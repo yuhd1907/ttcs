@@ -2,10 +2,11 @@ package com.project6.dto;
 
 import com.project6.entity.Company;
 import lombok.Data;
+import java.util.UUID;
 
 @Data
 public class CompanyInfoDto {
-    private Long id;
+    private UUID id;
     private String email;
     private String companyName;
     private String avatar;

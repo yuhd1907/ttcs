@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface OtpTokenRepository extends JpaRepository<OtpToken, Long> {
+public interface OtpTokenRepository extends JpaRepository<OtpToken, UUID> {
     Optional<OtpToken> findTopByEmailAndUsedFalseOrderByCreatedAtDesc(String email);
 
     @Transactional

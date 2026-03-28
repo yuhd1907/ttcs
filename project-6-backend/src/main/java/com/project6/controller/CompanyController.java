@@ -15,6 +15,17 @@ import org.springframework.web.bind.annotation.*;
 public class CompanyController {
 
     private final CompanyAuthService companyAuthService;
+    private final com.project6.service.CompanyProfileService companyProfileService;
+
+    @PatchMapping("/profile")
+    public ResponseEntity<ApiResponse> updateProfile(@ModelAttribute com.project6.dto.CompanyProfileRequest req) {
+        try {
+            CompanyInfoDto updatedCompany = companyProfileService.updateProfile(req);
+            return ResponseEntity.ok(ApiResponse.success("Cập nhật thông tin thành công!", updatedCompany));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
+    }
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@Valid @RequestBody CompanyRegisterRequest req) {

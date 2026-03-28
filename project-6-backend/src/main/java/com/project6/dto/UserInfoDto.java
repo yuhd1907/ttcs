@@ -2,10 +2,11 @@ package com.project6.dto;
 
 import com.project6.entity.User;
 import lombok.Data;
+import java.util.UUID;
 
 @Data
 public class UserInfoDto {
-    private Long id;
+    private UUID id;
     private String email;
     private String username;  // = fullName
     private String phone;
