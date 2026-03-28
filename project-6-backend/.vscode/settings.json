@@ -1,0 +1,12 @@
+{
+  "java.jdt.ls.java.home": "C:\\Users\\84353\\jdk-17\\jdk-17.0.10+7",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "C:\\Users\\84353\\jdk-17\\jdk-17.0.10+7",
+      "default": true
+    }
+  ],
+  "java.compile.nullAnalysis.mode": "disabled",
+  "maven.executable.preferMavenWrapper": false
+}
