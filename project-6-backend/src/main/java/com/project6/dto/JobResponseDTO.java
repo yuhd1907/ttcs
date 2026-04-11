@@ -2,6 +2,8 @@ package com.project6.dto;
 
 import com.project6.entity.JobPost;
 import com.project6.entity.Skill;
+import com.project6.entity.JobField;
+import com.project6.entity.Specialization;
 import lombok.Builder;
 import lombok.Data;
 
@@ -45,11 +47,15 @@ public class JobResponseDTO {
                 .level(job.getLevel())
                 .workingForm(job.getJobType()) // Mapping jobType to workingForm
                 .address(job.getCompany().getAddress())
-                .specialization(splitString(job.getSpecialization()))
+                .specialization(job.getSpecializationEntity() != null 
+                    ? Collections.singletonList(job.getSpecializationEntity().getSlug()) 
+                    : Collections.emptyList())
                 .technologies(job.getSkills() != null 
                     ? job.getSkills().stream().map(Skill::getName).collect(Collectors.toList())
                     : Collections.emptyList())
-                .fields(splitString(job.getFields()))
+                .fields(job.getJobFields() != null
+                    ? job.getJobFields().stream().map(JobField::getSlug).collect(Collectors.toList())
+                    : Collections.emptyList())
                 .description(job.getDescription())
                 .images(splitString(job.getImages()))
                 .build();

@@ -6,8 +6,13 @@ import com.project6.entity.Company;
 import com.project6.entity.JobPost;
 import com.project6.entity.Skill;
 import com.project6.repository.CompanyRepository;
+import com.project6.repository.CityRepository;
 import com.project6.repository.JobPostRepository;
 import com.project6.repository.SkillRepository;
+import com.project6.repository.SpecializationRepository;
+import com.project6.repository.JobFieldRepository;
+import com.project6.entity.JobField;
+import com.project6.entity.Specialization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
+import org.springframework.data.jpa.domain.Specification;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +33,10 @@ public class JobService {
 
     private final JobPostRepository jobPostRepository;
     private final CompanyRepository companyRepository;
+    private final CityRepository cityRepository;
     private final SkillRepository skillRepository;
+    private final SpecializationRepository specializationRepository;
+    private final JobFieldRepository jobFieldRepository;
     private final FileStorageService fileStorageService;
 
     private Company getCurrentCompany() {
@@ -41,6 +50,28 @@ public class JobService {
         int pageIndex = (page > 0) ? page - 1 : 0;
         Pageable pageable = PageRequest.of(pageIndex, size, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<JobPost> jobs = jobPostRepository.findByCompany(company, pageable);
+        return jobs.map(JobResponseDTO::from);
+    }
+
+    public JobResponseDTO getJobById(UUID id) {
+        return jobPostRepository.findById(id)
+                .map(JobResponseDTO::from)
+                .orElse(null);
+    }
+
+    public Page<JobResponseDTO> searchJobs(String keyword, String province, String skill,
+                                           String specialization, String companyName,
+                                           List<String> levels, List<String> workTypes,
+                                           BigDecimal salaryMin, BigDecimal salaryMax,
+                                           List<String> jobFields, int page, int size) {
+        int pageIndex = (page > 0) ? page - 1 : 0;
+        Pageable pageable = PageRequest.of(pageIndex, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        
+        Specification<JobPost> spec = com.project6.repository.JobPostSpecification.withDynamicQuery(
+                keyword, province, skill, specialization, companyName,
+                levels, workTypes, salaryMin, salaryMax, jobFields);
+        
+        Page<JobPost> jobs = jobPostRepository.findAll(spec, pageable);
         return jobs.map(JobResponseDTO::from);
     }
 
@@ -61,22 +92,46 @@ public class JobService {
         return skillSet;
     }
 
+    private Specialization getOrCreateSpecialization(String slug) {
+        if (slug == null || slug.isBlank()) return null;
+        return specializationRepository.findBySlug(slug)
+                .orElseGet(() -> specializationRepository.save(
+                        Specialization.builder().slug(slug).name(slug).build()));
+    }
+
+    private Set<JobField> getOrCreateFields(String fieldsString) {
+        Set<JobField> fieldsSet = new HashSet<>();
+        if (fieldsString != null && !fieldsString.isBlank()) {
+            String[] fieldArray = fieldsString.split(",");
+            for (String f : fieldArray) {
+                String slug = f.trim();
+                if (slug.isEmpty()) continue;
+                JobField jf = jobFieldRepository.findBySlug(slug).orElseGet(() -> 
+                        jobFieldRepository.save(JobField.builder().slug(slug).name(slug).build()));
+                fieldsSet.add(jf);
+            }
+        }
+        return fieldsSet;
+    }
+
     @Transactional
     public void createJob(JobRequestDTO req) {
         Company company = getCurrentCompany();
         
         JobPost jobPost = JobPost.builder()
                 .company(company)
-                .postedBy(company.getId()) // assuming postedBy is company's UUID for now
+                .postedBy(company.getId())
                 .title(req.getName() != null ? req.getName() : "Untitled")
                 .description(req.getDescription() != null ? req.getDescription() : "")
-                .requirements("") // Fallback empty
+                .requirements("")
                 .salaryMin(req.getMinSalary() != null ? BigDecimal.valueOf(req.getMinSalary()) : null)
                 .salaryMax(req.getMaxSalary() != null ? BigDecimal.valueOf(req.getMaxSalary()) : null)
                 .jobType(req.getWorkingForm())
                 .level(req.getLevel())
-                .specialization(req.getSpecialization())
-                .fields(req.getFields())
+                .specializationEntity(getOrCreateSpecialization(req.getSpecialization()))
+                .jobFields(getOrCreateFields(req.getFields()))
+                .city(req.getCityName() != null && !req.getCityName().isBlank()
+                        ? cityRepository.findByName(req.getCityName()).orElse(null) : null)
                 .currency("VND")
                 .status("open")
                 .build();
@@ -111,9 +166,12 @@ public class JobService {
         if (req.getMaxSalary() != null) jobPost.setSalaryMax(BigDecimal.valueOf(req.getMaxSalary()));
         if (req.getLevel() != null) jobPost.setLevel(req.getLevel());
         if (req.getWorkingForm() != null) jobPost.setJobType(req.getWorkingForm());
-        if (req.getSpecialization() != null) jobPost.setSpecialization(req.getSpecialization());
-        if (req.getFields() != null) jobPost.setFields(req.getFields());
+        if (req.getSpecialization() != null) jobPost.setSpecializationEntity(getOrCreateSpecialization(req.getSpecialization()));
+        if (req.getFields() != null) jobPost.setJobFields(getOrCreateFields(req.getFields()));
         if (req.getDescription() != null) jobPost.setDescription(req.getDescription());
+        if (req.getCityName() != null && !req.getCityName().isBlank()) {
+            cityRepository.findByName(req.getCityName()).ifPresent(jobPost::setCity);
+        }
 
         if (req.getTechnologies() != null) {
             jobPost.setSkills(saveAndMapSkills(req.getTechnologies()));

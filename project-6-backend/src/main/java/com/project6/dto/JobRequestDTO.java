@@ -15,6 +15,7 @@ public class JobRequestDTO {
     private String technologies;
     private String fields;
     private String description;
+    private String cityName;
     
     // Uploaded images for Job Details
     private List<MultipartFile> images;

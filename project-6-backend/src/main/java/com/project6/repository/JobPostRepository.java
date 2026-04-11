@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface JobPostRepository extends JpaRepository<JobPost, UUID> {
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+public interface JobPostRepository extends JpaRepository<JobPost, UUID>, JpaSpecificationExecutor<JobPost> {
     Page<JobPost> findByCompany(Company company, Pageable pageable);
     Optional<JobPost> findByIdAndCompany(UUID id, Company company);
 }

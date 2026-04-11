@@ -70,8 +70,25 @@ public class JobPost {
 
     // Additional fields from original Job implementation that Hibernate will append
     private String level;
-    private String specialization;
-    private String fields;
+    
+    // We keep these legacy string fields around or replace them: 
+    // We will use the new Relational fields instead:
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specialization_id")
+    private Specialization specializationEntity;
+
+    @ManyToMany
+    @JoinTable(
+        name = "job_field_mappings",
+        joinColumns = @JoinColumn(name = "job_post_id"),
+        inverseJoinColumns = @JoinColumn(name = "field_id")
+    )
+    private Set<JobField> jobFields;
     
     @Column(name = "images", columnDefinition = "TEXT")
     private String images;
