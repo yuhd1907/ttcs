@@ -211,4 +211,55 @@ public class JobService {
         }
         return JobResponseDTO.from(optionalJob.get());
     }
+
+    public List<JobResponseDTO> getSimilarJobs(UUID jobId, int limit) {
+        JobPost currentJob = jobPostRepository.findById(jobId).orElse(null);
+        if (currentJob == null) return Collections.emptyList();
+
+        // Collect current job's skill IDs and specialization ID
+        Set<UUID> currentSkillIds = currentJob.getSkills() == null ? Collections.emptySet()
+                : currentJob.getSkills().stream().map(Skill::getId).collect(java.util.stream.Collectors.toSet());
+        UUID currentSpecId = currentJob.getSpecializationEntity() != null
+                ? currentJob.getSpecializationEntity().getId() : null;
+
+        // Fetch all other jobs
+        List<JobPost> allJobs = jobPostRepository.findAll();
+
+        return allJobs.stream()
+                .filter(j -> !j.getId().equals(jobId))
+                .filter(j -> {
+                    // Same specialization
+                    boolean sameSpec = currentSpecId != null
+                            && j.getSpecializationEntity() != null
+                            && j.getSpecializationEntity().getId().equals(currentSpecId);
+                    // At least 3 matching skills
+                    long matchingSkills = j.getSkills() == null ? 0
+                            : j.getSkills().stream().filter(s -> currentSkillIds.contains(s.getId())).count();
+                    return sameSpec || matchingSkills >= 3;
+                })
+                .sorted((a, b) -> {
+                    int scoreA = similarityScore(a, currentSpecId, currentSkillIds);
+                    int scoreB = similarityScore(b, currentSpecId, currentSkillIds);
+                    return Integer.compare(scoreB, scoreA); // descending
+                })
+                .limit(limit)
+                .map(JobResponseDTO::from)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    private int similarityScore(JobPost job, UUID specId, Set<UUID> skillIds) {
+        int score = 0;
+        // Same specialization = high bonus
+        if (specId != null && job.getSpecializationEntity() != null
+                && job.getSpecializationEntity().getId().equals(specId)) {
+            score += 100;
+        }
+        // Each matching skill adds 10 points
+        if (job.getSkills() != null) {
+            score += (int) job.getSkills().stream()
+                    .filter(s -> skillIds.contains(s.getId()))
+                    .count() * 10;
+        }
+        return score;
+    }
 }

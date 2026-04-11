@@ -35,17 +35,25 @@ public class JobResponseDTO {
     private List<String> images;
     private String address;
 
+    // Company detail fields for job detail page
+    private String companyModel;
+    private String companyField;
+    private String companyEmployees;
+    private String companyWorkingTime;
+    private String companyWorkOvertime;
+    private String companyAddress;
+
     public static JobResponseDTO from(JobPost job) {
         return JobResponseDTO.builder()
                 ._id(job.getId())
                 .companyId(job.getCompany().getId())
                 .companyLogo(job.getCompany().getAvatar())
                 .companyName(job.getCompany().getCompanyName())
-                .name(job.getTitle()) // Mapping title to name
+                .name(job.getTitle())
                 .minSalary(job.getSalaryMin() != null ? job.getSalaryMin().intValue() : null)
                 .maxSalary(job.getSalaryMax() != null ? job.getSalaryMax().intValue() : null)
                 .level(job.getLevel())
-                .workingForm(job.getJobType()) // Mapping jobType to workingForm
+                .workingForm(job.getJobType())
                 .address(job.getCompany().getAddress())
                 .specialization(job.getSpecializationEntity() != null 
                     ? Collections.singletonList(job.getSpecializationEntity().getSlug()) 
@@ -58,6 +66,13 @@ public class JobResponseDTO {
                     : Collections.emptyList())
                 .description(job.getDescription())
                 .images(splitString(job.getImages()))
+                // Company detail fields
+                .companyModel(job.getCompany().getModel())
+                .companyField(job.getCompany().getField())
+                .companyEmployees(job.getCompany().getEmployees())
+                .companyWorkingTime(job.getCompany().getWorkingTime())
+                .companyWorkOvertime(job.getCompany().getOvertime())
+                .companyAddress(job.getCompany().getAddress())
                 .build();
     }
 

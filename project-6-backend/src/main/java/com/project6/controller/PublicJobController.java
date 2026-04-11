@@ -73,4 +73,13 @@ public class PublicJobController {
             return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
         }
     }
+    @GetMapping("/{id}/similar")
+    public ResponseEntity<Object> getSimilarJobs(@PathVariable UUID id) {
+        try {
+            List<JobResponseDTO> similar = jobService.getSimilarJobs(id, 6);
+            return ResponseEntity.ok(similar);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
+    }
 }
