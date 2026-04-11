@@ -4,6 +4,10 @@ server:
     include-binding-errors: always
   port: 4000
 spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
   datasource:
     url: jdbc:postgresql://localhost:5432/cv
     username: postgres
@@ -42,3 +46,8 @@ logging:
   level:
     org.springframework.security: DEBUG
     com.project6: DEBUG
+
+cloudinary:
+  cloud-name: duwsd0fls
+  api-key: 557828165226383
+  api-secret: QUNLJcGAQ6MwMbPdpnNmX5BUgoA

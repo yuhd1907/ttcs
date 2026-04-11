@@ -1,56 +1,39 @@
 package com.project6.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class FileStorageService {
 
-    private final Path fileStorageLocation;
-
-    public FileStorageService() {
-        this.fileStorageLocation = Paths.get("uploads").toAbsolutePath().normalize();
-        try {
-            Files.createDirectories(this.fileStorageLocation);
-        } catch (Exception ex) {
-            throw new RuntimeException("Could not create the directory where the uploaded files will be stored.", ex);
-        }
-    }
+    private final Cloudinary cloudinary;
 
     public String storeFile(MultipartFile file) {
         if (file == null || file.isEmpty()) {
             return null;
         }
-        
-        // Normalize file name and generate a unique name to prevent collisions
-        String originalFileName = file.getOriginalFilename();
-        String fileExtension = "";
-        
-        if (originalFileName != null && originalFileName.contains(".")) {
-            fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        }
-        
-        String newFileName = UUID.randomUUID().toString() + fileExtension;
 
         try {
-            // Check if the file's name contains invalid characters
-            if (newFileName.contains("..")) {
-                throw new RuntimeException("Sorry! Filename contains invalid path sequence " + newFileName);
-            }
+            // Upload to Cloudinary with unique name and auto resource type
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(),
+                    ObjectUtils.asMap(
+                            "public_id", UUID.randomUUID().toString(),
+                            "resource_type", "auto" // allows images, raw, etc.
+                    ));
 
-            // Copy file to the target location (Replacing existing file with the same name)
-            Path targetLocation = this.fileStorageLocation.resolve(newFileName);
-            Files.copy(file.getInputStream(), targetLocation, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-
-            return "/uploads/" + newFileName;
+            // Return the secure cloud URL
+            return uploadResult.get("secure_url").toString();
+            
         } catch (IOException ex) {
-            throw new RuntimeException("Could not store file " + newFileName + ". Please try again!", ex);
+            throw new RuntimeException("Could not upload file to Cloudinary. Please try again!", ex);
         }
     }
 }

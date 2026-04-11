@@ -60,6 +60,20 @@ public class JobController {
         }
     }
 
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<Object> getJobForEdit(@PathVariable UUID id) {
+        try {
+            JobResponseDTO detail = jobService.getJobDetail(id);
+            Map<String, Object> data = new HashMap<>();
+            data.put("code", "success");
+            data.put("message", "Get detail success");
+            data.put("job", detail); 
+            return ResponseEntity.ok(data);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
+    }
+
     @PatchMapping("/edit/{id}")
     public ResponseEntity<ApiResponse> updateJob(@PathVariable UUID id, @ModelAttribute JobRequestDTO req) {
         try {
