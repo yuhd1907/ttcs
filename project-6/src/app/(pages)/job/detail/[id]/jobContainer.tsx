@@ -20,11 +20,12 @@ const jobContainer = () => {
 
   const [job, setJob] = useState<Job>();
   const [sameJobs, setSameJobs] = useState<Job[]>([]);
+  // fsajkdfklsajdflk
 
   useEffect(() => {
     // Giữ nguyên logic gọi API của job bằng id từ params và env variable
     if (id) {
-       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}`)
         .then((res) => res.json())
         .then((data) => setJob(data));
     }
