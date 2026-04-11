@@ -1,0 +1,451 @@
+{
+  "it_jobs": [
+    {
+      "id": "1",
+      "category": "IT Executive and Management",
+      "roles": [
+        { "name": "Cấp điều hành (CTO, CIO, CISO, CDO)", "slug": "cap-dieu-hanh-cto-cio-ciso-cdo" },
+        { "name": "Phó Chủ tịch / Giám đốc", "slug": "pho-chu-tich-giam-doc" },
+        { "name": "Quản lý", "slug": "quan-ly" }
+      ]
+    },
+    {
+      "id": "2",
+      "category": "Web Application Development",
+      "roles": [
+        { "name": "Lập trình viên Backend", "slug": "lap-trinh-vien-backend" },
+        { "name": "Lập trình viên Frontend", "slug": "lap-trinh-vien-frontend" },
+        { "name": "Lập trình viên Fullstack", "slug": "lap-trinh-vien-fullstack" }
+      ]
+    },
+    {
+      "id": "3",
+      "category": "Mobile Application Development",
+      "roles": [
+        { "name": "Lập trình viên Ứng dụng Di động", "slug": "lap-trinh-vien-ung-dung-di-dong" }
+      ]
+    },
+    {
+      "id": "4",
+      "category": "Core / Enterprise Systems Development",
+      "roles": [
+        { "name": "Kỹ sư RPA (Tự động hóa quy trình robot)", "slug": "ky-su-rpa-tu-dong-hoa-quy-trinh-robot" },
+        { "name": "Lập trình viên ERP", "slug": "lap-trinh-vien-erp" },
+        { "name": "Lập trình viên Hệ thống Integration & Legacy", "slug": "lap-trinh-vien-he-thong-integration-legacy" },
+        { "name": "Lập trình viên Hệ thống Ngân hàng & Tài chính", "slug": "lap-trinh-vien-he-thong-ngan-hang-tai-chinh" },
+        { "name": "Lập trình viên Ứng dụng Desktop", "slug": "lap-trinh-vien-ung-dung-desktop" },
+        { "name": "Lập trình viên Ứng dụng Doanh nghiệp (CRM)", "slug": "lap-trinh-vien-ung-dung-doanh-nghiep-crm" }
+      ]
+    },
+    {
+      "id": "5",
+      "category": "Low-Code / No-Code Development",
+      "roles": [
+        { "name": "Lập trình viên Low-Code/No-Code", "slug": "lap-trinh-vien-low-code-no-code" }
+      ]
+    },
+    {
+      "id": "6",
+      "category": "Technical Architecture",
+      "roles": [
+        { "name": "Kiến trúc sư Doanh nghiệp", "slug": "kien-truc-su-doanh-nghiep" },
+        { "name": "Kiến trúc sư Giải pháp", "slug": "kien-truc-su-giai-phap" },
+        { "name": "Kiến trúc sư Phần mềm/Kỹ thuật", "slug": "kien-truc-su-phan-mem-ky-thuat" }
+      ]
+    },
+    {
+      "id": "7",
+      "category": "Blockchain Development",
+      "roles": [
+        { "name": "Kiến trúc sư Blockchain", "slug": "kien-truc-su-blockchain" },
+        { "name": "Lập trình viên Blockchain", "slug": "lap-trinh-vien-blockchain" },
+        { "name": "Lập trình viên Smart Contract", "slug": "lap-trinh-vien-smart-contract" }
+      ]
+    },
+    {
+      "id": "8",
+      "category": "Game Development",
+      "roles": [
+        { "name": "Kiểm thử Game", "slug": "kiem-thu-game" },
+        { "name": "Lập trình viên Game", "slug": "lap-trinh-vien-game" },
+        { "name": "Lập trình viên Game VR/AR", "slug": "lap-trinh-vien-game-vr-ar" },
+        { "name": "Sản xuất / Giám đốc Game", "slug": "san-xuat-giam-doc-game" },
+        { "name": "Thiết kế Game", "slug": "thiet-ke-game" }
+      ]
+    },
+    {
+      "id": "9",
+      "category": "Software Testing & Quality Assurance",
+      "roles": [
+        { "name": "Chuyên viên PQA", "slug": "chuyen-vien-pqa" },
+        { "name": "Kiểm thử Hiệu suất / Hiệu năng", "slug": "kiem-thu-hieu-suat-hieu-nang" },
+        { "name": "Kiểm thử thủ công", "slug": "kiem-thu-thu-cong" },
+        { "name": "Kiểm thử tự động", "slug": "kiem-thu-tu-dong" },
+        { "name": "Kỹ sư Phần mềm kiểm thử (SDET)", "slug": "ky-su-phan-mem-kiem-thu-sdet" },
+        { "name": "Điều phối viên Kiểm thử", "slug": "dieu-phoi-vien-kiem-thu" }
+      ]
+    },
+    {
+      "id": "10",
+      "category": "Data Analytics & Business Intelligence",
+      "roles": [
+        { "name": "Chuyên viên Trực quan hóa Dữ liệu", "slug": "chuyen-vien-truc-quan-hoa-du-lieu" },
+        { "name": "Kỹ sư Analytics", "slug": "ky-su-analytics" },
+        { "name": "Phân tích BI / Lập trình viên BI", "slug": "phan-tich-bi-lap-trinh-vien-bi" },
+        { "name": "Phân tích Dữ liệu", "slug": "phan-tich-du-lieu" }
+      ]
+    },
+    {
+      "id": "11",
+      "category": "Data Engineering",
+      "roles": [
+        { "name": "Kỹ sư Cơ sở dữ liệu", "slug": "ky-su-co-so-du-lieu" },
+        { "name": "Kỹ sư DataOps / MLOps", "slug": "ky-su-dataops-mlops" },
+        { "name": "Kỹ sư Dữ liệu", "slug": "ky-su-du-lieu" },
+        { "name": "Kỹ sư Dữ liệu Lớn", "slug": "ky-su-du-lieu-lon" }
+      ]
+    },
+    {
+      "id": "12",
+      "category": "Data Science & AI / Machine Learning",
+      "roles": [
+        { "name": "Data Scientist", "slug": "data-scientist" },
+        { "name": "Kỹ sư AI / Machine Learning", "slug": "ky-su-ai-machine-learning" },
+        { "name": "Kỹ sư Thị giác Máy tính", "slug": "ky-su-thi-giac-may-tinh" },
+        { "name": "Nghiên cứu viên AI", "slug": "nghien-cuu-vien-ai" }
+      ]
+    },
+    {
+      "id": "13",
+      "category": "Data Management & Governance",
+      "roles": [
+        { "name": "Chuyên gia Quản trị Dữ liệu", "slug": "chuyen-gia-quan-tri-du-lieu" },
+        { "name": "Kiến trúc sư AI", "slug": "kien-truc-su-ai" },
+        { "name": "Kiến trúc sư Dữ liệu", "slug": "kien-truc-su-du-lieu" },
+        { "name": "Người quản lý Dữ liệu / Nhà phân tích Chất lượng Dữ liệu", "slug": "nguoi-quan-ly-du-lieu-nha-phan-tich-chat-luong-du-lieu" },
+        { "name": "Quản trị viên Cơ sở dữ liệu", "slug": "quan-tri-vien-co-so-du-lieu" }
+      ]
+    },
+    {
+      "id": "14",
+      "category": "Cloud Computing",
+      "roles": [
+        { "name": "Kỹ sư Đám mây", "slug": "ky-su-dam-may" }
+      ]
+    },
+    {
+      "id": "15",
+      "category": "Systems & Network Engineering / Administration",
+      "roles": [
+        { "name": "Kỹ sư Hệ thống / Quản trị viên", "slug": "ky-su-he-thong-quan-tri-vien" },
+        { "name": "Kỹ sư Mạng", "slug": "ky-su-mang" },
+        { "name": "Kỹ sư SysOps", "slug": "ky-su-sysops" }
+      ]
+    },
+    {
+      "id": "16",
+      "category": "DevOps & Site Reliability (SRE)",
+      "roles": [
+        { "name": "Kỹ sư DevOps", "slug": "ky-su-devops" },
+        { "name": "Kỹ sư Đảm bảo độ tin cậy Trang web (SRE)", "slug": "ky-su-dam-bao-do-tin-cay-trang-web-sre" },
+        { "name": "Quản lý Phiên bản", "slug": "quan-ly-phien-ban" }
+      ]
+    },
+    {
+      "id": "17",
+      "category": "IT Support & Helpdesk",
+      "roles": [
+        { "name": "Hỗ trợ CNTT", "slug": "ho-tro-cntt" },
+        { "name": "Hỗ trợ Field", "slug": "ho-tro-field" },
+        { "name": "Hỗ trợ Khách hàng Kỹ thuật", "slug": "ho-tro-khach-hang-ky-thuat" },
+        { "name": "Quản trị viên CNTT", "slug": "quan-tri-vien-cntt" },
+        { "name": "Tổng đài Hỗ trợ CNTT", "slug": "tong-dai-ho-tro-cntt" }
+      ]
+    },
+    {
+      "id": "18",
+      "category": "Cybersecurity",
+      "roles": [
+        { "name": "Kiểm thử An ninh / Kiểm thử xâm nhập", "slug": "kiem-thu-an-ninh-kiem-thu-xam-nhap" },
+        { "name": "Kỹ sư An ninh", "slug": "ky-su-an-ninh" },
+        { "name": "Kỹ sư An ninh Ứng dụng", "slug": "ky-su-an-ninh-ung-dung" },
+        { "name": "Kỹ sư DevSecOps", "slug": "ky-su-devsecops" },
+        { "name": "Tư vấn viên An ninh", "slug": "tu-van-vien-an-ninh" }
+      ]
+    },
+    {
+      "id": "19",
+      "category": "IT Compliance & Risk Management",
+      "roles": [
+        { "name": "Chuyên gia GRC", "slug": "chuyen-gia-grc" },
+        { "name": "Compliance Officer / Analyst", "slug": "compliance-officer-analyst" },
+        { "name": "Kiểm toán viên CNTT / Quản lý Rủi ro CNTT", "slug": "kiem-toan-vien-cntt-quan-ly-rui-ro-cntt" }
+      ]
+    },
+    {
+      "id": "20",
+      "category": "Embedded Systems",
+      "roles": [
+        { "name": "Kỹ sư Embedded", "slug": "ky-su-embedded" },
+        { "name": "Kỹ sư Firmware", "slug": "ky-su-firmware" },
+        { "name": "Kỹ sư Real-Time Systems", "slug": "ky-su-real-time-systems" },
+        { "name": "Kỹ sư Tích hợp Phần cứng-Phần mềm", "slug": "ky-su-tich-hop-phan-cung-phan-mem" }
+      ]
+    },
+    {
+      "id": "21",
+      "category": "IoT & Robotics",
+      "roles": [
+        { "name": "Kỹ sư Edge Computing", "slug": "ky-su-edge-computing" },
+        { "name": "Kỹ sư Phần mềm Robot", "slug": "ky-su-phan-mem-robot" },
+        { "name": "Lập trình viên Ứng dụng IoT", "slug": "lap-trinh-vien-ung-dung-iot" }
+      ]
+    },
+    {
+      "id": "22",
+      "category": "Product Management",
+      "roles": [
+        { "name": "Chuyên viên Phân tích sản phẩm", "slug": "chuyen-vien-phan-tich-san-pham" },
+        { "name": "Chuyên viên phát triển sản phẩm", "slug": "chuyen-vien-phat-trien-san-pham" },
+        { "name": "Quản lý sản phẩm", "slug": "quan-ly-san-pham" }
+      ]
+    },
+    {
+      "id": "23",
+      "category": "Project Management / Technical Communication",
+      "roles": [
+        { "name": "Chuyên viên Giao tiếp Kỹ thuật", "slug": "chuyen-vien-giao-tiep-ky-thuat" },
+        { "name": "Kỹ sư Cầu nối (BrSE)", "slug": "ky-su-cau-noi-brse" },
+        { "name": "Phân tích nghiệp vụ", "slug": "phan-tich-nghiep-vu" },
+        { "name": "Quản lý Chương trình / PMO", "slug": "quan-ly-chuong-trinh-pmo" },
+        { "name": "Quản lý Dự án", "slug": "quan-ly-du-an" },
+        { "name": "Scrum Master / Agile coach", "slug": "scrum-master-agile-coach" },
+        { "name": "Technical Writer", "slug": "technical-writer" }
+      ]
+    },
+    {
+      "id": "24",
+      "category": "Design & User Experience",
+      "roles": [
+        { "name": "Nghiên cứu viên UX", "slug": "nghien-cuu-vien-ux" },
+        { "name": "Thiết kế Hình ảnh / Đồ họa", "slug": "thiet-ke-hinh-anh-do-hoa" },
+        { "name": "Thiết kế Motion", "slug": "thiet-ke-motion" },
+        { "name": "Thiết kế Sản phẩm", "slug": "thiet-ke-san-pham" },
+        { "name": "Thiết kế UX/UI", "slug": "thiet-ke-ux-ui" }
+      ]
+    },
+    {
+      "id": "25",
+      "category": "IT Consulting & Sales",
+      "roles": [
+        { "name": "Kỹ sư bán hàng kỹ thuật", "slug": "ky-su-ban-hang-ky-thuat" },
+        { "name": "Quản lý Khách hàng Kỹ thuật", "slug": "quan-ly-khach-hang-ky-thuat" },
+        { "name": "Tư vấn viên CNTT", "slug": "tu-van-vien-cntt" },
+        { "name": "Tư vấn viên ERP", "slug": "tu-van-vien-erp" },
+        { "name": "Tư vấn viên Kỹ thuật", "slug": "tu-van-vien-ky-thuat" },
+        { "name": "Tư vấn viên Ứng dụng Doanh nghiệp (CRM / HCM / SCM)", "slug": "tu-van-vien-ung-dung-doanh-nghiep-crm-hcm-scm" }
+      ]
+    }
+  ],
+  "job_fields": [
+    { "id": 1, "name": "Dịch vụ Blockchain & Web3", "slug": "dich-vu-blockchain-web3" },
+    { "id": 2, "name": "Thực Phẩm và Đồ Uống", "slug": "thuc-pham-va-do-uong" },
+    { "id": 3, "name": "Du Lịch và Dịch Vụ Lưu Trú", "slug": "du-lich-va-dich-vu-luu-tru" },
+    { "id": 4, "name": "Bảo Hiểm", "slug": "bao-hiem" },
+    { "id": 5, "name": "Hàng Tiêu Dùng", "slug": "hang-tieu-dung" },
+    { "id": 6, "name": "Thương Mại Điện Tử", "slug": "thuong-mai-dien-tu" },
+    { "id": 7, "name": "Giáo Dục và Đào Tạo", "slug": "giao-duc-va-dao-tao" },
+    { "id": 8, "name": "Ngân Hàng", "slug": "ngan-hang" },
+    { "id": 9, "name": "Trò Chơi", "slug": "tro-choi" },
+    { "id": 10, "name": "Chính Phủ", "slug": "chinh-phu" },
+    { "id": 11, "name": "Phần Cứng và Điện Toán", "slug": "phan-cung-va-dien-toan" },
+    { "id": 12, "name": "Phi Lợi Nhuận và Dịch Vụ Xã Hội", "slug": "phi-loi-nhuan-va-dich-vu-xa-hoi" },
+    { "id": 13, "name": "Sản Xuất và Kỹ Thuật", "slug": "san-xuat-va-ky-thuat" },
+    { "id": 14, "name": "Truyền Thông, Quảng Cáo và Giải Trí", "slug": "truyen-thong-quang-cao-va-giai-tri" },
+    { "id": 15, "name": "Môi Trường", "slug": "moi-truong" },
+    { "id": 16, "name": "Dược Phẩm", "slug": "duoc-pham" },
+    { "id": 17, "name": "Bất Động Sản và Xây Dựng", "slug": "bat-dong-san-va-xay-dung" },
+    { "id": 18, "name": "Bán Lẻ và Bán Buôn", "slug": "ban-le-va-ban-buon" },
+    { "id": 19, "name": "Dịch Vụ và Tư Vấn IT", "slug": "dich-vu-va-tu-van-it" },
+    { "id": 20, "name": "Viễn Thông", "slug": "vien-thong" },
+    { "id": 21, "name": "Vận Tải, Logistics và Kho Hàng", "slug": "van-tai-logistics-va-kho-hang" },
+    { "id": 22, "name": "An Ninh Mạng", "slug": "an-ninh-mang" },
+    { "id": 23, "name": "Mua Bán và Thương Mại", "slug": "mua-ban-va-thuong-mai" },
+    { "id": 24, "name": "Mạng Lưới và Cơ Sở Hạ Tầng", "slug": "mang-luoi-va-co-so-ha-tang" },
+    { "id": 25, "name": "Thuê Ngoài Phát Triển Phần Mềm", "slug": "thue-ngoai-phat-trien-phan-mem" },
+    { "id": 26, "name": "Sản Phẩm Phần Mềm và Dịch Vụ Web", "slug": "san-pham-phan-mem-va-dich-vu-web" },
+    { "id": 27, "name": "Nông Nghiệp", "slug": "nong-nghiep" },
+    { "id": 28, "name": "Thể thao và Thể hình", "slug": "the-thao-va-the-hinh" },
+    { "id": 29, "name": "May mặc và Thời Trang", "slug": "may-mac-va-thoi-trang" },
+    { "id": 30, "name": "Sáng Tạo và Thiết Kế", "slug": "sang-tao-va-thiet-ke" },
+    { "id": 31, "name": "Cung Ứng và Tuyển Dụng", "slug": "cung-ung-va-tuyen-dung" },
+    { "id": 32, "name": "Xuất Bản và In Ấn", "slug": "xuat-ban-va-in-an" },
+    { "id": 33, "name": "Quản Lý Cơ Sở Vật Chất", "slug": "quan-ly-co-so-vat-chat" },
+    { "id": 34, "name": "Dịch Vụ Nghiên Cứu", "slug": "dich-vu-nghien-cuu" },
+    { "id": 35, "name": "Chăm Sóc Sức Khỏeo", "slug": "cham-soc-suc-khoe" },
+    { "id": 36, "name": "Vật Liệu và Khai Thác", "slug": "vat-lieu-va-khai-thac" },
+    { "id": 37, "name": "Công Nghiệp Tiện Ích", "slug": "cong-nghiep-tien-ich" },
+    { "id": 38, "name": "Dịch Vụ Chuyên Nghiệp", "slug": "dich-vu-chuyen-nghiep" },
+    { "id": 39, "name": "Chứng khoán và Đầu tư", "slug": "chung-khoan-va-dau-tu" },
+    { "id": 40, "name": "Dịch Vụ Tài Chính", "slug": "dich-vu-tai-chinh" },
+    { "id": 41, "name": "Nghiên cứu & Phát triển Công nghệ Mới", "slug": "nghien-cuu-phat-trien-cong-nghe-moi" },
+    { "id": 42, "name": "Phần mềm và Dịch vụ Trí tuệ Nhân tạo", "slug": "phan-mem-va-dich-vu-tri-tue-nhan-tao" }
+  ],
+  "jobs": {
+      "_id": "699fe3817f194b6d144e9991",
+      "companyID": "69882f4171e98c998b335e91",
+      "name": "Frontend Developer (Angular, TypeScript, JavaScript)",
+      "minSalary": 1000,
+      "maxSalary": 2000,
+      "level": "fresher",
+      "workingForm": "remote",
+      "technologies": [
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "SCSS",
+        "RXJS",
+        "Git"
+      ],
+      "description": "<div>\n<h2>3 Lý do để gia nhập công ty</h2>\n<ul>\n<li>Lương thưởng hấp dẫn và chế độ đãi ngộ tốt</li>\n<li>Môi trường làm việc năng động, sáng tạo</li>\n<li>Cơ hội học hỏi và phát triển kỹ năng với các dự án lớn</li>\n</ul>\n</div>",
+      "images": [
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1504384308090-c89e9270a8cc?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+      ],
+      "timeSince": "Đăng 10 giờ trước",
+      "createdAt": "2026-02-26T06:09:05.985Z",
+      "updatedAt": "2026-04-06T16:51:04.274Z",
+      "__v": 0,
+      "fields": [
+        "IT Software",
+        "Sản phẩm phần mềm và Dịch vụ Web"
+      ],
+      "specialization": "Lập trình viên Frontend",
+      "companyName": "Công ty Công nghệ ABC",
+      "companyAddress": "Số 123 Đường Duy Tân, Quận Cầu Giấy, Hà Nội",
+      "companyLogo": "https://res.cloudinary.com/dlhhuspb6/image/upload/v1775494250/logo.png",
+      "companyModel": "Product",
+      "companyField": "Điện tử viễn thông",
+      "companyEmployees": "50-150 nhân viên",
+      "companyWorkingTime": "Thứ 2 - Thứ 6",
+      "companyWorkOvertime": "Không OT"
+  },
+  "sameJobs": [
+    {
+      "_id": "699fe3817f194b6d144e9991",
+      "name": "Frontend Developer (Angular, TypeScript, JavaScript)",
+      "level": "fresher",
+      "workingForm": "remote",
+      "specialization": "Lập trình viên Frontend",
+      "technologies": ["Angular", "TypeScript", "JavaScript", "SCSS", "RXJS", "Git"],
+      "minSalary": 1000,
+      "maxSalary": 2000,
+      "companyID": "69882f4171e98c998b335e91",
+      "companyName": "Tech Visionary Corp",
+      "companyAddress": "Quận 9, TP. HCM",
+      "companyLogo": "https://images.unsplash.com/photo-1549923746-c50264f3079e?w=200",
+      "companyModel": "Product",
+      "companyField": "IT Software",
+      "companyEmployees": "200-500 nhân viên",
+      "companyWorkingTime": "Thứ 2 - Thứ 6",
+      "companyWorkOvertime": "Theo dự án"
+    },
+    {
+      "_id": "701af2228g205c7e255f0002",
+      "name": "Web Developer (Angular/TS)",
+      "level": "junior",
+      "workingForm": "at office",
+      "specialization": "Lập trình viên Frontend",
+      "technologies": ["Angular", "TypeScript", "JavaScript", "HTML5", "CSS3", "Bootstrap"],
+      "minSalary": 1200,
+      "maxSalary": 2200,
+      "companyID": "70221a5282f09d119c446f02",
+      "companyName": "Global Solution Systems",
+      "companyAddress": "Quận Cầu Giấy, Hà Nội",
+      "companyLogo": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200",
+      "companyModel": "Outsourcing",
+      "companyField": "IT Services",
+      "companyEmployees": "1000+ nhân viên",
+      "companyWorkingTime": "Thứ 2 - Thứ 6",
+      "companyWorkOvertime": "Có lương OT"
+    },
+    {
+      "_id": "712bc3339h316d8f366g1113",
+      "name": "Frontend Engineer - Angular Specialist",
+      "level": "middle",
+      "workingForm": "hybrid",
+      "specialization": "Lập trình viên Frontend",
+      "technologies": ["Angular", "TypeScript", "JavaScript", "Firebase", "NgRx", "Tailwind CSS"],
+      "minSalary": 1800,
+      "maxSalary": 3000,
+      "companyID": "71332b6393g10e220d557g13",
+      "companyName": "NextGen Fintech",
+      "companyAddress": "Quận 1, TP. HCM",
+      "companyLogo": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200",
+      "companyModel": "Product",
+      "companyField": "Fintech",
+      "companyEmployees": "50-150 nhân viên",
+      "companyWorkingTime": "Thứ 2 - Thứ 6",
+      "companyWorkOvertime": "Không OT"
+    },
+    {
+      "_id": "723cd4440i427e9g477h2224",
+      "name": "Angular Software Engineer",
+      "level": "senior",
+      "workingForm": "remote",
+      "specialization": "Lập trình viên Frontend",
+      "technologies": ["Angular", "TypeScript", "JavaScript", "Cypress", "NodeJS", "Docker"],
+      "minSalary": 2500,
+      "maxSalary": 4500,
+      "companyID": "72443c7404h21f331e668h24",
+      "companyName": "Cyber Security One",
+      "companyAddress": "Quận Liên Chiểu, Đà Nẵng",
+      "companyLogo": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=200",
+      "companyModel": "Product",
+      "companyField": "Cybersecurity",
+      "companyEmployees": "100-250 nhân viên",
+      "companyWorkingTime": "Thứ 2 - Thứ 6",
+      "companyWorkOvertime": "Hạn chế OT"
+    },
+    {
+      "_id": "734de5551j538f0h588i3335",
+      "name": "Middle Frontend (Angular 17+)",
+      "level": "middle",
+      "workingForm": "at office",
+      "specialization": "Lập trình viên Frontend",
+      "technologies": ["Angular", "TypeScript", "JavaScript", "Material UI", "Unit Test", "Jira"],
+      "minSalary": 1500,
+      "maxSalary": 2800,
+      "companyID": "73554d8515i32g442f779i35",
+      "companyName": "E-Com Giant",
+      "companyAddress": "Quận Hai Bà Trưng, Hà Nội",
+      "companyLogo": "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=200",
+      "companyModel": "Product",
+      "companyField": "E-commerce",
+      "companyEmployees": "500-1000 nhân viên",
+      "companyWorkingTime": "Thứ 2 - Thứ 6",
+      "companyWorkOvertime": "Linh hoạt"
+    },
+    {
+      "_id": "745ef6662k649g1i699j4446",
+      "name": "Junior Angular Developer",
+      "level": "junior",
+      "workingForm": "hybrid",
+      "specialization": "Lập trình viên Frontend",
+      "technologies": ["Angular", "TypeScript", "JavaScript", "RESTful API", "SASS", "Webpack"],
+      "minSalary": 900,
+      "maxSalary": 1600,
+      "companyID": "74665e9626j43h553g880j46",
+      "companyName": "Startup Hub",
+      "companyAddress": "Quận Bình Thạnh, TP. HCM",
+      "companyLogo": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=200",
+      "companyModel": "Outsourcing",
+      "companyField": "Software Development",
+      "companyEmployees": "20-50 nhân viên",
+      "companyWorkingTime": "Thứ 2 - Thứ 7 (Cách tuần)",
+      "companyWorkOvertime": "Có trả lương OT"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,0 +1,44 @@
+### Backend API base URL
+@backendUrl = http://localhost:8080
+@jsonServerUrl = http://localhost:5000
+
+### =====================================================
+### Backend Master Data API (Primary)
+### =====================================================
+
+### Get all cities
+GET {{backendUrl}}/api/public/master-data/cities
+Accept: application/json
+
+### Get all job fields
+GET {{backendUrl}}/api/public/master-data/fields
+Accept: application/json
+
+### Get all skills
+GET {{backendUrl}}/api/public/master-data/skills
+Accept: application/json
+
+### Get all specializations
+GET {{backendUrl}}/api/public/master-data/specializations
+Accept: application/json
+
+### =====================================================
+### JSON Server (Fallback/Legacy)
+### =====================================================
+
+### Get all IT job categories and roles
+GET {{jsonServerUrl}}/it_jobs
+Accept: application/json
+
+### Get one IT job group by id
+GET {{jsonServerUrl}}/it_jobs/1
+Accept: application/json
+
+### Get all job fields from JSON server
+GET {{jsonServerUrl}}/job_fields
+Accept: application/json
+
+### Get skills from JSON server (if exists)
+GET {{jsonServerUrl}}/skills
+Accept: application/json
+
