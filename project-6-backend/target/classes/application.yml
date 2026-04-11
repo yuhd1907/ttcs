@@ -2,11 +2,12 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+  port: 4000
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ttcs
+    url: jdbc:postgresql://localhost:5432/cv
     username: postgres
-    password: 1907
+    password: Namdeptraivcl129@@.
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
