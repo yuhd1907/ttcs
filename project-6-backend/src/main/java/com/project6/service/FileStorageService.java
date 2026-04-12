@@ -16,24 +16,47 @@ public class FileStorageService {
 
     private final Cloudinary cloudinary;
 
+    /**
+     * Upload ảnh (image) lên Cloudinary
+     */
     public String storeFile(MultipartFile file) {
         if (file == null || file.isEmpty()) {
             return null;
         }
-
         try {
-            // Upload to Cloudinary with unique name and auto resource type
             Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(),
                     ObjectUtils.asMap(
                             "public_id", UUID.randomUUID().toString(),
-                            "resource_type", "auto" // allows images, raw, etc.
+                            "resource_type", "auto"
                     ));
-
-            // Return the secure cloud URL
             return uploadResult.get("secure_url").toString();
-            
         } catch (IOException ex) {
-            throw new RuntimeException("Could not upload file to Cloudinary. Please try again!", ex);
+            throw new RuntimeException("Không thể tải lên ảnh. Vui lòng thử lại!", ex);
+        }
+    }
+
+    /**
+     * Upload file CV (PDF) lên Cloudinary với resource_type=raw
+     */
+    public String storeCV(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return null;
+        }
+        try {
+            String originalFilename = file.getOriginalFilename();
+            String extension = ".pdf"; // fallback
+            if (originalFilename != null && originalFilename.contains(".")) {
+                extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+            }
+
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(),
+                    ObjectUtils.asMap(
+                            "public_id", "cv-files/" + UUID.randomUUID().toString() + extension,
+                            "resource_type", "auto" // Cloudinary will generate correct headers for PDFs
+                    ));
+            return uploadResult.get("secure_url").toString();
+        } catch (IOException ex) {
+            throw new RuntimeException("Không thể tải lên CV. Vui lòng thử lại!", ex);
         }
     }
 }

@@ -26,6 +26,10 @@ export const LoginForm = () => {
       .then(res => res.json())
       .then(data => {
         if(data.code === 'success') {
+          // Lưu email để các trang khác (CV list, v.v.) dùng
+          if (data.data?.email) {
+            localStorage.setItem('userEmail', data.data.email);
+          }
           toast.success(data.message);
           router.push('/');
         }

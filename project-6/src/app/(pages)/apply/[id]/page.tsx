@@ -27,7 +27,7 @@ const ApplicationForm = () => {
     formData.append("fullName", data.fullName);
     formData.append("email", data.email);
     formData.append("phone", data.phone);
-    formData.append("jobID", jobID as string);
+    formData.append("jobId", jobID as string);
 
     if (data.coverLetter) {
       formData.append("coverLetter", data.coverLetter);
@@ -37,32 +37,37 @@ const ApplicationForm = () => {
       formData.append("cv", data.cv[0]);
     }
 
-    console.log(Object.fromEntries(formData.entries()));
-
     try {
-
-      fetch("https://api.example.com/apply", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/apply`, {
         method: "POST",
-        body: formData
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.code === "success") {
-            Swal.fire({
-              title: "Thành công!",
-              text: "Đơn ứng tuyển của bạn đã được gửi đi.",
-              icon: "success",
-              confirmButtonText: "Đóng",
-            }).then(() => {
-              router.push(`/job/detail/${jobID}`);
-            });
-          }
-        })
+        body: formData,
+      });
+      const result = await res.json();
+
+      if (result.code === "success") {
+        Swal.fire({
+          title: "Nộp đơn thành công!",
+          text: "Đơn ứng tuyển của bạn đã được gửi đến nhà tuyển dụng.",
+          icon: "success",
+          confirmButtonText: "Xem lại tin",
+          confirmButtonColor: "#0088FF",
+        }).then(() => {
+          router.push(`/job/detail/${jobID}`);
+        });
+      } else {
+        Swal.fire({
+          title: "Thất bại!",
+          text: result.message || "Có lỗi xảy ra khi gửi đơn.",
+          icon: "error",
+          confirmButtonColor: "#0088FF",
+        });
+      }
     } catch (error) {
       Swal.fire({
-        title: "Lỗi!",
-        text: "Có lỗi xảy ra khi gửi đơn. Vui lòng thử lại.",
+        title: "Lỗi kết nối!",
+        text: "Không thể kết nối đến server. Vui lòng thử lại.",
         icon: "error",
+        confirmButtonColor: "#0088FF",
       });
     }
   };

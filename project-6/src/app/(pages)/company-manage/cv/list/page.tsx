@@ -1,213 +1,201 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
-  FaEnvelope,
-  FaPhone,
-  FaUserTie,
-  FaBriefcase,
-  FaEye,
-  FaCheckCircle,
+  FaEnvelope, FaPhone, FaBriefcase, FaEye, FaCheckCircle,
+  FaTimesCircle, FaHourglassHalf, FaSearch, FaTrash
 } from "react-icons/fa";
+import Swal from "sweetalert2";
+
+interface Application {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  cvUrl: string;
+  coverLetter: string;
+  status: "pending" | "reviewed" | "accepted" | "rejected";
+  createdAt: string;
+  jobId: string;
+  jobTitle: string;
+}
+
+const statusConfig = {
+  pending:  { label: "Chờ xem",  color: "text-orange-500", icon: <FaHourglassHalf className="mr-1" /> },
+  reviewed: { label: "Đã xem",   color: "text-blue-500",   icon: <FaEye className="mr-1" /> },
+  accepted: { label: "Đã duyệt", color: "text-green-500",  icon: <FaCheckCircle className="mr-1" /> },
+  rejected: { label: "Từ chối",  color: "text-red-500",    icon: <FaTimesCircle className="mr-1" /> },
+};
 
 const CompanyManageCVList = () => {
+  const router = useRouter();
+  const [applications, setApplications] = useState<Application[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchApplications = (p = 1) => {
+    setLoading(true);
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/applications?page=${p}&size=9`, {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setApplications(data.data || []);
+        setTotalPages(data.totalPages || 1);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  };
+
+  useEffect(() => { fetchApplications(page); }, [page]);
+
+  const handleStatusChange = (id: string, status: string) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/company/applications/${id}/status?status=${status}`,
+      { 
+        method: "PATCH", 
+        credentials: "include" 
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code === "success") {
+          setApplications((prev) =>
+            prev.map((a) => (a.id === id ? { ...a, status: status as Application["status"] } : a))
+          );
+          Swal.fire({ title: "Cập nhật thành công!", icon: "success", timer: 1500, showConfirmButton: false });
+        }
+      });
+  };
+
+  const filtered = applications.filter(
+    (a) =>
+      a.fullName.toLowerCase().includes(search.toLowerCase()) ||
+      a.email.toLowerCase().includes(search.toLowerCase()) ||
+      a.jobTitle?.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <>
-      {/* Section 11 */}
-      <div className="mt-[60px]">
-        <div className="container mx-auto px-[16px]">
-          <h1 className="text-black text-[28px] font-[700]">Quản lý CV</h1>
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[20px] mt-[20px]">
-            {/* Item 1 */}
-            <div
-              className="border-[#DEDEDE] border-[1px] relative rounded-[8px] flex flex-col"
-              style={{
-                background:
-                  "linear-gradient(180deg, #F6F6F6 2.38%, #FFFFFF 70.43%)",
-              }}
-            >
-              <img
-                src="assets/images/item-bg.png"
-                alt=""
-                className="absolute top-[0] left-[0] w-[100%] h-auto"
-              />
-              <div className="mt-[20px] flex-1">
-                <h3 className="text-[18px] text-[#121212] text-center font-[700] line-clamp-2 md:px-[16px] px-[8px]">
-                  Frontend Engineer (ReactJS)
-                </h3>
-                <div className="mt-[12px] flex flex-col items-center gap-y-[6px]">
-                  <div className="">
-                    <span className="text-[#000000] text-[14px] font-[400]">
-                      Ứng viên:
-                    </span>
-                    <span className="text-[#000000] text-[14px] font-[700]">
-                      {" "}
-                      Lê Văn A
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <FaEnvelope className="text-[14px] mr-[8px]" />
-                    <span className="text-[#000000] text-[14px] font-[400]">
-                      levana@gmail.com
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <FaPhone className="text-[14px] mr-[8px]" />
-                    <span className="text-[#000000] text-[14px] font-[400]">
-                      0123456789
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-[12px] text-[16px] text-[#0088FF] font-[600] text-center">
-                  1.000$ - 1.500$
-                </div>
-                <div className="flex flex-col gap-[6px] mt-[6px]">
-                  <div className="flex justify-center items-center">
-                    <FaUserTie className="mr-[8px] text-[14px]" />
-                    <span className="text-[14px] text-[#121212] font-[400]">
-                      Fresher
-                    </span>
-                  </div>
-                  <div className="flex justify-center items-center">
-                    <FaBriefcase className="mr-[8px] text-[14px]" />
-                    <span className="text-[14px] text-[#121212] font-[400]">
-                      Tại văn phòng
-                    </span>
-                  </div>
-                  <div className="flex justify-center items-center">
-                    <FaEye className="mr-[8px] text-[#FF0000] text-[14px]" />
-                    <span className="text-[14px] text-[#FF0000] font-[400]">
-                      Chưa xem
-                    </span>
-                  </div>
-                  <div className="flex justify-center items-center">
-                    <FaCheckCircle className="mr-[8px] text-[14px]" />
-                    <span className="text-[14px] text-[#121212] font-[400]">
-                      Chưa duyệt
-                    </span>
-                  </div>
-                </div>
-                <div className="flex justify-center gap-x-[8px] mt-[12px] mb-[22px]">
-                  <a
-                    href="#"
-                    className="bg-[#0088FF] rounded-[4px] font-[400] text-[12px] text-white py-[8px] px-[20px]"
-                  >
-                    Xem
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-[#9FDB7C] rounded-[4px] font-[400] text-[12px] text-black py-[8px] px-[20px]"
-                  >
-                    Duyệt
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-[#FF5100] rounded-[4px] font-[400] text-[12px] text-white py-[8px] px-[20px]"
-                  >
-                    Từ chối
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-[#FF0000] rounded-[4px] font-[400] text-[12px] text-white py-[8px] px-[20px]"
-                  >
-                    Xoá
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Các Item từ 2 đến 9 lặp lại cấu trúc tương tự (Dưới đây là mẫu Item 2 đã duyệt) */}
-            <div
-              className="border-[#DEDEDE] border-[1px] relative rounded-[8px] flex flex-col"
-              style={{
-                background:
-                  "linear-gradient(180deg, #F6F6F6 2.38%, #FFFFFF 70.43%)",
-              }}
-            >
-              <img
-                src="assets/images/item-bg.png"
-                alt=""
-                className="absolute top-[0] left-[0] w-[100%] h-auto"
-              />
-              <div className="mt-[20px] flex-1">
-                <h3 className="text-[18px] text-[#121212] text-center font-[700] line-clamp-2 md:px-[16px] px-[8px]">
-                  Frontend Engineer (ReactJS)
-                </h3>
-                <div className="mt-[12px] flex flex-col items-center gap-y-[6px]">
-                  <div className="">
-                    <span className="text-[14px]">Ứng viên: </span>
-                    <span className="font-[700]">Lê Văn A</span>
-                  </div>
-                  <div className="flex items-center">
-                    <FaEnvelope className="mr-[8px]" />
-                    <span className="text-[14px]">levana@gmail.com</span>
-                  </div>
-                  <div className="flex items-center">
-                    <FaPhone className="mr-[8px]" />
-                    <span className="text-[14px]">0123456789</span>
-                  </div>
-                </div>
-                <div className="mt-[12px] text-[#0088FF] font-[600] text-center">
-                  1.000$ - 1.500$
-                </div>
-                <div className="flex flex-col gap-[6px] mt-[6px]">
-                  <div className="flex justify-center items-center">
-                    <FaUserTie className="mr-[8px]" />
-                    <span>Fresher</span>
-                  </div>
-                  <div className="flex justify-center items-center">
-                    <FaBriefcase className="mr-[8px]" />
-                    <span>Tại văn phòng</span>
-                  </div>
-                  <div className="flex justify-center items-center">
-                    <FaEye className="mr-[8px] text-black" />
-                    <span>Đã xem</span>
-                  </div>
-                  <div className="flex justify-center items-center">
-                    <FaCheckCircle className="mr-[8px] text-[#47BE02]" />
-                    <span className="text-[#47BE02]">Đã duyệt</span>
-                  </div>
-                </div>
-                <div className="flex justify-center gap-x-[8px] mt-[12px] mb-[22px]">
-                  <a
-                    href="#"
-                    className="bg-[#0088FF] text-white py-[8px] px-[20px] rounded-[4px] text-[12px]"
-                  >
-                    Xem
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-[#FF5100] text-white py-[8px] px-[20px] rounded-[4px] text-[12px]"
-                  >
-                    Từ chối
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-[#FF0000] text-white py-[8px] px-[20px] rounded-[4px] text-[12px]"
-                  >
-                    Xoá
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* ... Item 3 đến 9 tiếp tục giữ nguyên logic cũ với className và icons mới ... */}
+    <div className="mt-[60px]">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <h1 className="text-black text-[28px] font-[700]">Quản lý CV ứng tuyển</h1>
+          <div className="relative">
+            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Tìm theo tên, email, vị trí..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-64"
+            />
           </div>
         </div>
-      </div>
-      {/* End of Section 11 */}
 
-      {/* Section 5 */}
-      <div className="mt-[30px] container mx-auto px-[16px]">
-        <select
-          name=""
-          id=""
-          className="h-[44px] border border-[1px] border-[#DEDEDE] rounded-[8px] px-[18px]"
-        >
-          <option value="">Trang 1</option>
-          <option value="">Trang 2</option>
-          <option value="">Trang 3</option>
-        </select>
+        {/* Stats row */}
+        <div className="flex gap-4 mb-6 flex-wrap">
+          {Object.entries(statusConfig).map(([key, cfg]) => (
+            <div key={key} className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm flex items-center gap-2 shadow-sm">
+              <span className={cfg.color}>{cfg.icon}</span>
+              <span className="text-gray-600">{cfg.label}:</span>
+              <span className="font-bold">{applications.filter((a) => a.status === key).length}</span>
+            </div>
+          ))}
+        </div>
+
+        {loading ? (
+          <div className="flex items-center justify-center h-40">
+            <div className="animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent" />
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="text-center text-gray-500 py-20">Chưa có đơn ứng tuyển nào.</div>
+        ) : (
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+            {filtered.map((app) => {
+              const cfg = statusConfig[app.status] || statusConfig.pending;
+              return (
+                <div
+                  key={app.id}
+                  className="border border-[#DEDEDE] rounded-[8px] flex flex-col bg-white shadow-sm hover:shadow-md transition-shadow"
+                  style={{ background: "linear-gradient(180deg, #F6F6F6 2.38%, #FFFFFF 70.43%)" }}
+                >
+                  <div className="p-5 flex-1 flex flex-col">
+                    {/* Job title */}
+                    <h3 className="text-[16px] font-[700] text-center text-[#121212] line-clamp-2 mb-3">
+                      {app.jobTitle || "—"}
+                    </h3>
+
+                    {/* Candidate info */}
+                    <div className="flex flex-col gap-1 text-[13px] text-gray-700">
+                      <div><span className="font-[600]">Ứng viên:</span> {app.fullName}</div>
+                      <div className="flex items-center gap-1"><FaEnvelope className="text-gray-400" />{app.email}</div>
+                      <div className="flex items-center gap-1"><FaPhone className="text-gray-400" />{app.phone}</div>
+                    </div>
+
+                    {/* Status badge */}
+                    <div className={`flex items-center justify-center mt-3 text-[13px] font-[600] ${cfg.color}`}>
+                      {cfg.icon}{cfg.label}
+                    </div>
+
+                    {/* Date */}
+                    <div className="text-center text-[11px] text-gray-400 mt-1">
+                      Nộp: {new Date(app.createdAt).toLocaleDateString("vi-VN")}
+                    </div>
+
+                    {/* Action buttons */}
+                    <div className="flex justify-center gap-2 mt-4 flex-wrap">
+                      <button
+                        onClick={() => router.push(`/company-manage/cv/detail/${app.id}`)}
+                        className="bg-[#0088FF] text-white text-[12px] px-4 py-2 rounded-[4px] hover:bg-blue-700 transition-colors"
+                      >
+                        Xem CV
+                      </button>
+                      {app.status !== "accepted" && (
+                        <button
+                          onClick={() => handleStatusChange(app.id, "accepted")}
+                          className="bg-[#47BE02] text-white text-[12px] px-4 py-2 rounded-[4px] hover:bg-green-700 transition-colors"
+                        >
+                          Duyệt
+                        </button>
+                      )}
+                      {app.status !== "rejected" && (
+                        <button
+                          onClick={() => handleStatusChange(app.id, "rejected")}
+                          className="bg-[#FF5100] text-white text-[12px] px-4 py-2 rounded-[4px] hover:bg-red-700 transition-colors"
+                        >
+                          Từ chối
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center gap-2 mt-8">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+              <button
+                key={p}
+                onClick={() => setPage(p)}
+                className={`w-9 h-9 rounded-lg text-sm font-medium transition-colors ${
+                  p === page ? "bg-blue-500 text-white" : "border border-gray-300 hover:bg-gray-100"
+                }`}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
-      {/* End of Section 5 */}
-    </>
+    </div>
   );
 };
 

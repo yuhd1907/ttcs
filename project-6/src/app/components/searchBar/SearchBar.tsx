@@ -86,8 +86,8 @@ export const SearchBar = () => {
             <form onSubmit={handleSearch} className="flex flex-wrap gap-x-[15px] gap-y-[12px]">
               <select name="province" className="md:w-[240px] w-full h-[56px] bg-white rounded-[4px] px-[20px] text-[#121212] text-[16px] font-[500] outline-none">
                 <option value="">-- Tất cả tỉnh thành --</option>
-                {provinceList.map((province: any) => (
-                  <option key={province._id} value={province.name}>
+                {provinceList.map((province: any, index) => (
+                  <option key={province.id || province._id || index} value={province.name}>
                     {province.name}
                   </option>
                 ))}

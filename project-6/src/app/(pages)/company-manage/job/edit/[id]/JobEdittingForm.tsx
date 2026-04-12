@@ -48,10 +48,12 @@ export const JobEdittingForm = () => {
         technologies: Array.isArray(job.technologies)
           ? job.technologies.join(", ")
           : job.technologies || "",
-        specialization: job.specialization || "",
+        specialization: Array.isArray(job.specialization)
+          ? job.specialization.join(", ")
+          : (job.specialization || ""),
         fields: Array.isArray(job.fields)
           ? job.fields.join(", ")
-          : job.fields || "",
+          : (job.fields || ""),
         images: job.images || [],
         description: job.description || "",
       });

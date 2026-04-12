@@ -30,7 +30,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        Optional<String> tokenOpt = getTokenFromCookie(request);
+        Optional<String> tokenOpt = getToken(request);
 
         if (tokenOpt.isPresent()) {
             String token = tokenOpt.get();
@@ -51,7 +51,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private Optional<String> getTokenFromCookie(HttpServletRequest request) {
+    private Optional<String> getToken(HttpServletRequest request) {
+        // 1. Kiểm tra header Authorization trước (cho Company)
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return Optional.of(authHeader.substring(7));
+        }
+        
+        // 2. Fallback sang Cookie (cho User)
         if (request.getCookies() == null) return Optional.empty();
         return Arrays.stream(request.getCookies())
                 .filter(c -> "token".equals(c.getName()))

@@ -28,13 +28,11 @@ const jobContainer = () => {
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}`)
         .then((res) => res.json())
         .then((data) => setJob(data));
-    }
 
-    // Giữ nguyên gọi tới sameJob như yêu cầu
-    if (id) {
+      // Gọi API công việc tương tự từ backend thật
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}/similar`)
         .then((res) => res.json())
-        .then((data) => setSameJobs(data));
+        .then((data) => setSameJobs(Array.isArray(data) ? data : []));
     }
   }, [id]);
 
