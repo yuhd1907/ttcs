@@ -31,9 +31,11 @@ const jobContainer = () => {
     }
 
     // Giữ nguyên gọi tới sameJob như yêu cầu
-    fetch("http://localhost:5000/sameJobs")
-      .then((res) => res.json())
-      .then((data) => setSameJobs(data));
+    if (id) {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}/similar`)
+        .then((res) => res.json())
+        .then((data) => setSameJobs(data));
+    }
   }, [id]);
 
   const handleApply = () => {

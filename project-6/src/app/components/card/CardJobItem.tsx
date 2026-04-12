@@ -19,7 +19,7 @@ export const CardJobItem = (props: {
               {item.timeSince}
             </div>
             <div className="mt-[12px] text-[18px] font-[700] line-clamp-1">
-              {item.title}
+              {item.name || item.title}
             </div>
             <div className="flex items-center gap-[12px] mt-[12px]">
               <div className="w-[48px] h-[48px] border border-[1px] border-[#DEDEDE] rounded-[4px] )]">
@@ -41,19 +41,35 @@ export const CardJobItem = (props: {
           <div className="mt-[12px] flex flex-col gap-[4px]">
             <div className="flex items-center gap-[8px]">
               <PiSuitcase />
-              <Link href={`/search?keyword=${encodeURIComponent(item.specialization)}`} className="hover:text-[#0088FF]">{item.specialization}</Link>
+              <Link
+                href={`/search?keyword=${encodeURIComponent(
+                  Array.isArray(item.specialization)
+                    ? item.specialization[0]
+                    : item.specialization
+                )}`}
+                className="hover:text-[#0088FF]"
+              >
+                {Array.isArray(item.specialization)
+                  ? item.specialization[0]
+                  : item.specialization}
+              </Link>
             </div>
             <div className="flex items-center gap-[8px]">
               <GrPerformance />
-              <span>{workingFormMap.get(item.workingForm) || item.workingForm}</span>
+              <span>
+                {workingFormMap.get(item.workingForm) || item.workingForm}
+              </span>
             </div>
             <div className="flex items-center gap-[8px]">
               <IoLocationOutline />
-              <span>{item.location}</span>
+              <span>{item.address || item.location}</span>
             </div>
             <div className="flex flex-1 flex-wrap items-center gap-[8px] mt-[12px]">
-              {item.technologies.map((tech: string) => (
-                <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
+              {(item.technologies || []).map((tech: string, index: number) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black"
+                >
                   {tech}
                 </div>
               ))}

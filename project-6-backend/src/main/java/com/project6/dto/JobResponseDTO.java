@@ -3,7 +3,6 @@ package com.project6.dto;
 import com.project6.entity.JobPost;
 import com.project6.entity.Skill;
 import com.project6.entity.JobField;
-import com.project6.entity.Specialization;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -43,6 +43,8 @@ public class JobResponseDTO {
     private String companyWorkOvertime;
     private String companyAddress;
 
+    private String timeSince;
+
     public static JobResponseDTO from(JobPost job) {
         return JobResponseDTO.builder()
                 ._id(job.getId())
@@ -73,7 +75,28 @@ public class JobResponseDTO {
                 .companyWorkingTime(job.getCompany().getWorkingTime())
                 .companyWorkOvertime(job.getCompany().getOvertime())
                 .companyAddress(job.getCompany().getAddress())
+                .timeSince(calculateTimeSince(job.getCreatedAt()))
                 .build();
+    }
+
+    private static String calculateTimeSince(LocalDateTime dateTime) {
+        if (dateTime == null) return "Đăng gần đây";
+        
+        LocalDateTime now = LocalDateTime.now();
+        java.time.Duration duration = java.time.Duration.between(dateTime, now);
+        
+        long days = duration.toDays();
+        if (days >= 365) return "Đăng từ " + (days / 365) + " năm trước";
+        if (days >= 30) return "Đăng từ " + (days / 30) + " tháng trước";
+        if (days >= 1) return "Đăng từ " + days + " ngày trước";
+        
+        long hours = duration.toHours();
+        if (hours >= 1) return "Đăng từ " + hours + " giờ trước";
+        
+        long minutes = duration.toMinutes();
+        if (minutes >= 1) return "Đăng từ " + minutes + " phút trước";
+        
+        return "Đăng gần đây";
     }
 
     private static List<String> splitString(String str) {

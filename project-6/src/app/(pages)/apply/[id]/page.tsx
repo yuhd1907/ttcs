@@ -37,6 +37,8 @@ const ApplicationForm = () => {
       formData.append("cv", data.cv[0]);
     }
 
+    console.log(Object.fromEntries(formData.entries()));
+
     try {
 
       fetch("https://api.example.com/apply", {
