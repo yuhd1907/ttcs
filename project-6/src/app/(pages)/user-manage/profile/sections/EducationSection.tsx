@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionCard } from "../components/SectionCard";
 import { EducationModal } from "../components/EducationModal";
 import { CiEdit, CiTrash, CiCirclePlus } from "react-icons/ci";
+import { PiStudent } from "react-icons/pi";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -167,13 +168,9 @@ export const EducationSection = (
             setIsModalOpen(true);
           }}
           icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <path d="M22 12L32 17L22 22L12 17L22 12Z" fill="#B3D9FF" />
-              <path d="M12 17V24" stroke="#B3D9FF" strokeWidth="2" strokeLinecap="round" />
-              <path d="M17 19.5V26C17 26 19 28 22 28C25 28 27 26 27 26V19.5" stroke="#80BFFF" strokeWidth="2" strokeLinecap="round" />
-              <circle cx="12" cy="25" r="2" fill="#B3D9FF" />
-            </svg>
+            <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+              <PiStudent className="text-[26px] text-[#80BFFF]" />
+            </div>
           }
         />
       )}

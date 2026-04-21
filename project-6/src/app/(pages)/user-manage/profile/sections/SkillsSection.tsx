@@ -5,6 +5,7 @@ import { SectionCard } from "../components/SectionCard";
 import { HardSkillsModal } from "../components/HardSkillsModal";
 import { SoftSkillsModal } from "../components/SoftSkillsModal";
 import { CiEdit, CiTrash, CiCirclePlus } from "react-icons/ci";
+import { FaCode } from "react-icons/fa";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -17,22 +18,11 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const displaySkills = skillsGroups.length > 0 ? skillsGroups : (infoUser?.skills || []);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    if (isDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isDropdownOpen]);
+  const sortedSkills = [...displaySkills].sort((a, b) => {
+    if (a.type === "hard" && b.type === "soft") return -1;
+    if (a.type === "soft" && b.type === "hard") return 1;
+    return 0;
+  });
 
   const handleOpenDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -102,45 +92,48 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
       .catch(err => console.error(err));
   };
 
+  const DropdownMenu = () => (
+    <div className="absolute right-0 top-[100%] mt-2 z-50 w-[240px] bg-white border border-[#E0E0E0] rounded-[8px] shadow-lg py-2 animate-in fade-in zoom-in duration-200 origin-top-right">
+      <div className="px-4 py-2">
+        <span className="text-[13px] font-[600] text-[#999] uppercase tracking-wide">
+          Thêm nhóm:
+        </span>
+      </div>
+
+      <button
+        type="button"
+        className="w-full text-left px-4 py-2.5 text-[15px] text-[#121212] hover:bg-[#F5F9FF] hover:text-[#0D8EFF] transition-colors flex items-center"
+        onClick={() => handleSelectSkillType("hard")}
+      >
+        <span className="mr-2 text-[18px]">+</span> Kỹ năng chính
+      </button>
+
+      <button
+        type="button"
+        className="w-full text-left px-4 py-2.5 text-[15px] text-[#121212] hover:bg-[#F5F9FF] hover:text-[#0D8EFF] transition-colors flex items-center"
+        onClick={() => handleSelectSkillType("soft")}
+      >
+        <span className="mr-2 text-[18px]">+</span> Kỹ năng mềm
+      </button>
+    </div>
+  );
+
   return (
     <div className="relative" ref={dropdownRef}>
       {displaySkills.length > 0 ? (
         <div className="bg-white border border-[#DEDEDE] rounded-[12px] p-5 group hover:border-[#0D8EFF] hover:shadow-sm transition-all duration-200">
           <div className="flex items-center justify-between mb-4 relative">
             <h3 className="text-[18px] font-[700] text-[#121212]">Kỹ năng</h3>
-            <button
-              onClick={handleOpenDropdown}
-              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
-              title="Thêm kỹ năng"
-            >
-              <CiCirclePlus className="text-[24px]" />
-            </button>
-
-            {isDropdownOpen && (
-              <div className="absolute right-0 top-[100%] mt-2 z-50 w-[240px] bg-white border border-[#E0E0E0] rounded-[8px] shadow-lg py-2 animate-in fade-in zoom-in duration-200 origin-top-right">
-                <div className="px-4 py-2">
-                  <span className="text-[13px] font-[600] text-[#999] uppercase tracking-wide">
-                    Thêm nhóm:
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  className="w-full text-left px-4 py-2.5 text-[15px] text-[#121212] hover:bg-[#F5F9FF] hover:text-[#0D8EFF] transition-colors flex items-center"
-                  onClick={() => handleSelectSkillType("hard")}
-                >
-                  <span className="mr-2 text-[18px]">+</span> Kỹ năng chính
-                </button>
-
-                <button
-                  type="button"
-                  className="w-full text-left px-4 py-2.5 text-[15px] text-[#121212] hover:bg-[#F5F9FF] hover:text-[#0D8EFF] transition-colors flex items-center"
-                  onClick={() => handleSelectSkillType("soft")}
-                >
-                  <span className="mr-2 text-[18px]">+</span> Kỹ năng mềm
-                </button>
-              </div>
-            )}
+            <div className="relative">
+              <button
+                onClick={handleOpenDropdown}
+                className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+                title="Thêm kỹ năng"
+              >
+                <CiCirclePlus className="text-[24px]" />
+              </button>
+              {isDropdownOpen && <DropdownMenu />}
+            </div>
           </div>
 
           <div className="bg-[#F5F9FF] rounded-[8px] p-3 flex items-center gap-2 mb-6 border border-[#E6F0FF]">
@@ -152,7 +145,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
           </div>
 
           <div>
-            {displaySkills.map((group, index) => (
+            {sortedSkills.map((group, index) => (
               <div key={group.id || index} className="border-t border-[#F0F0F0] py-6 first:pt-0 first:border-t-0 last:pb-0">
                 <div className="flex items-start justify-between mb-4">
                   <h4 className="text-[16px] font-[700] text-[#121212]">{group.groupName}</h4>
@@ -195,7 +188,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
                   <ul className="space-y-2">
                     {group.items.map((item: any, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-[15px] text-[#121212]">
-                        <div className="w-1.5 h-1.5 bg-[#E53935] rounded-full mt-0.5"></div>
+                        <div className="w-1.5 h-1.5 bg-[#121212] rounded-full mt-0.5"></div>
                         <span>{item.skill}</span>
                       </li>
                     ))}
@@ -206,19 +199,23 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
           </div>
         </div>
       ) : (
-        <SectionCard
-          title="Kỹ năng"
-          subtitle="Liệt kê các kỹ năng chuyên môn của bạn"
-          icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <path d="M28 14C29.6569 14 31 15.3431 31 17C31 18.6569 29.6569 20 28 20C27.2316 20 26.5308 19.7159 26 19.25L18.25 24C18.7159 24.5308 19 25.2316 19 26C19 27.6569 17.6569 29 16 29C14.3431 29 13 27.6569 13 26C13 24.3431 14.3431 23 16 23C16.7684 23 17.4692 23.2841 18 23.75L25.75 19C25.2841 18.4692 25 17.7684 25 17C25 15.3431 26.3431 14 28 14Z" fill="#B3D9FF" />
-              <circle cx="28" cy="17" r="3" fill="#80BFFF" opacity="0.7" />
-              <circle cx="16" cy="26" r="3" fill="#80BFFF" opacity="0.7" />
-            </svg>
-          }
-          onAdd={handleOpenDropdown}
-        />
+        <div className="relative">
+          <SectionCard
+            title="Kỹ năng"
+            subtitle="Liệt kê các kỹ năng chuyên môn của bạn"
+            icon={
+              <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+                <FaCode className="text-[24px] text-[#80BFFF]" />
+              </div>
+            }
+            onAdd={handleOpenDropdown}
+          />
+          {isDropdownOpen && (
+            <div className="absolute right-0 top-[100%] translate-y-0 z-[60]">
+               <DropdownMenu />
+            </div>
+          )}
+        </div>
       )}
 
       {/* Modals rendered separately */}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionCard } from "../components/SectionCard";
 import { ExperienceModal } from "../components/ExperienceModal";
 import { CiEdit, CiTrash, CiCirclePlus } from "react-icons/ci";
+import { PiBriefcase } from "react-icons/pi";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -143,13 +144,9 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
           title="Kinh nghiệm làm việc"
           subtitle="Thể hiện những thông tin chi tiết về quá trình làm việc"
           icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <rect x="12" y="18" width="20" height="14" rx="3" fill="#B3D9FF" />
-              <path d="M17 18V16C17 14.3431 18.3431 13 20 13H24C25.6569 13 27 14.3431 27 16V18" stroke="#80BFFF" strokeWidth="2" />
-              <path d="M12 24H32" stroke="#80BFFF" strokeWidth="1.5" opacity="0.6" />
-              <circle cx="22" cy="24" r="2" fill="#80BFFF" />
-            </svg>
+            <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+              <PiBriefcase className="text-[26px] text-[#80BFFF]" />
+            </div>
           }
           onAdd={() => {
             setEditingId(null);

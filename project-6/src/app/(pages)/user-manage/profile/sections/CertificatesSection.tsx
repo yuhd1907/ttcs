@@ -5,6 +5,7 @@ import { SectionCard } from "../components/SectionCard";
 import { CertificateModal } from "../components/CertificateModal";
 import { CiEdit, CiTrash, CiCirclePlus } from "react-icons/ci";
 import { FiExternalLink } from "react-icons/fi";
+import { TbCertificate } from "react-icons/tb";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -143,15 +144,9 @@ export const CertificatesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser
           title="Chứng chỉ"
           subtitle="Bổ sung chứng chỉ liên quan đến kỹ năng của bạn"
           icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <rect x="12" y="12" width="18" height="22" rx="3" fill="#B3D9FF" />
-              <path d="M16 18H26" stroke="#80BFFF" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M16 22H26" stroke="#80BFFF" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M16 26H21" stroke="#80BFFF" strokeWidth="1.5" strokeLinecap="round" />
-              <circle cx="28" cy="28" r="5" fill="#80BFFF" />
-              <path d="M26 28L27.5 29.5L30.5 26.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+              <TbCertificate className="text-[24px] text-[#80BFFF]" />
+            </div>
           }
           onAdd={() => {
             setEditingId(null);

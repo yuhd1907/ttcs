@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionCard } from "../components/SectionCard";
 import { AwardsModal } from "../components/AwardsModal";
 import { CiEdit, CiTrash, CiCirclePlus } from "react-icons/ci";
+import { FaAward } from "react-icons/fa";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -132,13 +133,9 @@ export const AwardsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
           title="Giải thưởng"
           subtitle="Thể hiện giải thưởng hoặc thành tích mà bạn đạt được"
           icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <path d="M22 10L24.47 17.11H32L25.76 21.39L28.24 28.5L22 24.22L15.76 28.5L18.24 21.39L12 17.11H19.53L22 10Z" fill="#B3D9FF" />
-              <path d="M19 31H25" stroke="#80BFFF" strokeWidth="2" strokeLinecap="round" />
-              <path d="M22 28V31" stroke="#80BFFF" strokeWidth="2" strokeLinecap="round" />
-              <path d="M22 10L23.5 14.5L25 17.11H28L25.5 19.5L26.5 23L22 20.5L17.5 23L18.5 19.5L16 17.11H19L20.5 14.5L22 10Z" fill="#80BFFF" opacity="0.5" />
-            </svg>
+            <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+              <FaAward className="text-[24px] text-[#80BFFF]" />
+            </div>
           }
           onAdd={() => {
             setEditingId(null);

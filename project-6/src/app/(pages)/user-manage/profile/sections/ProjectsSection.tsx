@@ -5,6 +5,7 @@ import { SectionCard } from "../components/SectionCard";
 import { ProjectsModal } from "../components/ProjectsModal";
 import { CiEdit, CiTrash, CiCirclePlus } from "react-icons/ci";
 import { FiExternalLink } from "react-icons/fi";
+import { GoProjectRoadmap } from "react-icons/go";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -143,14 +144,9 @@ export const ProjectsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | n
           title="Dự án nổi bật"
           subtitle="Giới thiệu dự án nổi bật của bạn"
           icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <rect x="12" y="14" width="20" height="16" rx="3" fill="#B3D9FF" />
-              <path d="M16 20H28" stroke="#80BFFF" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M16 24H24" stroke="#80BFFF" strokeWidth="1.5" strokeLinecap="round" />
-              <circle cx="29" cy="15" r="4" fill="#80BFFF" />
-              <path d="M27 15H31M29 13V17" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
-            </svg>
+            <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+              <GoProjectRoadmap className="text-[24px] text-[#80BFFF]" />
+            </div>
           }
           onAdd={() => {
             setEditingId(null);

@@ -11,79 +11,13 @@
     "city": "Thành phố Hồ Chí Minh",
     "address": "Quận 1",
     "intro": "",
-    "educations": [
-      {
-        "school": "PTIT",
-        "degree": "college",
-        "major": "Công nghệ thông tin",
-        "isCurrentlyStudying": true,
-        "fromMonth": "02",
-        "fromYear": "2025",
-        "toMonth": "",
-        "toYear": "",
-        "details": "sdfasdfas",
-        "id": "edu-1776785180322"
-      }
-    ],
-    "experiences": [
-      {
-        "position": "Frontend Developer",
-        "company": "Công ty TNHH Giải pháp Phần mềm ABC",
-        "isCurrentlyWorking": false,
-        "fromMonth": "01",
-        "fromYear": "2025",
-        "toMonth": "01",
-        "toYear": "2022",
-        "description": "<p>dfsadfasdf</p>",
-        "projectDetails": "<p>sdfasdfasdf</p>",
-        "id": "exp-1776785194874"
-      }
-    ],
+    "educations": [],
+    "experiences": [],
     "skills": [],
-    "languages": [
-      {
-        "language": "vietnamese",
-        "level": "beginner"
-      },
-      {
-        "language": "german",
-        "level": "intermediate"
-      }
-    ],
-    "projects": [
-      {
-        "name": "Hệ thống Quản lý Bán hàng đa kênh",
-        "isCurrentlyWorking": true,
-        "fromMonth": "01",
-        "fromYear": "2025",
-        "toMonth": "",
-        "toYear": "",
-        "description": "<p>sdfsdafasdfasdfasdf</p>",
-        "link": "https://github.com/nguyenvana/sales-management",
-        "id": "proj-1776785219840"
-      }
-    ],
-    "certificates": [
-      {
-        "name": "Chuyên viên AWS Certified Developer Associate",
-        "organization": "Amazon Web Services (AWS)",
-        "month": "01",
-        "year": "2025",
-        "link": "https://aws.amazon.com/verification/...",
-        "description": "<p>fsadfasdfa</p>",
-        "id": "cert-1776785227317"
-      }
-    ],
-    "awards": [
-      {
-        "name": "Giải Nhất - Cuộc thi Sáng tạo Công nghệ",
-        "organization": "Khoa CNTT - ĐH KHTN",
-        "month": "01",
-        "year": "2025",
-        "description": "<p>sdfasdfasdf</p>",
-        "id": "award-1776785233341"
-      }
-    ]
+    "languages": [],
+    "projects": [],
+    "certificates": [],
+    "awards": []
   },
   "$schema": "./node_modules/json-server/schema.json"
 }

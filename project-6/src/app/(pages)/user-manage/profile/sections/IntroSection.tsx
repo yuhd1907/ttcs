@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SectionCard } from "../components/SectionCard";
 import { IntroModal } from "../components/IntroModal";
 import { CiEdit } from "react-icons/ci";
+import { PiUserCircle } from "react-icons/pi";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -52,12 +53,9 @@ export const IntroSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | null
           subtitle="Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn"
           onAdd={() => setIsModalOpen(true)}
           icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <path d="M22 22C25.3137 22 28 19.3137 28 16C28 12.6863 25.3137 10 22 10C18.6863 10 16 12.6863 16 16C16 19.3137 18.6863 22 22 22Z" fill="#B3D9FF" />
-              <path d="M30 34C30 29.5817 26.4183 26 22 26C17.5817 26 14 29.5817 14 34" stroke="#B3D9FF" strokeWidth="2" strokeLinecap="round" />
-              <circle cx="22" cy="16" r="5" fill="#80BFFF" opacity="0.6" />
-            </svg>
+            <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+              <PiUserCircle className="text-[28px] text-[#80BFFF]" />
+            </div>
           }
         />
       )}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionCard } from "../components/SectionCard";
 import { LanguageModal } from "../components/LanguageModal";
 import { CiEdit } from "react-icons/ci";
+import { TbWorld } from "react-icons/tb";
 
 import { InfoUser } from "@/interface/user.interface";
 
@@ -91,15 +92,9 @@ export const LanguagesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | 
           subtitle="Liệt kê các ngôn ngữ mà bạn biết"
           onAdd={() => setIsModalOpen(true)}
           icon={
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#F0F7FF" />
-              <circle cx="22" cy="22" r="10" fill="#B3D9FF" />
-              <path d="M22 12C22 12 18 17 18 22C18 27 22 32 22 32" stroke="#80BFFF" strokeWidth="1.5" />
-              <path d="M22 12C22 12 26 17 26 22C26 27 22 32 22 32" stroke="#80BFFF" strokeWidth="1.5" />
-              <path d="M12 22H32" stroke="#80BFFF" strokeWidth="1.5" />
-              <path d="M13.5 17H30.5" stroke="#80BFFF" strokeWidth="1" opacity="0.6" />
-              <path d="M13.5 27H30.5" stroke="#80BFFF" strokeWidth="1" opacity="0.6" />
-            </svg>
+            <div className="w-[44px] h-[44px] bg-[#F0F7FF] rounded-[10px] flex items-center justify-center">
+              <TbWorld className="text-[24px] text-[#80BFFF]" />
+            </div>
           }
         />
       )}
