@@ -16,11 +16,8 @@ const jobContainer = () => {
   const params = useParams();
   const id = params.id;
 
-  console.log(id);
-
   const [job, setJob] = useState<Job>();
   const [sameJobs, setSameJobs] = useState<Job[]>([]);
-  // fsajkdfklsajdflk
 
   useEffect(() => {
     // Giữ nguyên logic gọi API của job bằng id từ params và env variable

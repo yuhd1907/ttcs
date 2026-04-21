@@ -17,8 +17,19 @@ export const MenuUser = ({ infoUser }: { infoUser: InfoUser }) => {
 
   return (
     <>
-      <Link href={"#"} className={""}>
-        {infoUser!.username}
+      <Link href={"#"} className={"flex items-center gap-x-[8px]"}>
+        {infoUser.avatar ? (
+          <img
+            src={infoUser.avatar}
+            alt={infoUser.username}
+            className="rounded-full object-cover w-[32px] h-[32px]"
+          />
+        ) : (
+          <span className="w-[32px] h-[32px] rounded-full bg-white/20 flex items-center justify-center text-white text-[14px] font-bold">
+            {infoUser.username?.charAt(0)?.toUpperCase() || "U"}
+          </span>
+        )}
+        {infoUser.username}
       </Link>
       <ul
         className={

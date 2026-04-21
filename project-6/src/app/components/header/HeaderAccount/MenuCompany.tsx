@@ -17,8 +17,19 @@ export const MenuCompany = ({ infoCompany }: { infoCompany: InfoCompany }) => {
 
   return (
     <>
-      <Link href={"#"} className={""}>
-        {infoCompany!.companyName}
+      <Link href={"#"} className={"flex items-center gap-x-[8px]"}>
+        {infoCompany.avatar ? (
+          <img
+            src={infoCompany.avatar}
+            alt={infoCompany.companyName}
+            className="rounded-full object-cover w-[32px] h-[32px]"
+          />
+        ) : (
+          <span className="w-[32px] h-[32px] rounded-full bg-white/20 flex items-center justify-center text-white text-[14px] font-bold">
+            {infoCompany.companyName?.charAt(0)?.toUpperCase() || "C"}
+          </span>
+        )}
+        {infoCompany.companyName}
       </Link>
       <ul
         className={
