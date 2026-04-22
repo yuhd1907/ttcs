@@ -46,7 +46,6 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
         setIsModalOpen(false);
         setEditingId(null);
       })
-      .catch(err => console.error(err));
   };
 
   const handleDelete = (id: string) => {

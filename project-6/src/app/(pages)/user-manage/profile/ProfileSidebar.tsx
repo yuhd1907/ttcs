@@ -73,7 +73,41 @@ const GaugeChart = ({ percent }: { percent: number }) => {
 import { InfoUser } from "@/interface/user.interface";
 
 export const ProfileSidebar = ({ infoUser }: { infoUser: InfoUser | null }) => {
-  const completionPercent = 5;
+  const completionPercent = (() => {
+    if (!infoUser) return 0;
+    let score = 0;
+
+    // 1. Thông tin cá nhân (Cơ bản + Vị trí): 20%
+    if (infoUser.username && infoUser.email) score += 5;
+
+    // 2. Giới thiệu bản thân: 10%
+    if (infoUser.intro && infoUser.intro.replace(/<[^>]*>/g, "").trim().length > 0) {
+      score += 10;
+    }
+
+    // 3. Học vấn: 15%
+    if (infoUser.educations && infoUser.educations.length > 0) score += 15;
+
+    // 4. Kinh nghiệm làm việc: 15%
+    if (infoUser.experiences && infoUser.experiences.length > 0) score += 15;
+
+    // 5. Kỹ năng: 10%
+    if (infoUser.skills && infoUser.skills.length > 0) score += 10;
+
+    // 6. Dự án: 15%
+    if (infoUser.projects && infoUser.projects.length > 0) score += 15;
+
+    // 7. Chứng chỉ: 5%
+    if (infoUser.certificates && infoUser.certificates.length > 0) score += 5;
+
+    // 8. Giải thưởng: 5%
+    if (infoUser.awards && infoUser.awards.length > 0) score += 5;
+
+    // 9. Ngoại ngữ: 5%
+    if (infoUser.languages && infoUser.languages.length > 0) score += 5;
+
+    return Math.min(score, 100);
+  })();
 
   return (
     <div className="bg-white border border-[#DEDEDE] rounded-[12px] p-5">
