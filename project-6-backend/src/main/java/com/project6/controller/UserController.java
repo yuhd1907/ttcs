@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserAuthService userAuthService;
+    private final com.project6.service.UserProfileService userProfileService;
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@Valid @RequestBody UserRegisterRequest req) {
@@ -66,5 +67,25 @@ public class UserController {
             return ResponseEntity.badRequest().body(ApiResponse.error(error));
         }
         return ResponseEntity.ok(ApiResponse.success("Đặt lại mật khẩu thành công!"));
+    }
+
+    @PatchMapping("/profile")
+    public ResponseEntity<ApiResponse> updateProfile(@ModelAttribute UserProfileRequest request) {
+        try {
+            UserInfoDto updatedUser = userProfileService.updateProfile(request);
+            return ResponseEntity.ok(ApiResponse.success("Cập nhật thông tin thành công!", updatedUser));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
+    }
+
+    @PutMapping("/cv-profile")
+    public ResponseEntity<ApiResponse> updateCvProfile(@RequestBody CvProfileRequest request) {
+        try {
+            userProfileService.updateCvProfile(request);
+            return ResponseEntity.ok(ApiResponse.success("Cập nhật CV thành công!"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
     }
 }

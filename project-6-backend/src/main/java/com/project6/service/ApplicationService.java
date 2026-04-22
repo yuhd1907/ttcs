@@ -27,6 +27,7 @@ public class ApplicationService {
     private final JobPostRepository jobPostRepository;
     private final CompanyRepository companyRepository;
     private final FileStorageService fileStorageService;
+    private final com.project6.repository.UserRepository userRepository;
 
     /**
      * Ứng viên nộp đơn ứng tuyển
@@ -43,13 +44,21 @@ public class ApplicationService {
             throw new RuntimeException("Email này đã nộp đơn cho công việc này rồi!");
         }
 
-        // Upload CV lên Cloudinary
-        if (cvFile == null || cvFile.isEmpty()) {
-            throw new RuntimeException("Vui lòng tải lên file CV!");
-        }
-        String cvUrl = fileStorageService.storeCV(cvFile);
-        if (cvUrl == null) {
-            throw new RuntimeException("Không thể tải lên CV. Vui lòng thử lại!");
+        // Xử lý CV
+        String finalCvUrl = null;
+        if (cvFile != null && !cvFile.isEmpty()) {
+            finalCvUrl = fileStorageService.storeCV(cvFile);
+            if (finalCvUrl == null) {
+                throw new RuntimeException("Không thể tải lên CV. Vui lòng thử lại!");
+            }
+        } else {
+            // Lấy từ User profile
+            com.project6.entity.User user = userRepository.findByEmail(email).orElse(null);
+            if (user != null && user.getCvUrl() != null && !user.getCvUrl().isEmpty()) {
+                finalCvUrl = user.getCvUrl();
+            } else {
+                throw new RuntimeException("Vui lòng tải lên file CV hoặc cập nhật CV chính trong hồ sơ cá nhân!");
+            }
         }
 
         Application application = Application.builder()
@@ -58,7 +67,7 @@ public class ApplicationService {
                 .email(email)
                 .phone(phone)
                 .coverLetter(coverLetter)
-                .cvUrl(cvUrl)
+                .cvUrl(finalCvUrl)
                 .status("pending")
                 .build();
 

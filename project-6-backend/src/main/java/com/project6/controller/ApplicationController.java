@@ -30,7 +30,7 @@ public class ApplicationController {
             @RequestParam("email")     String email,
             @RequestParam("phone")     String phone,
             @RequestParam(value = "coverLetter", required = false) String coverLetter,
-            @RequestParam("cv")        MultipartFile cvFile) {
+            @RequestParam(value = "cv", required = false) MultipartFile cvFile) {
         try {
             ApplicationResponseDTO result = applicationService.apply(
                     UUID.fromString(jobId), fullName, email, phone, coverLetter, cvFile);

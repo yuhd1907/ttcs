@@ -9,4 +9,11 @@ public class UserProfileRequest {
     private String email;
     private String phone;
     private MultipartFile avatar; // Optional
+    private String position;
+    private String birth_date;
+    private String gender;
+    private String city;
+    private String address;
+    private String personal_link;
+    private MultipartFile cv; // Optional for CV upload
 }
