@@ -6,19 +6,27 @@ import { CVBuilderSection } from "@/app/(pages)/user-manage/profile/CVBuilderSec
 import { ProfileSidebar } from "@/app/(pages)/user-manage/profile/ProfileSidebar";
 import { InfoUser } from "@/interface/user.interface";
 
+import { Toaster } from "sonner";
+
 const ProfileClient = () => {
   const [infoUser, setInfoUser] = useState<InfoUser | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/check`, {
+      credentials: "include",
+    })
       .then(res => res.json())
       .then(data => {
-        setInfoUser(data);
+        if (data.code === 'success' && data.infoUser) {
+          setInfoUser(data.infoUser);
+        }
       })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
     <div className="mt-[60px] mb-12">
+      <Toaster richColors position="top-right" />
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-5 items-start">
           {/* ── Left column ── */}

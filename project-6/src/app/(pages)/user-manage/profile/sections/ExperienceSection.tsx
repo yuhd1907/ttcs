@@ -29,11 +29,11 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
       updatedList = [newItem, ...currentList];
     }
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ experiences: updatedList }),
+      body: JSON.stringify({ ...infoUser, experiences: updatedList  }),
     })
       .then(res => res.json())
       .then(resData => {
@@ -52,11 +52,11 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
     const currentList = experiences.length > 0 ? experiences : (infoUser?.experiences || []);
     const updatedList = currentList.filter(exp => exp.id !== id);
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ experiences: updatedList }),
+      body: JSON.stringify({ ...infoUser, experiences: updatedList  }),
     })
       .then(res => res.json())
       .then(data => {

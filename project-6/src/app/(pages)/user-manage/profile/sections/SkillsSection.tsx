@@ -53,11 +53,11 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
       updatedGroups = [newGroup, ...currentList];
     }
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ skills: updatedGroups }),
+      body: JSON.stringify({ ...infoUser, skills: updatedGroups  }),
     })
       .then(res => res.json())
       .then(resData => {
@@ -76,11 +76,11 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
     const currentList = skillsGroups.length > 0 ? skillsGroups : (infoUser?.skills || []);
     const updatedGroups = currentList.filter(group => group.id !== id);
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ skills: updatedGroups }),
+      body: JSON.stringify({ ...infoUser, skills: updatedGroups  }),
     })
       .then(res => res.json())
       .then(data => {

@@ -24,10 +24,19 @@ export const SearchBar = () => {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/list`)
-      .then((res) => res.json())
-      .then((data) =>
-        setCompanyList(data.companyList)
-      );
+      .then((res) => {
+        if (!res.ok) throw new Error("API not found or error");
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.companyList) {
+          setCompanyList(data.companyList);
+        }
+      })
+      .catch((err) => {
+        console.log("Failed to fetch company list:", err);
+        setCompanyList([]);
+      });
   }, []);
 
   const searchSlug = toSlugHelpter(keyword);
