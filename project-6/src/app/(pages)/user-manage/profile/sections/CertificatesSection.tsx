@@ -30,11 +30,11 @@ export const CertificatesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser
       updatedList = [newItem, ...currentList];
     }
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ certificates: updatedList }),
+      body: JSON.stringify({ ...infoUser, certificates: updatedList  }),
     })
       .then(res => res.json())
       .then(resData => {
@@ -54,11 +54,11 @@ export const CertificatesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser
     const currentList = certificates.length > 0 ? certificates : (infoUser?.certificates || []);
     const updatedList = currentList.filter(cert => cert.id !== id);
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ certificates: updatedList }),
+      body: JSON.stringify({ ...infoUser, certificates: updatedList  }),
     })
       .then(res => res.json())
       .then(data => {

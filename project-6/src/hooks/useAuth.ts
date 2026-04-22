@@ -26,6 +26,10 @@ export const useAuth = () => {
             setInfoUser(null);
           }
         }
+      })
+      .catch((error) => {
+        console.error("Lỗi khi kiểm tra đăng nhập:", error);
+        setIsLogin(false);
       });
   }, [pathName]);
 

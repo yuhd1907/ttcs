@@ -30,11 +30,11 @@ export const ProjectsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | n
       updatedList = [newItem, ...currentList];
     }
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ projects: updatedList }),
+      body: JSON.stringify({ ...infoUser, projects: updatedList  }),
     })
       .then(res => res.json())
       .then(resData => {
@@ -54,11 +54,11 @@ export const ProjectsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | n
     const currentList = projects.length > 0 ? projects : (infoUser?.projects || []);
     const updatedList = currentList.filter(proj => proj.id !== id);
 
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ projects: updatedList }),
+      body: JSON.stringify({ ...infoUser, projects: updatedList  }),
     })
       .then(res => res.json())
       .then(data => {

@@ -38,11 +38,11 @@ export const LanguagesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | 
   const displayLanguages = languages !== null ? languages : (infoUser?.languages || []);
 
   const handleSave = (items: any[]) => {
-    fetch("http://localhost:5000/user", {
-      method: "PATCH",
-      // credentials: "include",
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ languages: items }),
+      body: JSON.stringify({ ...infoUser, languages: items  }),
     })
       .then(res => res.json())
       .then(resData => {
