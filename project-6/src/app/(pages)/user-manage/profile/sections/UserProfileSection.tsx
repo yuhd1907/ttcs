@@ -108,19 +108,7 @@ export const UserProfileSection = ({ infoUser, onUpdate }: { infoUser: InfoUser 
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[14px] flex-wrap">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-[#BDBDBD] flex-shrink-0">
-              <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            {infoUser.cv_url ? (
-              <a href={infoUser.cv_url} target="_blank" rel="noopener noreferrer" className="text-[#28a745] hover:underline truncate max-w-[180px] font-medium">
-                Xem CV đã đính kèm
-              </a>
-            ) : (
-              <span className="text-[#BDBDBD]">Chưa đính kèm CV</span>
-            )}
-          </div>
+
         </div>
       </div>
 

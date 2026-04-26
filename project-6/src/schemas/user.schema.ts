@@ -27,7 +27,7 @@ export const UserProfileSchema = z.object({
   city: z.string().min(1, { message: "Vui lòng chọn tỉnh/thành phố!" }),
   address: z.string().optional(),
   personal_link: z.string().optional(),
-  cv: z.any().optional(),
+
 });
 
 export type UserProfileFormValues = z.infer<typeof UserProfileSchema>;

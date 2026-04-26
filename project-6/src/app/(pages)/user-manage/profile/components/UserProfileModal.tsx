@@ -75,13 +75,6 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
       }
     }
 
-    if (values.cv && values.cv.length > 0) {
-      const cvItem = values.cv[0];
-      if (cvItem instanceof File || cvItem instanceof Blob) {
-        formData.append("cv", cvItem);
-      }
-    }
-
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`, {
       method: "PATCH",
       body: formData,
@@ -294,39 +287,6 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                 />
               </div>
 
-              {/* CV Upload */}
-              <div className="mt-1">
-                <label className="block text-[14px] font-[600] text-[#121212] mb-2">
-                  CV đính kèm (Main CV)
-                </label>
-                <Controller
-                  name="cv"
-                  control={control}
-                  render={({ field: { onChange, value } }) => (
-                    <div className="inner-upload-cv">
-                      <FilePond
-                        files={value || []}
-                        onupdatefiles={(fileItems) => {
-                          const files = fileItems.map((item) => item.file);
-                          onChange(files);
-                        }}
-                        maxFiles={1}
-                        allowMultiple={false}
-                        labelIdle='Kéo thả hoặc <span class="filepond--label-action">Tải lên file CV (PDF)</span>'
-                        acceptedFileTypes={["application/pdf"]}
-                      />
-                    </div>
-                  )}
-                />
-                {infoUser?.cv_url && (
-                  <div className="flex items-center gap-2 mt-[-5px] text-[13px]">
-                    <span className="text-[#28a745] font-[500]">Đã có CV trên hệ thống:</span>
-                    <a href={infoUser.cv_url} target="_blank" rel="noopener noreferrer" className="text-[#0088FF] hover:underline truncate max-w-[250px]">
-                      Xem CV hiện tại
-                    </a>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
 
