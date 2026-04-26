@@ -32,10 +32,22 @@ const ProfileClient = () => {
           {/* ── Left column ── */}
           <div className="lg:w-[calc(65%-10px)] w-full flex flex-col gap-4">
             {/* Personal info card (with edit modal) */}
-            <UserProfileSection infoUser={infoUser} onUpdate={setInfoUser} />
+            <UserProfileSection 
+              infoUser={infoUser} 
+              onUpdate={(data) => {
+                setInfoUser(data);
+                window.dispatchEvent(new Event("userUpdate"));
+              }} 
+            />
 
             {/* CV builder sections */}
-            <CVBuilderSection infoUser={infoUser} onUpdate={setInfoUser} />
+            <CVBuilderSection 
+              infoUser={infoUser} 
+              onUpdate={(data) => {
+                setInfoUser(data);
+                window.dispatchEvent(new Event("userUpdate"));
+              }} 
+            />
           </div>
 
           {/* ── Right sidebar ── */}

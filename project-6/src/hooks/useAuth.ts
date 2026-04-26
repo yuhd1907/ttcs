@@ -6,7 +6,17 @@ export const useAuth = () => {
   const [isLogin, setIsLogin] = useState<boolean | null>(null);
   const [infoUser, setInfoUser] = useState<InfoUser | null>(null);
   const [infoCompany, setInfoCompany] = useState<InfoCompany | null>(null);
+  const [refetchTrigger, setRefetchTrigger] = useState(0);
   const pathName = usePathname();
+
+  useEffect(() => {
+    const handleUserUpdate = () => {
+      setRefetchTrigger((prev) => prev + 1);
+    };
+
+    window.addEventListener("userUpdate", handleUserUpdate);
+    return () => window.removeEventListener("userUpdate", handleUserUpdate);
+  }, []);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/check`, {
@@ -31,7 +41,7 @@ export const useAuth = () => {
         console.error("Lỗi khi kiểm tra đăng nhập:", error);
         setIsLogin(false);
       });
-  }, [pathName]);
+  }, [pathName, refetchTrigger]);
 
   return { isLogin, infoUser, infoCompany };
 };

@@ -4,10 +4,12 @@ import { useState, useRef, useEffect } from "react";
 import { SectionCard } from "../components/SectionCard";
 import { HardSkillsModal } from "../components/HardSkillsModal";
 import { SoftSkillsModal } from "../components/SoftSkillsModal";
+import { QuickExperienceModal } from "../components/QuickExperienceModal";
 import { CiEdit, CiTrash, CiCirclePlus } from "react-icons/ci";
 import { FaCode } from "react-icons/fa";
 
 import { InfoUser } from "@/interface/user.interface";
+import { skillLabel, softSkillLabel, experienceLabel } from "@/config/cvLabels";
 
 export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | null, onUpdate?: (data: InfoUser) => void }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,6 +18,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
 
   const [skillsGroups, setSkillsGroups] = useState<any[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [isQuickModalOpen, setIsQuickModalOpen] = useState(false);
 
   const displaySkills = skillsGroups.length > 0 ? skillsGroups : (infoUser?.skills || []);
   const sortedSkills = [...displaySkills].sort((a, b) => {
@@ -32,6 +35,24 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
     setEditingId(null);
     setModalType(type);
     setIsDropdownOpen(false);
+  };
+
+  const handleSaveQuickExperience = (updatedGroups: any[]) => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...infoUser, skills: updatedGroups }),
+    })
+      .then((res) => res.json())
+      .then((resData) => {
+        setSkillsGroups(updatedGroups);
+        if (infoUser && onUpdate) {
+          onUpdate({ ...infoUser, skills: updatedGroups });
+        }
+        setIsQuickModalOpen(false);
+      })
+      .catch((err) => console.error(err));
   };
 
   const handleCloseModal = () => {
@@ -127,7 +148,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
             <div className="relative">
               <button
                 onClick={handleOpenDropdown}
-                className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+                className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
                 title="Thêm kỹ năng"
               >
                 <CiCirclePlus className="text-[24px]" />
@@ -139,7 +160,12 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
           <div className="bg-[#F5F9FF] rounded-[8px] p-3 flex items-center gap-2 mb-6 border border-[#E6F0FF]">
             <CiEdit className="text-[20px] text-[#2563EB]" />
             <p className="text-[14px]">
-              <span className="text-[#2563EB] font-[500] cursor-pointer hover:underline">Cập nhật nhanh</span>{" "}
+              <span 
+                onClick={() => setIsQuickModalOpen(true)}
+                className="text-[#2563EB] font-[500] cursor-pointer hover:underline"
+              >
+                Cập nhật nhanh
+              </span>{" "}
               <span className="text-[#555]">số năm kinh nghiệm cho kỹ năng</span>
             </p>
           </div>
@@ -148,10 +174,10 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
             {sortedSkills.map((group, index) => (
               <div key={group.id || index} className="border-t border-[#F0F0F0] py-6 first:pt-0 first:border-t-0 last:pb-0">
                 <div className="flex items-start justify-between mb-4">
-                  <h4 className="text-[16px] font-[700] text-[#121212]">{group.groupName}</h4>
+                  <h4 className="text-[16px] font-[700] text-[#121212] break-words">{group.groupName}</h4>
                   <div className="flex items-center gap-3">
                     <button
-                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
                       title="Chỉnh sửa"
                       onClick={() => {
                         setEditingId(group.id);
@@ -161,7 +187,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
                       <CiEdit className="text-[24px]" />
                     </button>
                     <button
-                      className="text-[#444444] hover:text-[#111111] transition-colors"
+                      className="text-[#444444] hover:text-[#111111] transition-colors cursor-pointer"
                       title="Xoá"
                       onClick={() => handleDelete(group.id)}
                     >
@@ -177,9 +203,9 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
                         key={i}
                         className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white border border-[#E0E0E0] rounded-full text-[14px] text-[#222]"
                       >
-                        <span className="font-[700]">{item.skill}</span>
+                        <span className="font-[700]">{skillLabel(item.skill)}</span>
                         {item.experience && (
-                          <span className="text-[#555] font-[400]">({item.experience})</span>
+                          <span className="text-[#555] font-[400]">({experienceLabel(item.experience)})</span>
                         )}
                       </div>
                     ))}
@@ -189,7 +215,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
                     {group.items.map((item: any, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-[15px] text-[#121212]">
                         <div className="w-1.5 h-1.5 bg-[#121212] rounded-full mt-0.5"></div>
-                        <span>{item.skill}</span>
+                        <span>{softSkillLabel(item.skill)}</span>
                       </li>
                     ))}
                   </ul>
@@ -230,9 +256,14 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
         isOpen={modalType === "soft"}
         onClose={handleCloseModal}
         initialItems={editingId !== null ? displaySkills.find(g => g.id === editingId)?.items : undefined}
-        onSave={(groupName, items) => {
-          handleSaveModal(groupName, items);
-        }}
+        onSave={handleSaveModal}
+      />
+
+      <QuickExperienceModal
+        isOpen={isQuickModalOpen}
+        onClose={() => setIsQuickModalOpen(false)}
+        skills={displaySkills}
+        onSave={handleSaveQuickExperience}
       />
     </div>
   );

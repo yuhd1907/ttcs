@@ -81,7 +81,7 @@ export const CertificatesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser
                 setEditingId(null);
                 setIsModalOpen(true);
               }}
-              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
               title="Thêm chứng chỉ"
             >
               <CiCirclePlus className="text-[24px]" />
@@ -93,9 +93,9 @@ export const CertificatesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser
               <div key={cert.id || index} className="border-t border-[#F0F0F0] py-4 last:pb-0">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h4 className="text-[16px] font-[700] text-[#121212]">{cert.name}</h4>
-                    <p className="text-[14px] text-[#333333] mt-1">{cert.organization}</p>
-                    <p className="text-[14px] text-[#757575] mt-1">
+                    <h4 className="text-[16px] font-[700] text-[#121212] break-words">{cert.name}</h4>
+                    <p className="text-[14px] text-[#333333] mt-1 break-words">{cert.organization}</p>
+                    <p className="text-[14px] text-[#757575] mt-1 break-words">
                       {cert.month}/{cert.year}
                     </p>
                     {cert.description && (
@@ -115,9 +115,9 @@ export const CertificatesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser
                       </a>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 ml-4">
+                  <div className="flex items-center gap-3 ml-4 shrink-0">
                     <button
-                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
                       title="Chỉnh sửa"
                       onClick={() => {
                         setEditingId(cert.id);
@@ -127,7 +127,7 @@ export const CertificatesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser
                       <CiEdit className="text-[24px]" />
                     </button>
                     <button
-                      className="text-[#444444] hover:text-[#111111] transition-colors"
+                      className="text-[#444444] hover:text-[#111111] transition-colors cursor-pointer"
                       title="Xoá"
                       onClick={() => handleDelete(cert.id)}
                     >

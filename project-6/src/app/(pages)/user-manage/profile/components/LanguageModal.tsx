@@ -15,30 +15,12 @@ interface LanguageModalProps {
   onSave?: (items: LanguageItem[]) => void;
 }
 
-const LANGUAGE_OPTIONS = [
-  { value: "vietnamese", label: "Tiếng Việt" },
-  { value: "english", label: "Tiếng Anh" },
-  { value: "japanese", label: "Tiếng Nhật" },
-  { value: "german", label: "Tiếng Đức" },
-  { value: "spanish", label: "Tiếng Tây Ban Nha" },
-  { value: "korean", label: "Tiếng Hàn" },
-  { value: "chinese", label: "Tiếng Trung" },
-  { value: "french", label: "Tiếng Pháp" },
-];
+import { LANGUAGE_MAP, LEVEL_MAP, languageLabel, levelLabel } from '@/config/cvLabels';
 
-const LEVEL_OPTIONS = [
-  { value: "beginner", label: "Sơ cấp" },
-  { value: "intermediate", label: "Trung cấp" },
-  { value: "advanced", label: "Nâng cao" },
-  { value: "proficient", label: "Thành thạo" },
-];
+const LANGUAGE_OPTIONS = Object.entries(LANGUAGE_MAP).map(([value, label]) => ({ value, label }));
+const LEVEL_OPTIONS = Object.entries(LEVEL_MAP).map(([value, label]) => ({ value, label }));
 
 const MAX_LANGUAGES = 5;
-
-const getLabelByValue = (
-  options: { value: string; label: string }[],
-  value: string
-) => options.find((o) => o.value === value)?.label || value;
 
 export const LanguageModal: React.FC<LanguageModalProps> = ({
   isOpen,
@@ -103,7 +85,7 @@ export const LanguageModal: React.FC<LanguageModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-[#757575] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-[#757575] transition-colors cursor-pointer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -188,9 +170,9 @@ export const LanguageModal: React.FC<LanguageModalProps> = ({
                 className="inline-flex items-center gap-1.5 h-[32px] px-3 bg-[#F5F5F5] border border-[#E0E0E0] rounded-full text-[13px] text-[#444]"
               >
                 <span>
-                  {getLabelByValue(LANGUAGE_OPTIONS, item.language)}{" "}
+                  {languageLabel(item.language)}{" "}
                   <span className="text-[#0D8EFF]">
-                    ({getLabelByValue(LEVEL_OPTIONS, item.level)})
+                    ({levelLabel(item.level)})
                   </span>
                 </span>
                 <button

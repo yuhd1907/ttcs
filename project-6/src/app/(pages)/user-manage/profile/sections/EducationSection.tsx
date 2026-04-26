@@ -8,16 +8,8 @@ import { PiStudent } from "react-icons/pi";
 
 import { InfoUser } from "@/interface/user.interface";
 
-const getDegreeLabel = (val: string) => {
-  const options: Record<string, string> = {
-    college: "Cao đẳng",
-    bachelor: "Cử nhân",
-    master: "Thạc Sĩ",
-    doctorate: "Tiến Sĩ",
-    other: "Khác"
-  };
-  return options[val] || val;
-};
+import { degreeLabel } from '@/config/cvLabels';
+
 
 export const EducationSection = (
   { infoUser, onUpdate }:
@@ -109,7 +101,7 @@ export const EducationSection = (
                 setEditingId(null);
                 setIsModalOpen(true);
               }}
-              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
               title="Thêm học vấn"
             >
               <CiCirclePlus className="text-[24px]" />
@@ -120,12 +112,12 @@ export const EducationSection = (
             {displayEducations.map((edu, index) => (
               <div key={edu.id || index} className="border-t border-[#F0F0F0] py-4 last:pb-0">
                 <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="text-[16px] font-[700] text-[#121212]">{edu.school}</h4>
-                    <p className="text-[14px] text-[#333333] mt-1">
-                      {getDegreeLabel(edu.degree)} - {edu.major}
+                  <div className="min-w-0">
+                    <h4 className="text-[16px] font-[700] text-[#121212] break-words">{edu.school}</h4>
+                    <p className="text-[14px] text-[#333333] mt-1 break-words">
+                      {degreeLabel(edu.degree)} - {edu.major}
                     </p>
-                    <p className="text-[14px] text-[#757575] mt-1">
+                    <p className="text-[14px] text-[#757575] mt-1 break-words">
                       {edu.fromMonth}/{edu.fromYear} - {edu.isCurrentlyStudying ? "Hiện tại" : `${edu.toMonth}/${edu.toYear}`}
                     </p>
                     {edu.details && (
@@ -135,9 +127,9 @@ export const EducationSection = (
                       />
                     )}
                   </div>
-                  <div className="flex items-center gap-3 ml-4">
+                  <div className="flex items-center gap-3 ml-4 shrink-0">
                     <button
-                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
                       title="Chỉnh sửa"
                       onClick={() => {
                         setEditingId(edu.id);
@@ -147,7 +139,7 @@ export const EducationSection = (
                       <CiEdit className="text-[24px]" />
                     </button>
                     <button
-                      className="text-[#444444] hover:text-[#111111] transition-colors"
+                      className="text-[#444444] hover:text-[#111111] transition-colors cursor-pointer"
                       title="Xoá"
                       onClick={() => handleDelete(edu.id)}
                     >

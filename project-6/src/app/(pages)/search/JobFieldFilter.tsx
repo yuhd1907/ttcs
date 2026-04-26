@@ -4,9 +4,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { IoClose } from "react-icons/io5";
 import { FaAngleDown } from "react-icons/fa";
-import database from "../../../../database.json";
-
-const jobFields = database.job_fields;
+import { useJobFields } from "@/hooks/useJobFields";
 
 const JobFieldFilter = ({
   onActiveChange,
@@ -15,6 +13,7 @@ const JobFieldFilter = ({
   onActiveChange?: (active: boolean) => void;
   onSelectionChange?: (selected: string[]) => void;
 }) => {
+  const { jobFields, isLoading } = useJobFields();
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,7 +43,7 @@ const JobFieldFilter = ({
         field.slug.includes(slugSearch) ||
         field.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
-  }, [searchTerm]);
+  }, [searchTerm, jobFields]);
 
   const toggleOption = (slug: string) => {
     let newSelected: string[];
@@ -122,7 +121,11 @@ const JobFieldFilter = ({
 
           {/* Options List */}
           <div className="max-h-[240px] overflow-y-auto py-1">
-            {filteredFields.length > 0 ? (
+            {isLoading ? (
+              <div className="px-4 py-3 text-[16px] text-gray-400 text-center">
+                Đang tải...
+              </div>
+            ) : filteredFields.length > 0 ? (
               filteredFields.map((field) => (
                 <label
                   key={field.id}

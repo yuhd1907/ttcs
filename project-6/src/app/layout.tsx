@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <Header />
 
-        <div className="pb-[80px]">{children}</div>
+        <div>{children}</div>
 
         <Footer />
       </body>

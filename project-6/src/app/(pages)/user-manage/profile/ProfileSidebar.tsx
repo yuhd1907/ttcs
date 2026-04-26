@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 /** Semi-circular gauge that shows profile completion percentage */
 const GaugeChart = ({ percent }: { percent: number }) => {
   // SVG semi-circle gauge
@@ -73,6 +75,7 @@ const GaugeChart = ({ percent }: { percent: number }) => {
 import { InfoUser } from "@/interface/user.interface";
 
 export const ProfileSidebar = ({ infoUser }: { infoUser: InfoUser | null }) => {
+  const router = useRouter();
   const completionPercent = (() => {
     if (!infoUser) return 0;
     let score = 0;
@@ -86,10 +89,10 @@ export const ProfileSidebar = ({ infoUser }: { infoUser: InfoUser | null }) => {
     }
 
     // 3. Học vấn: 15%
-    if (infoUser.educations && infoUser.educations.length > 0) score += 15;
+    if (infoUser.educations && infoUser.educations.length > 0) score += 20;
 
     // 4. Kinh nghiệm làm việc: 15%
-    if (infoUser.experiences && infoUser.experiences.length > 0) score += 15;
+    if (infoUser.experiences && infoUser.experiences.length > 0) score += 20;
 
     // 5. Kỹ năng: 10%
     if (infoUser.skills && infoUser.skills.length > 0) score += 10;
@@ -123,7 +126,7 @@ export const ProfileSidebar = ({ infoUser }: { infoUser: InfoUser | null }) => {
       <div className="mt-4 flex items-start gap-3 bg-[#F0F7FF] border border-[#CCE5FF] rounded-[10px] p-3">
         <div className="flex-1 text-[12px] text-[#444] leading-relaxed">
           Nâng cấp hồ sơ của bạn lên{" "}
-          <span className="font-[700] text-[#0D8EFF]">70%</span> để tải mẫu CV
+          <span className="font-[700] text-[#0D8EFF]">65%</span> để tải mẫu CV
           dành cho chuyên gia IT.
         </div>
         {/* Robot icon */}
@@ -131,7 +134,15 @@ export const ProfileSidebar = ({ infoUser }: { infoUser: InfoUser | null }) => {
       </div>
 
       {/* Download CV button */}
-      <button className="mt-4 w-full h-11 bg-[#0D8EFF] hover:bg-[#0076E5] transition-colors rounded-[8px] text-white text-[14px] font-[700] flex items-center justify-center gap-2">
+      <button
+        disabled={completionPercent < 65}
+        onClick={() => completionPercent >= 65 && router.push('/user-manage/cv-preview')}
+        className={`mt-4 w-full h-11 transition-colors rounded-[8px] text-[14px] font-[700] flex items-center justify-center gap-2 ${
+          completionPercent < 65
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+            : "bg-[#0D8EFF] hover:bg-[#0076E5] text-white cursor-pointer"
+        }`}
+      >
         <svg
           width="17"
           height="17"
@@ -141,11 +152,11 @@ export const ProfileSidebar = ({ infoUser }: { infoUser: InfoUser | null }) => {
         >
           <path
             d="M12 16L7 11H10V4H14V11H17L12 16Z"
-            fill="white"
+            fill="currentColor"
           />
           <path
             d="M5 20H19"
-            stroke="white"
+            stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
           />

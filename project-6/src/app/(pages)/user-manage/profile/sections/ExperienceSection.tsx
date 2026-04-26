@@ -79,7 +79,7 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
                 setEditingId(null);
                 setIsModalOpen(true);
               }}
-              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
               title="Thêm kinh nghiệm"
             >
               <CiCirclePlus className="text-[24px]" />
@@ -91,11 +91,11 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
               <div key={exp.id || index} className="border-t border-[#F0F0F0] py-4 last:pb-0">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h4 className="text-[16px] font-[700] text-[#121212]">{exp.position}</h4>
-                    <p className="text-[14px] text-[#333333] mt-1">
+                    <h4 className="text-[16px] font-[700] text-[#121212] break-words">{exp.position}</h4>
+                    <p className="text-[14px] text-[#333333] mt-1 break-words">
                       {exp.company}
                     </p>
-                    <p className="text-[14px] text-[#757575] mt-1">
+                    <p className="text-[14px] text-[#757575] mt-1 break-words">
                       {exp.fromMonth}/{exp.fromYear} - {exp.isCurrentlyWorking ? "Hiện tại" : `${exp.toMonth}/${exp.toYear}`}
                     </p>
                     {exp.description && (
@@ -106,7 +106,7 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
                     )}
                     {exp.projectDetails && (
                       <div className="mt-3">
-                        <p className="text-[16px] font-[700] text-[#121212]">Dự án:</p>
+                        <p className="text-[16px] font-[700] text-[#121212] break-words">Dự án:</p>
                         <div
                           className="text-[14px] text-[#222222] mt-2 prose prose-sm max-w-none"
                           dangerouslySetInnerHTML={{ __html: exp.projectDetails }}
@@ -114,9 +114,9 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 ml-4">
+                  <div className="flex items-center gap-3 ml-4 shrink-0">
                     <button
-                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
                       title="Chỉnh sửa"
                       onClick={() => {
                         setEditingId(exp.id);
@@ -126,7 +126,7 @@ export const ExperienceSection = ({ infoUser, onUpdate }: { infoUser: InfoUser |
                       <CiEdit className="text-[24px]" />
                     </button>
                     <button
-                      className="text-[#444444] hover:text-[#111111] transition-colors"
+                      className="text-[#444444] hover:text-[#111111] transition-colors cursor-pointer"
                       title="Xoá"
                       onClick={() => handleDelete(exp.id)}
                     >

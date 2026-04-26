@@ -49,7 +49,7 @@ export const UserProfileSection = ({ infoUser, onUpdate }: { infoUser: InfoUser 
         </div>
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-3">
-          <div className="flex items-center gap-2 text-[14px]">
+          <div className="flex items-center gap-2 text-[14px] flex-wrap">
             <CiMail className="text-[16px] text-[#BDBDBD]" />
             {infoUser.email ? (
               <span className="text-[#757575] truncate max-w-[180px]">{infoUser.email}</span>
@@ -58,7 +58,7 @@ export const UserProfileSection = ({ infoUser, onUpdate }: { infoUser: InfoUser 
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[14px]">
+          <div className="flex items-center gap-2 text-[14px] flex-wrap">
             <CiPhone className="text-[16px] text-[#BDBDBD]" />
             {infoUser.phone ? (
               <span className="text-[#757575]">{infoUser.phone}</span>
@@ -67,7 +67,7 @@ export const UserProfileSection = ({ infoUser, onUpdate }: { infoUser: InfoUser 
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[14px]">
+          <div className="flex items-center gap-2 text-[14px] flex-wrap">
             <CiCalendar className="text-[16px] text-[#BDBDBD]" />
             {infoUser.birth_date ? (
               <span className="text-[#757575]">{infoUser.birth_date}</span>
@@ -76,14 +76,14 @@ export const UserProfileSection = ({ infoUser, onUpdate }: { infoUser: InfoUser 
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[14px]">
+          <div className="flex items-center gap-2 text-[14px] flex-wrap">
             <IoPersonOutline className="text-[16px] text-[#BDBDBD]" />
             {infoUser.gender ? <span className="text-[#757575]">
               {infoUser.gender === "male" ? "Nam" : infoUser.gender === "female" ? "Nữ" : "Khác"}</span>
               : <span className="text-[#BDBDBD]">Giới tính</span>}
           </div>
 
-          <div className="flex items-center gap-2 text-[14px]">
+          <div className="flex items-center gap-2 text-[14px] flex-wrap">
             <GoLocation className="text-[16px] text-[#BDBDBD]" />
             {infoUser.city ? (
               <span className="text-[#757575]">
@@ -94,7 +94,7 @@ export const UserProfileSection = ({ infoUser, onUpdate }: { infoUser: InfoUser 
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[14px]">
+          <div className="flex items-center gap-2 text-[14px] flex-wrap">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-[#BDBDBD] flex-shrink-0">
                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -108,7 +108,7 @@ export const UserProfileSection = ({ infoUser, onUpdate }: { infoUser: InfoUser 
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[14px]">
+          <div className="flex items-center gap-2 text-[14px] flex-wrap">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-[#BDBDBD] flex-shrink-0">
               <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

@@ -81,7 +81,7 @@ export const ProjectsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | n
                 setEditingId(null);
                 setIsModalOpen(true);
               }}
-              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
               title="Thêm dự án"
             >
               <CiCirclePlus className="text-[24px]" />
@@ -93,8 +93,8 @@ export const ProjectsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | n
               <div key={project.id || index} className="border-t border-[#F0F0F0] py-4 last:pb-0">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h4 className="text-[16px] font-[700] text-[#121212]">{project.name}</h4>
-                    <p className="text-[14px] text-[#757575] mt-1">
+                    <h4 className="text-[16px] font-[700] text-[#121212] break-words">{project.name}</h4>
+                    <p className="text-[14px] text-[#757575] mt-1 break-words">
                       {project.fromMonth}/{project.fromYear}
                       {project.toMonth && project.toYear ? ` - ${project.toMonth}/${project.toYear}` : (project.isCurrentlyWorking ? ' - Hiện tại' : '')}
                     </p>
@@ -115,9 +115,9 @@ export const ProjectsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | n
                       </a>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 ml-4">
+                  <div className="flex items-center gap-3 ml-4 shrink-0">
                     <button
-                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+                      className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
                       title="Chỉnh sửa"
                       onClick={() => {
                         setEditingId(project.id);
@@ -127,7 +127,7 @@ export const ProjectsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | n
                       <CiEdit className="text-[24px]" />
                     </button>
                     <button
-                      className="text-[#444444] hover:text-[#111111] transition-colors"
+                      className="text-[#444444] hover:text-[#111111] transition-colors cursor-pointer"
                       title="Xoá"
                       onClick={() => handleDelete(project.id)}
                     >

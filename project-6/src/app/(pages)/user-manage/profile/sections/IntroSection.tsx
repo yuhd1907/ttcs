@@ -39,7 +39,7 @@ export const IntroSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | null
             <h3 className="text-[18px] font-[700] text-[#121212]">Giới thiệu bản thân</h3>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
               title="Chỉnh sửa giới thiệu"
             >
               <CiEdit className="text-[24px]" />
@@ -47,7 +47,7 @@ export const IntroSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | null
           </div>
           <hr className="border-[#F0F0F0] mt-3 mb-4" />
           <div
-            className="text-[14px] text-[#222222] leading-relaxed [&>p]:mb-2 last:[&>p]:mb-0"
+            className="text-[14px] text-[#222222] leading-relaxed break-words [&>p]:mb-2 last:[&>p]:mb-0"
             dangerouslySetInnerHTML={{ __html: infoUser.intro }}
           />
         </div>

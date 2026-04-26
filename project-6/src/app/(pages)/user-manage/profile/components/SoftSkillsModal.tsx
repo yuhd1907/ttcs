@@ -22,12 +22,10 @@ const MOCK_SKILLS = [
   { value: "leadership", label: "Lãnh đạo" },
 ];
 
-const MAX_SKILLS = 20;
+const softSkillLabel = (v: string) =>
+  MOCK_SKILLS.find((o) => o.value === v)?.label ?? v;
 
-const getLabelByValue = (
-  options: { value: string; label: string }[],
-  value: string
-) => options.find((o) => o.value === value)?.label || value;
+const MAX_SKILLS = 20;
 
 export const SoftSkillsModal: React.FC<SoftSkillsModalProps> = ({
   isOpen,
@@ -94,7 +92,7 @@ export const SoftSkillsModal: React.FC<SoftSkillsModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-[#757575] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-[#757575] transition-colors cursor-pointer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -201,7 +199,7 @@ export const SoftSkillsModal: React.FC<SoftSkillsModalProps> = ({
                     className="inline-flex items-center gap-1.5 h-[36px] px-3 bg-[#F5F5F5] border border-[#E0E0E0] rounded-full text-[13px] text-[#444]"
                   >
                     <span className="font-[500] text-[#121212]">
-                      {getLabelByValue(MOCK_SKILLS, item.skill)}
+                      {softSkillLabel(item.skill)}
                     </span>
                     <button
                       type="button"

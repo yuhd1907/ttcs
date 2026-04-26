@@ -8,28 +8,7 @@ import { TbWorld } from "react-icons/tb";
 
 import { InfoUser } from "@/interface/user.interface";
 
-const LANGUAGE_OPTIONS = [
-  { value: "vietnamese", label: "Tiếng Việt" },
-  { value: "english", label: "Tiếng Anh" },
-  { value: "japanese", label: "Tiếng Nhật" },
-  { value: "german", label: "Tiếng Đức" },
-  { value: "spanish", label: "Tiếng Tây Ban Nha" },
-  { value: "korean", label: "Tiếng Hàn" },
-  { value: "chinese", label: "Tiếng Trung" },
-  { value: "french", label: "Tiếng Pháp" },
-];
-
-const LEVEL_OPTIONS = [
-  { value: "beginner", label: "Sơ cấp" },
-  { value: "intermediate", label: "Trung cấp" },
-  { value: "advanced", label: "Nâng cao" },
-  { value: "proficient", label: "Thành thạo" },
-];
-
-const getLabelByValue = (
-  options: { value: string; label: string }[],
-  value: string
-) => options.find((o) => o.value === value)?.label || value;
+import { languageLabel, levelLabel } from '@/config/cvLabels';
 
 export const LanguagesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | null, onUpdate?: (data: InfoUser) => void }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,7 +42,7 @@ export const LanguagesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | 
             <h3 className="text-[18px] font-[700] text-[#121212]">Ngoại ngữ</h3>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+              className="text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
               title="Chỉnh sửa ngoại ngữ"
             >
               <CiEdit className="text-[24px]" />
@@ -77,10 +56,10 @@ export const LanguagesSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | 
                 className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#F5F5F5] rounded-full text-[14px] text-[#222]"
               >
                 <span className="font-[600]">
-                  {getLabelByValue(LANGUAGE_OPTIONS, item.language)}
+                  {languageLabel(item.language)}
                 </span>
                 <span className="text-[#555] font-[400]">
-                  ({getLabelByValue(LEVEL_OPTIONS, item.level)})
+                  ({levelLabel(item.level)})
                 </span>
               </div>
             ))}

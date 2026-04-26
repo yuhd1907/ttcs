@@ -34,7 +34,7 @@ export const SectionCard: React.FC<SectionCardProps> = ({
       {/* Add button - Downsized to w-7 h-7 */}
       <button
         onClick={onAdd}
-        className="ml-4 flex-shrink-0 text-[#0D8EFF] hover:text-[#0076E5] transition-colors"
+        className="ml-4 flex-shrink-0 text-[#0D8EFF] hover:text-[#0076E5] transition-colors cursor-pointer"
         title={`Thêm ${title}`}
       >
         <CiCirclePlus className="text-[30px]" />

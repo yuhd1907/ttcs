@@ -19,30 +19,12 @@ interface SkillGroupModalProps {
   onSave?: (groupName: string, items: SkillItem[]) => void;
 }
 
-const MOCK_SKILLS = [
-  { value: "react", label: "ReactJS" },
-  { value: "node", label: "NodeJS" },
-  { value: "python", label: "Python" },
-  { value: "java", label: "Java" },
-  { value: "figma", label: "Figma" },
-  { value: "communication", label: "Giao tiếp" },
-  { value: "teamwork", label: "Làm việc nhóm" },
-];
+import { SKILL_MAP, EXPERIENCE_MAP, skillLabel, experienceLabel } from '@/config/cvLabels';
 
-const EXPERIENCE_OPTIONS = [
-  { value: "no-exp", label: "Chưa có kinh nghiệm" },
-  { value: "under-1", label: "Dưới 1 năm" },
-  { value: "1-3", label: "1 - 3 năm" },
-  { value: "3-5", label: "3 - 5 năm" },
-  { value: "over-5", label: "Trên 5 năm" },
-];
+const MOCK_SKILLS = Object.entries(SKILL_MAP).map(([value, label]) => ({ value, label }));
+const EXPERIENCE_OPTIONS = Object.entries(EXPERIENCE_MAP).map(([value, label]) => ({ value, label }));
 
 const MAX_SKILLS = 20;
-
-const getLabelByValue = (
-  options: { value: string; label: string }[],
-  value: string
-) => options.find((o) => o.value === value)?.label || value;
 
 export const SkillGroupModal: React.FC<SkillGroupModalProps> = ({
   isOpen,
@@ -118,7 +100,7 @@ export const SkillGroupModal: React.FC<SkillGroupModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-[#757575] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-[#757575] transition-colors cursor-pointer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -249,13 +231,13 @@ export const SkillGroupModal: React.FC<SkillGroupModalProps> = ({
                     className="inline-flex items-center gap-1.5 h-[36px] px-3 bg-[#F5F5F5] border border-[#E0E0E0] rounded-full text-[13px] text-[#444]"
                   >
                     <span className="font-[500] text-[#121212]">
-                      {getLabelByValue(MOCK_SKILLS, item.skill)}
+                      {skillLabel(item.skill)}
                     </span>
                     {type === "hard" && (
                       <>
                         <span className="text-[#999] mx-0.5">•</span>
                         <span className="text-[#666]">
-                          {getLabelByValue(EXPERIENCE_OPTIONS, item.experience)}
+                          {experienceLabel(item.experience)}
                         </span>
                       </>
                     )}
