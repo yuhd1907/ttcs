@@ -2,32 +2,95 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { InfoUser } from '@/interface/user.interface';
 import { Template1 } from './Template1';
 import { Template2 } from './Template2';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function CVBuilderPage() {
   const router = useRouter();
-  const [user, setUser] = useState<InfoUser | null>(null);
-  const [loading, setLoading] = useState(true);
   const [selectedLayout, setSelectedLayout] = useState(1);
-  const [selectedColor, setSelectedColor] = useState('blue');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/check`, {
-      credentials: 'include',
+  const { isLogin, infoUser } = useAuth();
+
+  const handleUseCV = () => {
+    setIsSaving(true);
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...infoUser,
+        cv_template_id: selectedLayout,
+      }),
+      credentials: "include",
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.code === 'success' && data.infoUser) {
-          setUser(data.infoUser);
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code === "success") {
+          toast.success("Đã lưu mẫu CV thành công!");
+          setIsModalOpen(false);
+        } else {
+          toast.error(data.message || "Có lỗi xảy ra");
         }
       })
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
+      .finally(() => setIsSaving(false));
+  };
 
-  if (loading) {
+  const handleDownloadCV = async () => {
+    if (!infoUser) return;
+    setIsDownloading(true);
+    const toastId = toast.loading("Đang yêu cầu server tạo PDF...");
+    
+    try {
+      // Gọi API yêu cầu backend tạo PDF (chưa có endpoint thực tế)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/generate-pdf`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          infoUser: infoUser,
+          cv_template_id: selectedLayout,
+        }),
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Lỗi khi tạo PDF từ server");
+      }
+
+      // Nhận file PDF (blob) từ backend trả về
+      const blob = await response.blob();
+      
+      // Tạo link ảo để trình duyệt tải file về
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${infoUser.username.trim().replace(/\s+/g, '_')}_cv.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      
+      // Dọn dẹp bộ nhớ
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      toast.success("Tải CV thành công!", { id: toastId });
+    } catch (error) {
+      console.error(error);
+      toast.error("Endpoint tạo PDF chưa sẵn sàng hoặc có lỗi xảy ra.", { id: toastId });
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  if (isLogin === null) {
     return (
       <div className="flex h-screen items-center justify-center bg-gray-900 text-white text-lg">
         Đang tải thông tin...
@@ -35,7 +98,7 @@ export default function CVBuilderPage() {
     );
   }
 
-  if (!user) {
+  if (!infoUser) {
     return (
       <div className="flex h-screen items-center justify-center bg-gray-900 text-white text-lg">
         Không tìm thấy thông tin người dùng. Vui lòng đăng nhập lại.
@@ -65,7 +128,7 @@ export default function CVBuilderPage() {
             <div onClick={() => setSelectedLayout(1)} className="cursor-pointer relative flex flex-col items-center">
               <div className={`w-full aspect-[1/1.4] bg-white overflow-hidden p-1 border-4 transition-all ${selectedLayout === 1 ? 'border-green-500' : 'border-transparent'}`}>
                 <div className="scale-[0.25] origin-top-left w-[400%] h-[400%] pointer-events-none">
-                  <Template1 user={user} />
+                  <Template1 user={infoUser} />
                 </div>
               </div>
               <span className="text-gray-300 mt-2 text-sm font-medium">Mẫu Tiêu chuẩn</span>
@@ -78,7 +141,7 @@ export default function CVBuilderPage() {
             <div onClick={() => setSelectedLayout(2)} className="cursor-pointer relative flex flex-col items-center">
               <div className={`w-full aspect-[1/1.4] bg-white overflow-hidden p-1 border-4 transition-all ${selectedLayout === 2 ? 'border-green-500' : 'border-transparent'}`}>
                 <div className="scale-[0.25] origin-top-left w-[400%] h-[400%] pointer-events-none">
-                  <Template2 user={user} />
+                  <Template2 user={infoUser} />
                 </div>
               </div>
               <span className="text-gray-300 mt-2 text-sm font-medium">Mẫu Hiện đại</span>
@@ -94,7 +157,7 @@ export default function CVBuilderPage() {
         <div className="flex-1 flex flex-col bg-[#2e343c] relative">
           <div className="flex-1 overflow-y-auto flex justify-center py-10 px-4 pb-28">
             <div className="transform scale-[0.7] sm:scale-[0.85] origin-top shadow-2xl">
-              {selectedLayout === 1 ? <Template1 user={user} /> : <Template2 user={user} />}
+              {selectedLayout === 1 ? <Template1 user={infoUser} /> : <Template2 user={infoUser} />}
             </div>
           </div>
 
@@ -106,13 +169,28 @@ export default function CVBuilderPage() {
 
             {/* Actions */}
             <div className="flex items-center gap-3">
-              <button className="p-2 bg-gray-700 hover:bg-gray-600 text-white rounded transition" onClick={() => window.print()}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                </svg>
+              <button 
+                onClick={handleDownloadCV}
+                disabled={isDownloading}
+                className={`p-2 rounded transition flex items-center justify-center ${isDownloading ? 'bg-gray-500 cursor-not-allowed' : 'bg-gray-700 hover:bg-gray-600 text-white'}`}
+                title="Tải CV về máy"
+              >
+                {isDownloading ? (
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                  </svg>
+                )}
               </button>
-              <button className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded transition shadow-md">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-[#0D8EFF] hover:bg-[#0076E5] text-white font-medium py-2 px-6 rounded transition shadow-md"
+              >
                 Dùng mẫu CV này
               </button>
             </div>
@@ -120,6 +198,72 @@ export default function CVBuilderPage() {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-[520px] relative overflow-hidden animate-in zoom-in duration-200">
+            {/* Close button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="p-8 flex flex-col items-center text-center">
+              {/* Illustration */}
+              <div className="mb-6">
+                <img
+                  src="https://itviec.com/assets/profile/cv-template-uses-3fd7b05ce4dc094e6eb0c6d165ba63310722eaab6a305cbadd1605dca2415dc5.svg"
+                  alt="CV Illustration"
+                  className="w-48 h-auto"
+                />
+              </div>
+
+              {/* Title */}
+              <h2 className="text-[22px] font-bold text-gray-900 mb-4 leading-tight">
+                Dùng CV này để nhận cơ hội việc làm mới
+              </h2>
+
+              {/* Description */}
+              <p className="text-[15px] text-gray-600 mb-6 leading-relaxed">
+                Dùng CV này trên ITviec để ứng tuyển, nhận lời mời công việc và được nhiều nhà tuyển dụng nhìn thấy hơn. Xem lại và dùng CV ngay.
+              </p>
+
+              {/* File Info Box */}
+              <div className="w-full bg-[#f0f7ff] border border-[#d1e9ff] rounded-lg py-3 px-4 flex items-center justify-center gap-2 mb-8">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-[#0D8EFF]">
+                  <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="14" r="3" stroke="currentColor" strokeWidth="2" />
+                </svg>
+                <span className="text-[#0D8EFF] font-medium underline truncate">
+                  {infoUser.username.trim().replace(/\s+/g, '_')}_cv.pdf
+                </span>
+              </div>
+
+              {/* Action Button */}
+              <button
+                onClick={handleUseCV}
+                disabled={isSaving}
+                className={`w-full text-white font-bold py-3.5 px-6 rounded-lg transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2
+                  ${isSaving ? "bg-gray-400 cursor-not-allowed" : "bg-[#0D8EFF] hover:bg-[#0076E5]"}`}
+              >
+                {isSaving && (
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                )}
+                {isSaving ? "Đang xử lý..." : "Sử dụng CV này"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
