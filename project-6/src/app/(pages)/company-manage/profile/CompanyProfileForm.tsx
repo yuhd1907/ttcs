@@ -196,7 +196,7 @@ export const CompanyProfileForm = () => {
             >
               <option value="">-- Chọn thành phố --</option>
               {provinceList.map((item) => (
-                <option key={item._id} value={item._id}>
+                <option key={item.id || item._id} value={item.id || item._id}>
                   {item.name}
                 </option>
               ))}

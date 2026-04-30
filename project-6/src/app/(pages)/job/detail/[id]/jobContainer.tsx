@@ -249,15 +249,21 @@ const jobContainer = () => {
             {/* Right */}
             <div className="lg:w-[32%] w-[100%]">
               <div className="bg-white border border-[#DEDEDE] rounded-[8px] p-[20px] )]">
-                <div className="flex gap-x-[12px]">
-                  <img
-                    src="/assets/images/company-detail-logo.png"
-                    alt=""
-                    className="aspect-[100/100] rounded-[4px]"
-                  />
+                <div className="flex gap-x-[12px] items-center">
+                  {job?.companyLogo ? (
+                    <img
+                      src={job.companyLogo}
+                      alt={job.companyName}
+                      className="w-[80px] h-[80px] object-contain rounded-[4px] border border-[#DEDEDE]"
+                    />
+                  ) : (
+                    <div className="w-[80px] h-[80px] rounded-[4px] border border-[#DEDEDE] bg-[#F7F7F7] flex items-center justify-center text-[#A6A6A6] text-[12px]">
+                      Logo
+                    </div>
+                  )}
                   <div>
                     <Link
-                      href={"/company/detail/123"}
+                      href={`/company/detail/${job?.companyID}`}
                       className="text-[#121212] text-[18px] font-[700] hover:text-[#0D8EFF]"
                     >
                       {job?.companyName}

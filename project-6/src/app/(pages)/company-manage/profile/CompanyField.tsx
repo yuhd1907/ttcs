@@ -18,7 +18,7 @@ const CompanyField = ({ value, onChange, errors }: CompanyFieldProps) => {
   useClickOutside(fieldRef, () => setShowFieldSuggestion(false));
 
   useEffect(() => {
-    fetch("http://localhost:5000/job_fields")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/master-data/fields`)
       .then((res) => res.json())
       .then((data: FieldOption[]) => {
         setFieldList(Array.isArray(data) ? data : []);

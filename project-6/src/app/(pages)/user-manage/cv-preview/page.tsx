@@ -17,30 +17,45 @@ export default function CVBuilderPage() {
 
   const { isLogin, infoUser } = useAuth();
 
-  const handleUseCV = () => {
+  const handleUseCV = async () => {
+    if (!infoUser) return;
     setIsSaving(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/generate-cv-pdf`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          intro: infoUser.intro,
+          educations: infoUser.educations,
+          experiences: infoUser.experiences,
+          skills: infoUser.skills,
+          languages: infoUser.languages,
+          projects: infoUser.projects,
+          certificates: infoUser.certificates,
+          awards: infoUser.awards,
+        }),
+        credentials: "include",
+      });
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...infoUser,
-        cv_template_id: selectedLayout,
-      }),
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.code === "success") {
-          toast.success("Đã lưu mẫu CV thành công!");
-          setIsModalOpen(false);
-        } else {
-          toast.error(data.message || "Có lỗi xảy ra");
-        }
-      })
-      .finally(() => setIsSaving(false));
+      const text = await res.text();
+      if (!text) {
+        toast.error("Server không phản hồi. Vui lòng thử lại.");
+        return;
+      }
+      const data = JSON.parse(text);
+
+      if (data.code === "success") {
+        toast.success("Đã lưu và tạo PDF CV thành công!");
+        setIsModalOpen(false);
+      } else {
+        toast.error(data.message || "Có lỗi xảy ra khi tạo PDF");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Không thể kết nối đến máy chủ");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleDownloadCV = async () => {
@@ -49,42 +64,42 @@ export default function CVBuilderPage() {
     const toastId = toast.loading("Đang yêu cầu server tạo PDF...");
     
     try {
-      // Gọi API yêu cầu backend tạo PDF (chưa có endpoint thực tế)
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/generate-pdf`, {
+      // Gọi API tạo PDF và lưu lên Cloudinary
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/generate-cv-pdf`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          infoUser: infoUser,
-          cv_template_id: selectedLayout,
+          intro: infoUser.intro,
+          educations: infoUser.educations,
+          experiences: infoUser.experiences,
+          skills: infoUser.skills,
+          languages: infoUser.languages,
+          projects: infoUser.projects,
+          certificates: infoUser.certificates,
+          awards: infoUser.awards,
         }),
         credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error("Lỗi khi tạo PDF từ server");
+      const text = await response.text();
+      if (!text) throw new Error("Server không phản hồi.");
+      const data = JSON.parse(text);
+      if (data.code !== "success") {
+        throw new Error(data.message || "Lỗi khi tạo PDF từ server");
       }
 
-      // Nhận file PDF (blob) từ backend trả về
-      const blob = await response.blob();
+      // Nhận link PDF từ Cloudinary
+      const pdfUrl = data.data;
       
-      // Tạo link ảo để trình duyệt tải file về
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${infoUser.username.trim().replace(/\s+/g, '_')}_cv.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      
-      // Dọn dẹp bộ nhớ
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      // Mở sang tab mới hoặc tải về
+      window.open(pdfUrl, '_blank');
 
-      toast.success("Tải CV thành công!", { id: toastId });
-    } catch (error) {
+      toast.success("Tạo CV thành công!", { id: toastId });
+    } catch (error: any) {
       console.error(error);
-      toast.error("Endpoint tạo PDF chưa sẵn sàng hoặc có lỗi xảy ra.", { id: toastId });
+      toast.error(error.message || "Có lỗi xảy ra.", { id: toastId });
     } finally {
       setIsDownloading(false);
     }

@@ -51,7 +51,7 @@ export const MenuUser = ({ infoUser }: { infoUser: InfoUser }) => {
             " justify-between hover:bg-[#000096] relative group/sub-2"
           }
         >
-          <Link href={"/user-manage/cv/info"}>Quản lý Hồ sơ đính kèm</Link>
+          <Link href={"/user-manage/cv-preview"}>Quản lý Hồ sơ đính kèm</Link>
         </li>
         <li
           className={
