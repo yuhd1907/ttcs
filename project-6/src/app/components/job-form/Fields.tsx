@@ -17,7 +17,7 @@ export const Fields = ({ value, onChange, errors }: Selector) => {
   const keyword = toSlugHelpter(inputValue);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/job_fields`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/master-data/fields`)
       .then((res) => res.json())
       .then((data: FieldOption[]) =>
         setFieldSuggestions(Array.isArray(data) ? data : []),
