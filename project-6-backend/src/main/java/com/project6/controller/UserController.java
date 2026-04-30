@@ -1,6 +1,7 @@
 package com.project6.controller;
 
 import com.project6.dto.*;
+import com.project6.service.PdfGenerationService;
 import com.project6.service.UserAuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ public class UserController {
 
     private final UserAuthService userAuthService;
     private final com.project6.service.UserProfileService userProfileService;
+    private final PdfGenerationService pdfGenerationService;
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@Valid @RequestBody UserRegisterRequest req) {
@@ -84,6 +86,16 @@ public class UserController {
         try {
             userProfileService.updateCvProfile(request);
             return ResponseEntity.ok(ApiResponse.success("Cập nhật CV thành công!"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/generate-cv-pdf")
+    public ResponseEntity<ApiResponse> generateCvPdf(@RequestBody CvPdfRequest request) {
+        try {
+            String pdfUrl = pdfGenerationService.generateAndUploadCvPdf(request);
+            return ResponseEntity.ok(ApiResponse.success("Tạo CV PDF thành công!", pdfUrl));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
         }

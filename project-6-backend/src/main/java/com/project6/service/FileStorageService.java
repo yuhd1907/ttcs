@@ -59,4 +59,20 @@ public class FileStorageService {
             throw new RuntimeException("Không thể tải lên CV. Vui lòng thử lại!", ex);
         }
     }
+    /**
+     * Upload PDF bytes (từ mảng byte) lên Cloudinary với resource_type=raw
+     */
+    public String storePdfBytes(byte[] pdfBytes, String fileName) {
+        try {
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(pdfBytes,
+                    ObjectUtils.asMap(
+                            "public_id", "cv-files/" + UUID.randomUUID() + "_" + fileName,
+                            "resource_type", "raw",
+                            "format", "pdf"
+                    ));
+            return uploadResult.get("secure_url").toString();
+        } catch (IOException ex) {
+            throw new RuntimeException("Không thể tải lên PDF. Vui lòng thử lại!", ex);
+        }
+    }
 }

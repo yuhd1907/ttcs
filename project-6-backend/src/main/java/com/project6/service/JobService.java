@@ -82,7 +82,7 @@ public class JobService {
             for (String t : techs) {
                 String techName = t.trim();
                 if (techName.isEmpty()) continue;
-                Skill skill = skillRepository.findByName(techName).orElseGet(() -> {
+                Skill skill = skillRepository.findFirstByName(techName).orElseGet(() -> {
                     Skill newSkill = Skill.builder().name(techName).build();
                     return skillRepository.save(newSkill);
                 });
@@ -92,11 +92,11 @@ public class JobService {
         return skillSet;
     }
 
-    private Specialization getOrCreateSpecialization(String slug) {
-        if (slug == null || slug.isBlank()) return null;
-        return specializationRepository.findBySlug(slug)
+    private Specialization getOrCreateSpecialization(String name) {
+        if (name == null || name.isBlank()) return null;
+        return specializationRepository.findFirstByName(name)
                 .orElseGet(() -> specializationRepository.save(
-                        Specialization.builder().slug(slug).name(slug).build()));
+                        Specialization.builder().slug(name).name(name).build()));
     }
 
     private Set<JobField> getOrCreateFields(String fieldsString) {
@@ -104,10 +104,10 @@ public class JobService {
         if (fieldsString != null && !fieldsString.isBlank()) {
             String[] fieldArray = fieldsString.split(",");
             for (String f : fieldArray) {
-                String slug = f.trim();
-                if (slug.isEmpty()) continue;
-                JobField jf = jobFieldRepository.findBySlug(slug).orElseGet(() -> 
-                        jobFieldRepository.save(JobField.builder().slug(slug).name(slug).build()));
+                String name = f.trim();
+                if (name.isEmpty()) continue;
+                JobField jf = jobFieldRepository.findFirstByName(name).orElseGet(() -> 
+                        jobFieldRepository.save(JobField.builder().slug(name).name(name).build()));
                 fieldsSet.add(jf);
             }
         }
@@ -131,7 +131,7 @@ public class JobService {
                 .specializationEntity(getOrCreateSpecialization(req.getSpecialization()))
                 .jobFields(getOrCreateFields(req.getFields()))
                 .city(req.getCityName() != null && !req.getCityName().isBlank()
-                        ? cityRepository.findByName(req.getCityName()).orElse(null) : null)
+                        ? cityRepository.findFirstByName(req.getCityName()).orElse(null) : null)
                 .currency("VND")
                 .status("open")
                 .build();
@@ -170,7 +170,7 @@ public class JobService {
         if (req.getFields() != null) jobPost.setJobFields(getOrCreateFields(req.getFields()));
         if (req.getDescription() != null) jobPost.setDescription(req.getDescription());
         if (req.getCityName() != null && !req.getCityName().isBlank()) {
-            cityRepository.findByName(req.getCityName()).ifPresent(jobPost::setCity);
+            cityRepository.findFirstByName(req.getCityName()).ifPresent(jobPost::setCity);
         }
 
         if (req.getTechnologies() != null) {

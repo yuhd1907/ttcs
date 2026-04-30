@@ -9,5 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface SpecializationRepository extends JpaRepository<Specialization, UUID> {
-    Optional<Specialization> findBySlug(String slug);
+    Optional<Specialization> findFirstBySlug(String slug);
+    Optional<Specialization> findFirstByName(String name);
 }
