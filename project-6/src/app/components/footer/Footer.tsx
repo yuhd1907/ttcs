@@ -13,7 +13,7 @@ export const Footer = () => {
 
   return (
     <>
-      <footer className="bg-[#000065]">
+      <footer className="bg-[#000065] mt-[60px]">
         <div className="container mx-auto pt-[48px] pb-[20px] grid grid-cols-1 lg:grid-cols-4 gap-x-[30px]">
           <div className={"flex flex-col lg:items-start items-center"}>
             <div className={"w-[132px] h-[50px]"}>

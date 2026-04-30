@@ -67,7 +67,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
     let updatedGroups = [];
     if (isEditing) {
       updatedGroups = currentList.map(group =>
-        group.id === editingId ? { type: modalType, groupName, items, id: editingId } : group
+        (group.id === editingId && group.type === modalType) ? { type: modalType, groupName, items, id: editingId } : group
       );
     } else {
       const newGroup = { type: modalType, groupName, items, id: `skill-group-${Date.now()}` };
@@ -93,9 +93,9 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
       .catch(err => console.error(err));
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string, type: "hard" | "soft") => {
     const currentList = skillsGroups.length > 0 ? skillsGroups : (infoUser?.skills || []);
-    const updatedGroups = currentList.filter(group => group.id !== id);
+    const updatedGroups = currentList.filter(group => !(group.id === id && group.type === type));
 
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv-profile`, {
       method: "PUT",
@@ -189,7 +189,7 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
                     <button
                       className="text-[#444444] hover:text-[#111111] transition-colors cursor-pointer"
                       title="Xoá"
-                      onClick={() => handleDelete(group.id)}
+                      onClick={() => handleDelete(group.id, group.type)}
                     >
                       <CiTrash className="text-[24px]" />
                     </button>
@@ -248,14 +248,14 @@ export const SkillsSection = ({ infoUser, onUpdate }: { infoUser: InfoUser | nul
       <HardSkillsModal
         isOpen={modalType === "hard"}
         onClose={handleCloseModal}
-        initialItems={editingId !== null ? displaySkills.find(g => g.id === editingId)?.items : undefined}
+        initialItems={editingId !== null ? displaySkills.find(g => g.id === editingId && g.type === "hard")?.items : undefined}
         onSave={handleSaveModal}
       />
 
       <SoftSkillsModal
         isOpen={modalType === "soft"}
         onClose={handleCloseModal}
-        initialItems={editingId !== null ? displaySkills.find(g => g.id === editingId)?.items : undefined}
+        initialItems={editingId !== null ? displaySkills.find(g => g.id === editingId && g.type === "soft")?.items : undefined}
         onSave={handleSaveModal}
       />
 

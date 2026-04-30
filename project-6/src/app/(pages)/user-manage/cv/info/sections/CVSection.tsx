@@ -1,30 +1,77 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FaFileAlt } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
+import { FcViewDetails } from "react-icons/fc";
+import { useRouter } from "next/navigation";
 
 export default function CVSection() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const router = useRouter();
+
+  const handleUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      console.log("Selected file:", file.name);
+      // Logic upload file sẽ được xử lý ở đây
+    }
+  };
+
+  const handleFileNameClick = () => {
+    if (selectedFile) {
+      const fileUrl = URL.createObjectURL(selectedFile);
+      router.push(`/user-manage/cv/preview?fileUrl=${encodeURIComponent(fileUrl)}`);
+    }
+  };
+
   return (
     <div className="bg-white border border-gray-300 rounded-lg p-6">
       <h2 className="text-[17px] font-bold text-gray-900 mb-5">CV của bạn</h2>
 
       <div className="flex items-center gap-4 mb-6">
         <div className="text-gray-300">
-          <FaFileAlt className="w-8 h-8" />
+          {selectedFile ? (
+            <FcViewDetails className="w-8 h-8" />
+          ) : (
+            <FaFileAlt className="w-8 h-8" />
+          )}
         </div>
-        <div className="font-semibold text-gray-400 text-[15px]">
-          Bạn chưa đính kèm CV nào
+        <div 
+          onClick={handleFileNameClick}
+          className={`font-semibold text-[15px] ${
+            selectedFile ? "text-black underline cursor-pointer" : "text-gray-400"
+          }`}
+        >
+          {selectedFile ? selectedFile.name : "Bạn chưa đính kèm CV nào"}
         </div>
       </div>
 
       <div className="border-t border-dashed border-gray-300 pt-6">
-        <button className="flex items-center gap-2 border border-red-500 text-red-500 px-4 py-2 rounded hover:bg-red-50 transition-colors">
+        <input
+          type="file"
+          accept=".pdf"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className="hidden"
+        />
+        <button 
+          onClick={handleUploadClick}
+          className="flex items-center gap-2 border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 transition-colors"
+        >
           <FiUpload className="w-4 h-4" />
           <span className="text-sm font-medium">Tải CV lên</span>
         </button>
         <p className="text-gray-500 text-[13px] mt-4">
-          Hỗ trợ định dạng .doc, .docx hoặc .pdf, dưới 3MB và không chứa mật
+          Hỗ trợ định dạng .pdf, dưới 3MB và không chứa mật
           khẩu bảo vệ
         </p>
 
