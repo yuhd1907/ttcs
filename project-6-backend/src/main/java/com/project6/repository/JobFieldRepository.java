@@ -9,5 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface JobFieldRepository extends JpaRepository<JobField, UUID> {
-    Optional<JobField> findBySlug(String slug);
+    Optional<JobField> findFirstBySlug(String slug);
+    Optional<JobField> findFirstByName(String name);
 }
