@@ -5,11 +5,13 @@ import { FaFileAlt } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
 import { FcViewDetails } from "react-icons/fc";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function CVSection() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const router = useRouter();
+  const { infoUser } = useAuth();
 
   const handleUploadClick = () => {
     if (fileInputRef.current) {
@@ -30,6 +32,8 @@ export default function CVSection() {
     if (selectedFile) {
       const fileUrl = URL.createObjectURL(selectedFile);
       router.push(`/user-manage/cv/preview?fileUrl=${encodeURIComponent(fileUrl)}`);
+    } else if (infoUser?.cvUrl) {
+      window.open(infoUser.cvUrl, '_blank');
     }
   };
 
@@ -39,7 +43,7 @@ export default function CVSection() {
 
       <div className="flex items-center gap-4 mb-6">
         <div className="text-gray-300">
-          {selectedFile ? (
+          {selectedFile || infoUser?.cvUrl ? (
             <FcViewDetails className="w-8 h-8" />
           ) : (
             <FaFileAlt className="w-8 h-8" />
@@ -48,10 +52,10 @@ export default function CVSection() {
         <div 
           onClick={handleFileNameClick}
           className={`font-semibold text-[15px] ${
-            selectedFile ? "text-black underline cursor-pointer" : "text-gray-400"
+            selectedFile || infoUser?.cvUrl ? "text-black underline cursor-pointer" : "text-gray-400"
           }`}
         >
-          {selectedFile ? selectedFile.name : "Bạn chưa đính kèm CV nào"}
+          {selectedFile ? selectedFile.name : (infoUser?.cvUrl ? infoUser.cvUrl.substring(infoUser.cvUrl.lastIndexOf('/') + 1) : "Bạn chưa đính kèm CV nào")}
         </div>
       </div>
 

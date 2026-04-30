@@ -1,3 +1,18 @@
 {
-
+  "user": {
+    "experience": "1_year",
+    "level": "junior",
+    "workTypes": [
+      "office"
+    ],
+    "jobFieldSelected": [
+      "7fe5a159-5ad6-4653-b7d3-c981c269c175"
+    ],
+    "desiredMin": "1.000",
+    "desiredMax": "2.000",
+    "desiredCurrency": "USD",
+    "currentSalary": "100",
+    "currentCurrency": "USD"
+  },
+  "$schema": "./node_modules/json-server/schema.json"
 }

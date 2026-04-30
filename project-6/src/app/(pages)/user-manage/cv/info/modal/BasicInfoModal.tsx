@@ -21,6 +21,7 @@ export default function BasicInfoModal({
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
+    city: "",
   });
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function BasicInfoModal({
       setFormData({
         fullName: infoUser.username || "",
         phone: infoUser.phone || "",
+        city: infoUser.city || "",
       });
     }
   }, [infoUser]);
@@ -40,8 +42,24 @@ export default function BasicInfoModal({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log("Saving Basic Info:", formData);
+    
+    try {
+      const res = await fetch("http://localhost:5000/user", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        console.log("Đã lưu thành công vào database.json");
+      } else {
+        console.error("Lỗi khi lưu vào database.json");
+      }
+    } catch (error) {
+      console.error("Lỗi kết nối:", error);
+    }
+
     onClose();
   };
 
@@ -105,6 +123,7 @@ export default function BasicInfoModal({
               </label>
               <select
                 name="city"
+                value={formData.city}
                 onChange={handleChange}
                 className="w-full outline-none text-[15px] text-gray-900 bg-transparent cursor-pointer appearance-none pr-6"
               >

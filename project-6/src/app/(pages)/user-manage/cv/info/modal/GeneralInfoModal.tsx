@@ -9,7 +9,7 @@ interface GeneralInfoModalProps {
   onClose: () => void;
 }
 
-const EXPERIENCE_OPTIONS = [
+export const EXPERIENCE_OPTIONS = [
   { label: "< 1 năm", value: "less_than_1" },
   ...Array.from({ length: 10 }, (_, i) => ({
     label: `${i + 1} năm`,
@@ -18,7 +18,7 @@ const EXPERIENCE_OPTIONS = [
   { label: "> 10 năm", value: "more_than_10" },
 ];
 
-const LEVEL_OPTIONS = [
+export const LEVEL_OPTIONS = [
   { label: "Fresher", value: "fresher" },
   { label: "Junior", value: "junior" },
   { label: "Middle", value: "middle" },
@@ -27,7 +27,7 @@ const LEVEL_OPTIONS = [
   { label: "Manager", value: "manager" },
 ];
 
-const WORK_TYPE_OPTIONS = [
+export const WORK_TYPE_OPTIONS = [
   { label: "Tại văn phòng", value: "office" },
   { label: "Linh hoạt", value: "hybrid" },
   { label: "Làm từ xa", value: "remote" },
@@ -175,8 +175,35 @@ export default function GeneralInfoModal({ isOpen, onClose }: GeneralInfoModalPr
   const removeJobField = (v: string) =>
     setJobFieldSelected((prev) => prev.filter((x) => x !== v));
 
-  const handleSave = () => {
-    console.log({ experience, level, workTypes, jobFieldSelected, desiredMin, desiredMax, desiredCurrency, currentSalary, currentCurrency });
+  const handleSave = async () => {
+    const formData = {
+      experience,
+      level,
+      workTypes,
+      jobFieldSelected,
+      desiredMin,
+      desiredMax,
+      desiredCurrency,
+      currentSalary,
+      currentCurrency
+    };
+    console.log("Dữ liệu thông tin chung:", formData);
+    
+    try {
+      const res = await fetch("http://localhost:5000/user", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        console.log("Đã lưu thành công vào database.json");
+      } else {
+        console.error("Lỗi khi lưu vào database.json");
+      }
+    } catch (error) {
+      console.error("Lỗi kết nối:", error);
+    }
+    
     onClose();
   };
 

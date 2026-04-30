@@ -256,7 +256,7 @@ export default function CVBuilderPage() {
                   <circle cx="12" cy="14" r="3" stroke="currentColor" strokeWidth="2" />
                 </svg>
                 <span className="text-[#0D8EFF] font-medium underline truncate">
-                  {infoUser.username.trim().replace(/\s+/g, '_')}_cv.pdf
+                  {infoUser.cvUrl ? infoUser.cvUrl.substring(infoUser.cvUrl.lastIndexOf('/') + 1) : `${infoUser.username.trim().replace(/\\s+/g, '_')}_cv.pdf`}
                 </span>
               </div>
 

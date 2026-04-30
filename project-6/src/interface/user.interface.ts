@@ -86,7 +86,17 @@ export interface InfoUser {
   address?: string;
   city?: string;
   personal_link?: string;
+  cvUrl?: string;
   intro?: string;
+  experience?: string;
+  level?: string;
+  workTypes?: string[];
+  jobFieldSelected?: string[];
+  desiredMin?: string;
+  desiredMax?: string;
+  desiredCurrency?: string;
+  currentSalary?: string;
+  currentCurrency?: string;
   educations?: Education[];
   experiences?: Experience[];
   skills?: SkillGroup[];

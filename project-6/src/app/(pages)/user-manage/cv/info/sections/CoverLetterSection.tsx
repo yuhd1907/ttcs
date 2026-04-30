@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
 
 const MAX_COVER_LETTER = 500;
@@ -8,6 +8,45 @@ const MAX_COVER_LETTER = 500;
 export default function CoverLetterSection() {
   const [isEditing, setIsEditing] = useState(false);
   const [coverLetter, setCoverLetter] = useState("");
+  const [savedCoverLetter, setSavedCoverLetter] = useState("");
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/user");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.intro) {
+          setCoverLetter(data.intro);
+          setSavedCoverLetter(data.intro);
+        }
+      }
+    } catch (error) {
+      console.error("Lỗi khi tải dữ liệu từ database.json", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleSave = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/user", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ intro: coverLetter }),
+      });
+      if (res.ok) {
+        setSavedCoverLetter(coverLetter);
+        console.log("Đã lưu thành công vào database.json");
+      } else {
+        console.error("Lỗi khi lưu vào database.json");
+      }
+    } catch (error) {
+      console.error("Lỗi kết nối:", error);
+    }
+    setIsEditing(false);
+  };
 
   return (
     <div className="bg-white border border-gray-300 rounded-lg p-6 relative">
@@ -19,23 +58,29 @@ export default function CoverLetterSection() {
           >
             <CiEdit className="w-6 h-6" />
           </button>
-          <div className="flex items-center min-h-[70px]">
-            <div>
-              <h2 className="text-[17px] font-bold text-gray-900 mb-1">
+          
+          {savedCoverLetter ? (
+            <div className="flex flex-col">
+              <h2 className="text-[17px] font-bold text-gray-900 pb-4 border-b border-gray-100 mb-4">
                 Thư xin việc
               </h2>
-              {coverLetter ? (
-                <p className="text-[15px] text-gray-800 whitespace-pre-wrap">
-                  {coverLetter}
-                </p>
-              ) : (
+              <p className="text-[15px] text-gray-800 whitespace-pre-wrap">
+                {savedCoverLetter}
+              </p>
+            </div>
+          ) : (
+            <div className="flex items-center min-h-[70px]">
+              <div>
+                <h2 className="text-[17px] font-bold text-gray-900 mb-1">
+                  Thư xin việc
+                </h2>
                 <p className="text-[15px] text-gray-400">
                   Giới thiệu bản thân và lý do vì sao bạn sẽ là lựa chọn tuyển
                   dụng tuyệt vời
                 </p>
-              )}
+              </div>
             </div>
-          </div>
+          )}
         </>
       ) : (
         <div className="flex flex-col gap-4">
@@ -61,13 +106,16 @@ export default function CoverLetterSection() {
             </span>
             <div className="flex items-center gap-4">
               <button
-                onClick={() => setIsEditing(false)}
+                onClick={() => {
+                  setCoverLetter(savedCoverLetter); // Reset on cancel
+                  setIsEditing(false);
+                }}
                 className="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors"
               >
                 Huỷ
               </button>
               <button
-                onClick={() => setIsEditing(false)}
+                onClick={handleSave}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-2 rounded text-[15px] font-medium transition-colors"
               >
                 Lưu
