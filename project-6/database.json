@@ -12,7 +12,10 @@
     "desiredMax": "2.000",
     "desiredCurrency": "USD",
     "currentSalary": "100",
-    "currentCurrency": "USD"
+    "currentCurrency": "USD",
+    "intro": "fdasfadfads",
+    "city": "Đà Nẵng",
+    "wantToWorkIn": "Hồ Chí Minh"
   },
   "$schema": "./node_modules/json-server/schema.json"
 }

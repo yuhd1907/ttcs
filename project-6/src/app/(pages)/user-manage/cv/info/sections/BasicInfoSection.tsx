@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
 import { IoWarningOutline } from "react-icons/io5";
 import { InfoUser } from "@/interface/user.interface";
@@ -12,6 +12,23 @@ interface BasicInfoSectionProps {
 
 export default function BasicInfoSection({ infoUser }: BasicInfoSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/user");
+      if (res.ok) {
+        const data = await res.json();
+        setUserData(data);
+      }
+    } catch (error) {
+      console.error("Lỗi khi tải dữ liệu từ database.json", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -41,16 +58,23 @@ export default function BasicInfoSection({ infoUser }: BasicInfoSectionProps) {
           )}
 
           <div className="text-gray-600">Nơi làm việc mong muốn</div>
-          <div className="flex items-center gap-2 text-[#f97316]">
-            <IoWarningOutline className="w-4 h-4" />
-            <span className="font-medium">Thêm thông tin</span>
-          </div>
+          {userData?.wantToWorkIn ? (
+            <div className="font-semibold text-gray-900">{userData.wantToWorkIn}</div>
+          ) : (
+            <div className="flex items-center gap-2 text-[#f97316]">
+              <IoWarningOutline className="w-4 h-4" />
+              <span className="font-medium">Thêm thông tin</span>
+            </div>
+          )}
         </div>
       </div>
 
       <BasicInfoModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          fetchData();
+        }}
         infoUser={infoUser}
       />
     </>
