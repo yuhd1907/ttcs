@@ -33,7 +33,7 @@ export const MenuUser = ({ infoUser }: { infoUser: InfoUser }) => {
       </Link>
       <ul
         className={
-          "absolute top-[100%] right-[8px] w-[200px]" +
+          "absolute top-[100%] right-[8px] w-[210px]" +
           " bg-[#000071] hidden group-hover/sub-1:block z-[999]"
         }
       >
