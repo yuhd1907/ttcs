@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class AuthController {
      * Frontend (useAuth hook) gọi endpoint này mỗi khi path thay đổi.
      */
     @GetMapping("/check")
+    @Transactional(readOnly = true)
     public ResponseEntity<ApiResponse> check(HttpServletRequest request) {
         String token = getTokenFromCookie(request);
 

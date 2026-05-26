@@ -76,13 +76,12 @@ public class ApplicationController {
         }
     }
 
-    /** DELETE /api/public/applications/{id}?email=... — ứng viên xóa đơn */
+    /** DELETE /api/public/applications/{id} — ứng viên xóa đơn */
     @DeleteMapping("/api/public/applications/{id}")
     public ResponseEntity<Object> deleteApplication(
-            @PathVariable UUID id,
-            @RequestParam String email) {
+            @PathVariable UUID id) {
         try {
-            applicationService.deleteApplication(id, email);
+            applicationService.deleteApplication(id);
             return ResponseEntity.ok(Map.of("code", "success", "message", "Đã xóa đơn ứng tuyển!"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));

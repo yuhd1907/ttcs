@@ -53,6 +53,10 @@ public class ApplicationService {
             }
         } else {
             // Lấy từ User profile
+            org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getName()) || !auth.getName().equalsIgnoreCase(email)) {
+                throw new RuntimeException("Bạn phải đăng nhập đúng tài khoản để sử dụng CV đã lưu trong hồ sơ!");
+            }
             com.project6.entity.User user = userRepository.findByEmail(email).orElse(null);
             if (user != null && user.getCvUrl() != null && !user.getCvUrl().isEmpty()) {
                 finalCvUrl = user.getCvUrl();
@@ -109,6 +113,10 @@ public class ApplicationService {
             throw new RuntimeException("Bạn không có quyền cập nhật đơn này!");
         }
 
+        if (!List.of("pending", "reviewed", "accepted", "rejected").contains(status)) {
+            throw new RuntimeException("Trạng thái không hợp lệ!");
+        }
+
         app.setStatus(status);
         return ApplicationResponseDTO.from(applicationRepository.save(app));
     }
@@ -117,6 +125,10 @@ public class ApplicationService {
      * Ứng viên tra cứu đơn theo email
      */
     public List<ApplicationResponseDTO> getApplicationsByEmail(String email) {
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getName()) || !auth.getName().equalsIgnoreCase(email)) {
+            throw new RuntimeException("Bạn không có quyền xem thông tin này!");
+        }
         return applicationRepository.findAll().stream()
                 .filter(a -> email.equalsIgnoreCase(a.getEmail()))
                 .sorted((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()))
@@ -136,7 +148,13 @@ public class ApplicationService {
     /**
      * Ứng viên xóa đơn của mình (chỉ khi còn pending)
      */
-    public void deleteApplication(UUID applicationId, String email) {
+    public void deleteApplication(UUID applicationId) {
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getName())) {
+            throw new RuntimeException("Bạn phải đăng nhập để thực hiện thao tác này!");
+        }
+        String email = auth.getName();
+        
         Application app = applicationRepository.findById(applicationId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn ứng tuyển!"));
         if (!app.getEmail().equalsIgnoreCase(email)) {

@@ -1,8 +1,10 @@
 package com.project6.controller;
 
 import com.project6.dto.*;
-import com.project6.service.PdfGenerationService;
+import com.project6.service.FileStorageService;
+
 import com.project6.service.UserAuthService;
+import com.project6.service.UserProfileService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -10,14 +12,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserAuthService userAuthService;
-    private final com.project6.service.UserProfileService userProfileService;
-    private final PdfGenerationService pdfGenerationService;
+    private final UserProfileService userProfileService;
+    private final FileStorageService fileStorageService;
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@Valid @RequestBody UserRegisterRequest req) {
@@ -91,13 +95,31 @@ public class UserController {
         }
     }
 
-    @PostMapping("/generate-cv-pdf")
-    public ResponseEntity<ApiResponse> generateCvPdf(@RequestBody CvPdfRequest request) {
+
+    /**
+     * Nhận PDF dạng base64 từ frontend (html-to-image + jsPDF),
+     * upload lên Cloudinary và lưu URL vào profile người dùng.
+     */
+    @PostMapping("/save-cv-pdf")
+    public ResponseEntity<ApiResponse> saveCvPdf(@RequestBody SaveCvPdfRequest request) {
         try {
-            String pdfUrl = pdfGenerationService.generateAndUploadCvPdf(request);
-            return ResponseEntity.ok(ApiResponse.success("Tạo CV PDF thành công!", pdfUrl));
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+            if (request.getBase64Pdf() == null || request.getBase64Pdf().isBlank()) {
+                return ResponseEntity.badRequest().body(ApiResponse.error("Dữ liệu PDF không hợp lệ"));
+            }
+
+            // Giải mã base64 → bytes
+            byte[] pdfBytes = Base64.getDecoder().decode(request.getBase64Pdf());
+
+            // Upload lên Cloudinary
+            String fileName = request.getFileName() != null ? request.getFileName() : "user-cv";
+            String pdfUrl = fileStorageService.storePdfBytes(pdfBytes, fileName);
+
+            // Lưu URL vào profile người dùng
+            userProfileService.saveCvUrl(pdfUrl);
+
+            return ResponseEntity.ok(ApiResponse.success("Lưu CV thành công!", pdfUrl));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Lỗi khi lưu CV: " + e.getMessage()));
         }
     }
 }

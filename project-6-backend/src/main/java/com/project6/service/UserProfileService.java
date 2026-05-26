@@ -206,4 +206,15 @@ public class UserProfileService {
 
         userRepository.save(user);
     }
+
+    /**
+     * Lưu URL PDF CV (từ Cloudinary) vào profile người dùng hiện tại
+     */
+    public void saveCvUrl(String pdfUrl) {
+        String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(currentEmail)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng đang đăng nhập."));
+        user.setCvUrl(pdfUrl);
+        userRepository.save(user);
+    }
 }

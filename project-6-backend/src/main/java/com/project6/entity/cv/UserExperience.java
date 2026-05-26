@@ -3,7 +3,6 @@ package com.project6.entity.cv;
 import com.project6.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "user_experiences")
@@ -13,8 +12,8 @@ import java.util.UUID;
 @Builder
 public class UserExperience {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

@@ -53,6 +53,15 @@ public class JobService {
         return jobs.map(JobResponseDTO::from);
     }
 
+    public Page<JobResponseDTO> getJobsByCompanyId(java.util.UUID companyId, int page, int size) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy công ty"));
+        int pageIndex = (page > 0) ? page - 1 : 0;
+        Pageable pageable = PageRequest.of(pageIndex, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Page<JobPost> jobs = jobPostRepository.findByCompany(company, pageable);
+        return jobs.map(JobResponseDTO::from);
+    }
+
     public JobResponseDTO getJobById(UUID id) {
         return jobPostRepository.findById(id)
                 .map(JobResponseDTO::from)
@@ -217,9 +226,9 @@ public class JobService {
         if (currentJob == null) return Collections.emptyList();
 
         // Collect current job's skill IDs and specialization ID
-        Set<UUID> currentSkillIds = currentJob.getSkills() == null ? Collections.emptySet()
+        Set<Long> currentSkillIds = currentJob.getSkills() == null ? Collections.emptySet()
                 : currentJob.getSkills().stream().map(Skill::getId).collect(java.util.stream.Collectors.toSet());
-        UUID currentSpecId = currentJob.getSpecializationEntity() != null
+        Long currentSpecId = currentJob.getSpecializationEntity() != null
                 ? currentJob.getSpecializationEntity().getId() : null;
 
         // Fetch all other jobs
@@ -247,7 +256,7 @@ public class JobService {
                 .collect(java.util.stream.Collectors.toList());
     }
 
-    private int similarityScore(JobPost job, UUID specId, Set<UUID> skillIds) {
+    private int similarityScore(JobPost job, Long specId, Set<Long> skillIds) {
         int score = 0;
         // Same specialization = high bonus
         if (specId != null && job.getSpecializationEntity() != null

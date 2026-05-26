@@ -49,4 +49,10 @@ public class CompanyProfileService {
         Company updatedCompany = companyRepository.save(company);
         return CompanyInfoDto.from(updatedCompany);
     }
+
+    public CompanyInfoDto getCompanyDetail(java.util.UUID id) {
+        Company company = companyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy công ty"));
+        return CompanyInfoDto.from(company);
+    }
 }
