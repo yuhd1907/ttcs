@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Job } from "@/interface/job.interface";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const jobContainer = () => {
   const router = useRouter();
@@ -18,6 +19,32 @@ const jobContainer = () => {
 
   const [job, setJob] = useState<Job>();
   const [sameJobs, setSameJobs] = useState<Job[]>([]);
+
+  const { user, token } = useAuth();
+  const [matchAnalysis, setMatchAnalysis] = useState<{ score: number, reason: string } | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const analyzeMatch = async () => {
+    if (!token || !id) return;
+    setIsAnalyzing(true);
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/match-job/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        const data = await res.json();
+        if (data.status === 'Success') {
+            setMatchAnalysis(data.data);
+        } else {
+            console.error("Match error:", data.message);
+        }
+    } catch (e) {
+        console.error(e);
+    } finally {
+        setIsAnalyzing(false);
+    }
+  };
 
   useEffect(() => {
     // Giữ nguyên logic gọi API của job bằng id từ params và env variable
@@ -59,7 +86,12 @@ const jobContainer = () => {
                     {job?.name}
                   </h1>
                   <div className="mt-[10px] text-[#414042] text-[16px]">
-                    {job?.companyName}
+                    <Link
+                      href={`/company/detail/${job?.companyId}`}
+                      className="hover:text-[#0D8EFF] transition-colors"
+                    >
+                      {job?.companyName}
+                    </Link>
                   </div>
                   <div className="flex items-center gap-[12px] text-[#0ab305] mt-[10px]">
                     <AiOutlineDollarCircle className="text-[20px] font-[500]" />
@@ -248,6 +280,33 @@ const jobContainer = () => {
 
             {/* Right */}
             <div className="lg:w-[32%] w-[100%]">
+              
+              {/* AI Matching Box */}
+              {user && (
+                <div className="bg-white border border-[#DEDEDE] rounded-[8px] p-[20px] mb-[20px]">
+                  <h3 className="text-[16px] font-[700] mb-3 flex items-center gap-2">
+                    <span className="text-[20px]">🤖</span> AI Phân Tích Độ Phù Hợp
+                  </h3>
+                  {!matchAnalysis ? (
+                    <button
+                      onClick={analyzeMatch}
+                      disabled={isAnalyzing}
+                      className="w-full h-[40px] rounded-[4px] bg-[#f0f7ff] text-[#0088FF] font-[600] border border-[#0088FF] hover:bg-[#e0f0ff] transition-colors disabled:opacity-50"
+                    >
+                      {isAnalyzing ? "Đang phân tích..." : "Phân tích CV của bạn"}
+                    </button>
+                  ) : (
+                    <div className="flex flex-col items-center">
+                       <div className="text-[32px] font-[800] text-[#0088FF]">{matchAnalysis.score}%</div>
+                       <div className="text-[13px] text-[#A6A6A6] font-[600]">Mức độ phù hợp</div>
+                       <div className="mt-3 text-[14px] text-[#414042] leading-relaxed p-3 bg-[#F9F9F9] border border-[#DEDEDE] rounded-[8px] italic w-full">
+                         {matchAnalysis.reason}
+                       </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div className="bg-white border border-[#DEDEDE] rounded-[8px] p-[20px] )]">
                 <div className="flex gap-x-[12px] items-center">
                   {job?.companyLogo ? (
@@ -263,8 +322,8 @@ const jobContainer = () => {
                   )}
                   <div>
                     <Link
-                      href={`/company/detail/${job?.companyID}`}
-                      className="text-[#121212] text-[18px] font-[700] hover:text-[#0D8EFF]"
+                      href={`/company/detail/${job?.companyId}`}
+                      className="text-[#0D8EFF] text-[18px] font-[700] hover:opacity-80"
                     >
                       {job?.companyName}
                     </Link>

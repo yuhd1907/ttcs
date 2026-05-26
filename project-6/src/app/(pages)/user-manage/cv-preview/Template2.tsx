@@ -69,13 +69,13 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
 
             {/* Học vấn */}
             {user.educations && user.educations.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 cv-section">
                 <div className="flex items-center mb-3">
                   <div className="w-1.5 h-4 bg-gray-900 mr-2" />
                   <h4 className="font-bold text-base uppercase">Học vấn</h4>
                 </div>
                 {user.educations.map((edu, i) => (
-                  <div key={edu.id ?? i} className="mb-3">
+                  <div key={edu.id ?? i} className="mb-3 cv-item">
                     <div className="text-sm font-bold break-words mb-1">{edu.school}</div>
                     <div className="flex flex-wrap items-center mb-1 gap-x-1">
                       <div className="text-xs min-w-0">
@@ -98,13 +98,13 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
 
             {/* Kỹ năng */}
             {user.skills && user.skills.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 cv-section">
                 <div className="flex items-center mb-3">
                   <div className="w-1.5 h-4 bg-gray-900 mr-2" />
                   <h4 className="font-bold text-base uppercase">Kỹ năng</h4>
                 </div>
                 {hardSkills.map((group, i) => (
-                  <div key={group.id ?? i} className="mb-3">
+                  <div key={group.id ?? i} className="mb-3 cv-item">
                     <div className="text-xs font-bold mb-2 italic">{group.groupName}</div>
                     <div className="flex flex-wrap gap-2">
                       {group.items.map((item, j) => (
@@ -116,7 +116,7 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
                   </div>
                 ))}
                 {softSkills.map((group, i) => (
-                  <div key={group.id ?? i} className="mb-3">
+                  <div key={group.id ?? i} className="mb-3 cv-item">
                     <div className="text-xs font-bold mb-2 italic">{group.groupName}</div>
                     <div className="flex flex-wrap gap-2">
                       {group.items.map((item, j) => (
@@ -132,13 +132,13 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
 
             {/* Kinh nghiệm */}
             {user.experiences && user.experiences.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 cv-section">
                 <div className="flex items-center mb-4">
                   <div className="w-1.5 h-4 bg-gray-900 mr-2" />
                   <h4 className="font-bold text-base uppercase">Kinh nghiệm làm việc</h4>
                 </div>
                 {user.experiences.map((exp, i) => (
-                  <div key={exp.id ?? i} className="mt-4">
+                  <div key={exp.id ?? i} className="mt-4 cv-item">
                     <div className="flex items-start mb-2">
                       <div className="w-1.5 h-8 bg-lime-500 mr-4 mt-1" />
                       <div className="flex flex-col w-full">
@@ -172,14 +172,14 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
 
             {/* Ngoại ngữ */}
             {user.languages && user.languages.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 cv-section">
                 <div className="flex items-center mb-3">
                   <div className="w-1.5 h-4 bg-gray-900 mr-2" />
                   <h4 className="font-bold text-base uppercase">Ngoại ngữ</h4>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {user.languages.map((lang, i) => (
-                    <div key={lang.id ?? i} className="bg-gray-100 px-3 py-1.5 text-xs rounded-sm">
+                    <div key={lang.id ?? i} className="bg-gray-100 px-3 py-1.5 text-xs rounded-sm cv-item">
                       <span className="font-bold capitalize">{languageLabel(lang.language)}</span>
                       <span className="font-normal text-gray-600 ml-1">({levelLabel(lang.level)})</span>
                     </div>
@@ -190,13 +190,13 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
 
             {/* Dự án */}
             {user.projects && user.projects.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 cv-section">
                 <div className="flex items-center mb-3">
                   <div className="w-1.5 h-4 bg-gray-900 mr-2" />
                   <h4 className="font-bold text-base uppercase">Dự án nổi bật</h4>
                 </div>
                 {user.projects.map((proj, i) => (
-                  <div key={proj.id ?? i} className="mt-3">
+                  <div key={proj.id ?? i} className="mt-3 cv-item">
                     {proj.link
                       ? <a target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mb-1 hover:text-blue-600 transition-colors" href={proj.link}>
                           <div className="text-sm font-bold break-words">{proj.name}</div>
@@ -222,13 +222,13 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
 
             {/* Chứng chỉ */}
             {user.certificates && user.certificates.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 cv-section">
                 <div className="flex items-center mb-3">
                   <div className="w-1.5 h-4 bg-gray-900 mr-2" />
                   <h4 className="font-bold text-base uppercase">Chứng chỉ</h4>
                 </div>
                 {user.certificates.map((cert, i) => (
-                  <div key={cert.id ?? i} className="mt-3">
+                  <div key={cert.id ?? i} className="mt-3 cv-item">
                     <div className="mb-1">
                       {cert.link
                         ? <a target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mb-1 hover:text-blue-600 transition-colors" href={cert.link}>
@@ -258,13 +258,13 @@ export const Template2 = ({ user }: { user: InfoUser }) => {
 
             {/* Giải thưởng */}
             {user.awards && user.awards.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 cv-section">
                 <div className="flex items-center mb-3">
                   <div className="w-1.5 h-4 bg-gray-900 mr-2" />
                   <h4 className="font-bold text-base uppercase">Giải thưởng</h4>
                 </div>
                 {user.awards.map((award, i) => (
-                  <div key={award.id ?? i} className="mt-3">
+                  <div key={award.id ?? i} className="mt-3 cv-item">
                     <div className="text-sm font-bold break-words mb-1">{award.name}</div>
                     <div className="flex flex-wrap items-center mb-2 gap-x-1">
                       <div className="text-xs break-words min-w-0">{award.organization}</div>

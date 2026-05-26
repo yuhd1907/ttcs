@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { InfoUser } from '@/interface/user.interface';
 import { Template1 } from './Template1';
 import { Template2 } from './Template2';
 import { useAuth } from '@/hooks/useAuth';
+import { applyPageBreaks } from './cvUtils';
 
 export default function CVBuilderPage() {
   const router = useRouter();
@@ -14,94 +15,184 @@ export default function CVBuilderPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const printAreaRef = useRef<HTMLDivElement>(null);
 
   const { isLogin, infoUser } = useAuth();
 
-  const handleUseCV = async () => {
-    if (!infoUser) return;
-    setIsSaving(true);
+  // ───────────────────────────────────────────────
+  // Tạo tên file an toàn từ họ và tên người dùng
+  // ───────────────────────────────────────────────
+  const getSafeFileName = () => {
+    const name = (infoUser?.username || 'user').trim();
+    // Giữ tiếng Việt, chỉ thay khoảng trắng bằng dấu gạch ngang
+    return `${name.replace(/\s+/g, '-')}-cv`;
+  };
+
+  // ───────────────────────────────────────────────
+  // Core: chụp Template → PNG/JPEG → PDF blob
+  // mode: 'download' = chất lượng cao (pixelRatio 2)
+  //       'upload'   = nén nhỏ (pixelRatio 1.2, JPEG 75%) để vừa giới hạn Cloudinary 10MB
+  // ───────────────────────────────────────────────
+  const generatePdfBlob = async (mode: 'download' | 'upload' = 'download'): Promise<Blob | null> => {
+    const el = printAreaRef.current;
+    if (!el) return null;
+
+    // Đảm bảo element sẵn sàng và nằm trong viewport (dù bị z-index che)
+    await document.fonts.ready;
+    await new Promise((r) => setTimeout(r, 500));
+
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/generate-cv-pdf`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          intro: infoUser.intro,
-          educations: infoUser.educations,
-          experiences: infoUser.experiences,
-          skills: infoUser.skills,
-          languages: infoUser.languages,
-          projects: infoUser.projects,
-          certificates: infoUser.certificates,
-          awards: infoUser.awards,
-        }),
-        credentials: "include",
+      const { toPng, toJpeg } = await import('html-to-image');
+      const { default: jsPDF } = await import('jspdf');
+
+      // Áp dụng auto-pagination (đẩy element xuống nếu bị cắt ngang trang)
+      applyPageBreaks(el);
+
+      // Tạm thời hiển thị rõ để chụp
+      const prevOpacity = el.style.opacity;
+      el.style.opacity = '1';
+
+      // Capture options
+      const options = {
+        cacheBust: true,
+        useCORS: true, // Quan trọng để load ảnh avatar từ Cloudinary
+        style: {
+          opacity: '1',
+          transform: 'none',
+        }
+      };
+
+      // Gọi lần 1 để preload font/images vào canvas
+      await toPng(el, { ...options, pixelRatio: 1 }).catch(() => {});
+      await new Promise((r) => setTimeout(r, 200));
+
+      let dataUrl: string;
+      let imgFormat = 'JPEG';
+      if (mode === 'upload') {
+        dataUrl = await toJpeg(el, { ...options, quality: 0.75, pixelRatio: 1.2 });
+      } else {
+        // Sử dụng JPEG thay vì PNG cho bản tải xuống để tránh dung lượng quá lớn (>10MB)
+        dataUrl = await toJpeg(el, { ...options, quality: 0.85, pixelRatio: 2 });
+      }
+
+      // Restore opacity
+      el.style.opacity = prevOpacity;
+
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
       });
 
-      const text = await res.text();
-      if (!text) {
-        toast.error("Server không phản hồi. Vui lòng thử lại.");
-        return;
-      }
-      const data = JSON.parse(text);
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
 
-      if (data.code === "success") {
-        toast.success("Đã lưu và tạo PDF CV thành công!");
-        setIsModalOpen(false);
-      } else {
-        toast.error(data.message || "Có lỗi xảy ra khi tạo PDF");
+      const img = new Image();
+      img.src = dataUrl;
+      await new Promise((r) => {
+        img.onload = r;
+        img.onerror = r; // Tránh treo nếu lỗi
+      });
+
+      if (img.width === 0 || img.height === 0) {
+        throw new Error('Ảnh capture bị rỗng.');
       }
+
+      const totalHeightMm = (img.height / img.width) * pageW;
+
+      let offsetY = 0;
+      let pageIdx = 0;
+      while (offsetY < totalHeightMm) {
+        if (pageIdx > 0) pdf.addPage();
+        pdf.addImage(dataUrl, imgFormat, 0, -offsetY, pageW, totalHeightMm);
+        offsetY += pageH;
+        pageIdx++;
+      }
+
+      return pdf.output('blob');
     } catch (error) {
-      console.error(error);
-      toast.error("Không thể kết nối đến máy chủ");
-    } finally {
-      setIsSaving(false);
+      console.error('Lỗi generatePdfBlob:', error);
+      throw error;
     }
   };
 
+
+
+  // ───────────────────────────────────────────────
+  // Nút ⬇: Tải CV về máy
+  // ───────────────────────────────────────────────
   const handleDownloadCV = async () => {
     if (!infoUser) return;
     setIsDownloading(true);
-    const toastId = toast.loading("Đang yêu cầu server tạo PDF...");
-    
+    const toastId = toast.loading('Đang tạo file PDF...');
     try {
-      // Gọi API tạo PDF và lưu lên Cloudinary
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/generate-cv-pdf`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          intro: infoUser.intro,
-          educations: infoUser.educations,
-          experiences: infoUser.experiences,
-          skills: infoUser.skills,
-          languages: infoUser.languages,
-          projects: infoUser.projects,
-          certificates: infoUser.certificates,
-          awards: infoUser.awards,
-        }),
-        credentials: "include",
-      });
+      // 'download' = chất lượng cao, không giới hạn kích thước
+      const blob = await generatePdfBlob('download');
+      if (!blob) throw new Error('Không thể tạo PDF');
 
-      const text = await response.text();
-      if (!text) throw new Error("Server không phản hồi.");
-      const data = JSON.parse(text);
-      if (data.code !== "success") {
-        throw new Error(data.message || "Lỗi khi tạo PDF từ server");
-      }
+      const fileName = getSafeFileName();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${fileName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
 
-      // Nhận link PDF từ Cloudinary
-      const pdfUrl = data.data;
-      
-      // Mở sang tab mới hoặc tải về
-      window.open(pdfUrl, '_blank');
-
-      toast.success("Tạo CV thành công!", { id: toastId });
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error.message || "Có lỗi xảy ra.", { id: toastId });
+      toast.success(`Đã tải ${fileName}.pdf!`, { id: toastId });
+    } catch (err: any) {
+      console.error(err);
+      toast.error('Lỗi xuất PDF: ' + err.message, { id: toastId });
     } finally {
       setIsDownloading(false);
+    }
+  };
+
+  // ───────────────────────────────────────────────
+  // Nút "Dùng mẫu CV": Tạo PDF → upload Cloudinary
+  // ───────────────────────────────────────────────
+  const handleUseCV = async () => {
+    if (!infoUser) return;
+    setIsSaving(true);
+    const toastId = toast.loading('Đang tạo và lưu CV...');
+    try {
+      // 'upload' = nén JPEG pixelRatio 1.2 → ~2-4MB, vừa giới hạn 10MB của Cloudinary
+      const blob = await generatePdfBlob('upload');
+      if (!blob) throw new Error('Không thể tạo PDF');
+
+      // Chuyển blob → base64
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve((reader.result as string).split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+
+      const fileName = getSafeFileName();
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/save-cv-pdf`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ base64Pdf: base64, fileName }),
+        credentials: 'include',
+      });
+
+      const text = await res.text();
+      if (!text) throw new Error('Server không phản hồi');
+      const data = JSON.parse(text);
+
+      if (data.code === 'success') {
+        toast.success('Đã lưu CV lên hệ thống thành công!', { id: toastId });
+        setIsModalOpen(false);
+      } else {
+        throw new Error(data.message || 'Lỗi khi lưu CV');
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || 'Có lỗi xảy ra', { id: toastId });
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -176,15 +267,34 @@ export default function CVBuilderPage() {
             </div>
           </div>
 
+          {/* Khu vực CV ẩn — dùng cho html-to-image capture */}
+          <div
+            ref={printAreaRef}
+            style={{
+              position: 'fixed',
+              top: '0',
+              left: '0',
+              width: '794px',
+              minHeight: '1122px',
+              background: 'white',
+              overflow: 'visible',
+              zIndex: -9999,
+              opacity: 0.01,
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          >
+            {selectedLayout === 1 ? <Template1 user={infoUser} /> : <Template2 user={infoUser} />}
+          </div>
+
           {/* Footer Toolbar */}
           <div className="absolute bottom-0 w-full bg-[#1e2329] h-16 flex items-center justify-between px-6 border-t border-gray-700 shadow-[0_-5px_15px_rgba(0,0,0,0.2)]">
-
 
             <div className="flex-1" />
 
             {/* Actions */}
             <div className="flex items-center gap-3">
-              <button 
+              <button
                 onClick={handleDownloadCV}
                 disabled={isDownloading}
                 className={`p-2 rounded transition flex items-center justify-center ${isDownloading ? 'bg-gray-500 cursor-not-allowed' : 'bg-gray-700 hover:bg-gray-600 text-white'}`}
@@ -214,11 +324,10 @@ export default function CVBuilderPage() {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal xác nhận dùng CV */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-[520px] relative overflow-hidden animate-in zoom-in duration-200">
-            {/* Close button */}
             <button
               onClick={() => setIsModalOpen(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
@@ -229,7 +338,6 @@ export default function CVBuilderPage() {
             </button>
 
             <div className="p-8 flex flex-col items-center text-center">
-              {/* Illustration */}
               <div className="mb-6">
                 <img
                   src="https://itviec.com/assets/profile/cv-template-uses-3fd7b05ce4dc094e6eb0c6d165ba63310722eaab6a305cbadd1605dca2415dc5.svg"
@@ -238,34 +346,29 @@ export default function CVBuilderPage() {
                 />
               </div>
 
-              {/* Title */}
               <h2 className="text-[22px] font-bold text-gray-900 mb-4 leading-tight">
                 Dùng CV này để nhận cơ hội việc làm mới
               </h2>
 
-              {/* Description */}
               <p className="text-[15px] text-gray-600 mb-6 leading-relaxed">
-                Dùng CV này trên ITviec để ứng tuyển, nhận lời mời công việc và được nhiều nhà tuyển dụng nhìn thấy hơn. Xem lại và dùng CV ngay.
+                Dùng CV này trên ITviec để ứng tuyển, nhận lời mời công việc và được nhiều nhà tuyển dụng nhìn thấy hơn.
               </p>
 
-              {/* File Info Box */}
               <div className="w-full bg-[#f0f7ff] border border-[#d1e9ff] rounded-lg py-3 px-4 flex items-center justify-center gap-2 mb-8">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-[#0D8EFF]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-[#0D8EFF] shrink-0">
                   <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="12" cy="14" r="3" stroke="currentColor" strokeWidth="2" />
                 </svg>
-                <span className="text-[#0D8EFF] font-medium underline truncate">
-                  {infoUser.cvUrl ? infoUser.cvUrl.substring(infoUser.cvUrl.lastIndexOf('/') + 1) : `${infoUser.username.trim().replace(/\\s+/g, '_')}_cv.pdf`}
+                <span className="text-[#0D8EFF] font-medium truncate">
+                  {getSafeFileName()}.pdf
                 </span>
               </div>
 
-              {/* Action Button */}
               <button
                 onClick={handleUseCV}
                 disabled={isSaving}
                 className={`w-full text-white font-bold py-3.5 px-6 rounded-lg transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2
-                  ${isSaving ? "bg-gray-400 cursor-not-allowed" : "bg-[#0D8EFF] hover:bg-[#0076E5]"}`}
+                  ${isSaving ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#0D8EFF] hover:bg-[#0076E5]'}`}
               >
                 {isSaving && (
                   <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -273,12 +376,13 @@ export default function CVBuilderPage() {
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                 )}
-                {isSaving ? "Đang xử lý..." : "Sử dụng CV này"}
+                {isSaving ? 'Đang xử lý...' : 'Sử dụng CV này'}
               </button>
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 }

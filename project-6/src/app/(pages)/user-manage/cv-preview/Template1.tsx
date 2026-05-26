@@ -70,11 +70,11 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
 
         {/* Học vấn */}
         {user.educations && user.educations.length > 0 && (
-          <div className="flex flex-row border-t border-gray-300 pt-6">
+          <div className="flex flex-row border-t border-gray-300 pt-6 cv-section">
             <div className="w-[30%] text-base font-bold text-gray-900 pr-6 shrink-0 uppercase tracking-wide">Học vấn</div>
             <div className="w-[70%] text-sm text-gray-800 flex flex-col gap-4">
               {user.educations.map((edu, i) => (
-                <div key={edu.id ?? i}>
+                <div key={edu.id ?? i} className="cv-item">
                   <span className="text-base font-bold text-gray-900 break-words block mb-1">{edu.school}</span>
                   <div className="flex flex-wrap items-center mt-1 text-gray-600 gap-x-1">
                     <p className="whitespace-nowrap">{dateRange(edu.fromMonth, edu.fromYear, edu.toMonth, edu.toYear, edu.isCurrentlyStudying)}</p>
@@ -93,15 +93,15 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
 
         {/* Kỹ năng */}
         {user.skills && user.skills.length > 0 && (
-          <div className="flex flex-row border-t border-gray-300 pt-6">
+          <div className="flex flex-row border-t border-gray-300 pt-6 cv-section">
             <div className="w-[30%] text-base font-bold text-gray-900 pr-6 shrink-0 uppercase tracking-wide">Kỹ năng</div>
             <div className="w-[70%] text-sm text-gray-800">
               {hardSkills.map((group, i) => (
-                <div key={group.id ?? i} className="mb-4">
+                <div key={group.id ?? i} className="mb-4 cv-item">
                   <div className="text-sm font-bold text-gray-900 mb-2 italic">{group.groupName}</div>
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item, j) => (
-                      <span key={item.id ?? j} className="inline-flex items-center px-2.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-xs text-gray-800">
+                      <span key={item.id ?? j} className="inline-flex items-center px-2.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-xs text-gray-800 whitespace-nowrap">
                         {skillLabel(item.skill)}{item.experience && <span className="text-gray-500 ml-1">({experienceLabel(item.experience)})</span>}
                       </span>
                     ))}
@@ -109,11 +109,11 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
                 </div>
               ))}
               {softSkills.map((group, i) => (
-                <div key={group.id ?? i} className="mb-4">
+                <div key={group.id ?? i} className="mb-4 cv-item">
                   <div className="text-sm font-bold text-gray-900 mb-2 italic">{group.groupName}</div>
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item, j) => (
-                      <span key={item.id ?? j} className="inline-flex items-center px-2.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-xs text-gray-800">
+                      <span key={item.id ?? j} className="inline-flex items-center px-2.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-xs text-gray-800 whitespace-nowrap">
                         {softSkillLabel(item.skill)}
                       </span>
                     ))}
@@ -126,11 +126,11 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
 
         {/* Kinh nghiệm */}
         {user.experiences && user.experiences.length > 0 && (
-          <div className="flex flex-row border-t border-gray-300 pt-6">
+          <div className="flex flex-row border-t border-gray-300 pt-6 cv-section">
             <div className="w-[30%] text-base font-bold text-gray-900 pr-6 shrink-0 uppercase tracking-wide">Kinh nghiệm làm việc</div>
             <div className="w-[70%] text-sm text-gray-800 flex flex-col gap-4">
               {user.experiences.map((exp, i) => (
-                <div key={exp.id ?? i}>
+                <div key={exp.id ?? i} className="cv-item">
                   <div className="text-xs font-semibold text-gray-600 uppercase mb-1">
                     {dateRange(exp.fromMonth, exp.fromYear, exp.toMonth, exp.toYear, exp.isCurrentlyWorking)}
                   </div>
@@ -158,11 +158,11 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
 
         {/* Ngoại ngữ */}
         {user.languages && user.languages.length > 0 && (
-          <div className="flex flex-row border-t border-gray-300 pt-6">
+          <div className="flex flex-row border-t border-gray-300 pt-6 cv-section">
             <div className="w-[30%] text-base font-bold text-gray-900 pr-6 shrink-0 uppercase tracking-wide">Ngoại ngữ</div>
             <div className="w-[70%] text-sm text-gray-800 flex flex-col gap-2">
               {user.languages.map((lang, i) => (
-                <div key={lang.id ?? i} className="flex items-center">
+                <div key={lang.id ?? i} className="flex items-center cv-item">
                   <span className="font-bold text-gray-900 mr-1">{languageLabel(lang.language)}</span>
                   <span className="text-gray-700">: {levelLabel(lang.level)}</span>
                 </div>
@@ -173,11 +173,11 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
 
         {/* Dự án */}
         {user.projects && user.projects.length > 0 && (
-          <div className="flex flex-row border-t border-gray-300 pt-6">
+          <div className="flex flex-row border-t border-gray-300 pt-6 cv-section">
             <div className="w-[30%] text-base font-bold text-gray-900 pr-6 shrink-0 uppercase tracking-wide">Dự án nổi bật</div>
             <div className="w-[70%] text-sm text-gray-800 flex flex-col gap-4">
               {user.projects.map((proj, i) => (
-                <div key={proj.id ?? i}>
+                <div key={proj.id ?? i} className="cv-item">
                   <span className="text-sm font-bold text-gray-900 block mb-1">
                     {dateRange(proj.fromMonth, proj.fromYear, proj.toMonth, proj.toYear, proj.isCurrentlyWorking).toUpperCase()}
                   </span>
@@ -200,11 +200,11 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
 
         {/* Chứng chỉ */}
         {user.certificates && user.certificates.length > 0 && (
-          <div className="flex flex-row border-t border-gray-300 pt-6">
+          <div className="flex flex-row border-t border-gray-300 pt-6 cv-section">
             <div className="w-[30%] text-base font-bold text-gray-900 pr-6 shrink-0 uppercase tracking-wide">Chứng chỉ</div>
             <div className="w-[70%] text-sm text-gray-800 flex flex-col gap-4">
               {user.certificates.map((cert, i) => (
-                <div key={cert.id ?? i}>
+                <div key={cert.id ?? i} className="cv-item">
                   <span className="text-base font-bold text-gray-900 block mb-1 break-words">{cert.name}</span>
                   <div className="flex flex-wrap items-center text-gray-600 mb-2 mt-1 gap-x-1">
                     <span className="whitespace-nowrap">{fmt(cert.month, cert.year)}</span>
@@ -229,11 +229,11 @@ export const Template1 = ({ user }: { user: InfoUser }) => {
 
         {/* Giải thưởng */}
         {user.awards && user.awards.length > 0 && (
-          <div className="flex flex-row border-t border-gray-300 pt-6">
+          <div className="flex flex-row border-t border-gray-300 pt-6 cv-section">
             <div className="w-[30%] text-base font-bold text-gray-900 pr-6 shrink-0 uppercase tracking-wide">Giải thưởng</div>
             <div className="w-[70%] text-sm text-gray-800 flex flex-col gap-4">
               {user.awards.map((award, i) => (
-                <div key={award.id ?? i}>
+                <div key={award.id ?? i} className="cv-item">
                   <span className="text-base font-bold text-gray-900 block mb-1 break-words">{award.name}</span>
                   <div className="flex flex-wrap items-center text-gray-600 mt-1 mb-2 gap-x-1">
                     <span className="whitespace-nowrap">{fmt(award.month, award.year)}</span>

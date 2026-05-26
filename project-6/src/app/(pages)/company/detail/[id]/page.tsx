@@ -1,46 +1,122 @@
+"use client";
+
 import Link from "next/link";
 import { FaBriefcase } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { GrPerformance } from "react-icons/gr";
 import { IoLocationOutline } from "react-icons/io5";
-import { AiOutlineDollarCircle } from "react-icons/ai";
-import { PiSuitcase } from "react-icons/pi";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { CardJobItem } from "@/app/components/card/CardJobItem";
+
 const CompanyDetail = () => {
+  const params = useParams();
+  const id = params.id;
+  const [company, setCompany] = useState<any>(null);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [totalJobs, setTotalJobs] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (id) {
+      setLoading(true);
+      setErrorMsg(null);
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/company/${id}`)
+        .then(async (res) => {
+          if (!res.ok) {
+            let msg = "Failed to fetch";
+            try {
+              const errData = await res.json();
+              msg = errData.message || msg;
+            } catch(e) {}
+            throw new Error(msg);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setCompany(data);
+        })
+        .catch(err => {
+          console.log("Fetch company error:", err);
+          setErrorMsg(err.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/company/${id}/jobs?size=10`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch jobs");
+          return res.json();
+        })
+        .then((data) => {
+          if (data.code === "success") {
+            setJobs(data.jobList || []);
+            setTotalJobs(data.totalElements || 0);
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  }, [id]);
+
+  if (loading) {
+    return <div className="text-center py-20 text-[#121212]">Đang tải thông tin...</div>;
+  }
+
+  if (errorMsg) {
+    return (
+      <div className="text-center py-20 text-[#121212] flex flex-col items-center">
+        <h2 className="text-xl font-bold text-red-500 mb-2">Lỗi truy xuất dữ liệu</h2>
+        <p>{errorMsg}</p>
+        <p className="mt-4 text-sm text-gray-500">ID: {id}</p>
+      </div>
+    );
+  }
+
+  if (!company) {
+    return <div className="text-center py-20 text-[#121212]">Không tìm thấy thông tin công ty.</div>;
+  }
+
   return (
     <>
       <div className="bg-[#000071]">
         <div className="container mx-auto px-[16px] flex flex-wrap gap-[16px] py-[32px]">
-          <div className="w-[160px] h-[160px]">
-            <img
-              src="/assets/images/naver.png"
-              alt=""
-              className="aspect-[100/100] rounded-[4px] w-full h-full"
-            />
+          <div className="w-[160px] h-[160px] bg-white rounded-[4px] p-2 flex items-center justify-center">
+            {company.avatar ? (
+              <img
+                src={company.avatar}
+                alt={company.companyName}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <span className="text-gray-400">No Logo</span>
+            )}
           </div>
           <div className="sm:flex-1">
             <h2 className="text-white text-[28px] font-[700]">
-              Naver Việt Nam
+              {company.companyName}
             </h2>
             <div className="flex gap-[6px] items-center mt-[8px]">
-              <FaLocationDot className="text-white" />
+              <FaLocationDot className="text-white shrink-0" />
               <span className="text-white text-[14px] font-[400]">
-                Tầng 15, tòa Keangnam Landmark 72, Mễ Trì, Nam Tu Liem, Ha Noi
+                {company.address || "Đang cập nhật"}
               </span>
             </div>
             <div className="flex gap-[6px] items-center mt-[8px]">
-              <FaBriefcase className="text-white" />
+              <FaBriefcase className="text-white shrink-0" />
               <span className="text-white text-[14px] font-[400]">
-                2 việc làm đang tuyển dụng
+                {totalJobs} việc làm đang tuyển dụng
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div className="container mx-auto px-[16px] mt-[30px] flex flex-col lg:flex-row gap-[24px] items-start">
+      
+      <div className="container mx-auto px-[16px] mt-[30px] flex flex-col lg:flex-row gap-[24px] items-start pb-[40px]">
         {/* Left block */}
         <div className="w-full lg:w-[65%] flex flex-col gap-[20px]">
           {/* Section 6 */}
-          <div className="border border-[1px] border-[#D9DCDB] rounded-[8px] p-[20px] )] bg-white">
+          <div className="border border-[1px] border-[#D9DCDB] rounded-[8px] p-[20px] bg-white">
             <div>
               <h2 className="text-[#121212] text-[22px] font-[700] pb-[16px] border-b border-dashed border-[#D9DCDB]">
                 Thông tin chung
@@ -53,7 +129,7 @@ const CompanyDetail = () => {
                   Mô hình công ty
                 </span>
                 <span className="text-[#121212] text-[16px] font-[500]">
-                  Sản phẩm
+                  {company.model || "Chưa cập nhật"}
                 </span>
               </div>
               <div className="flex flex-col gap-[4px]">
@@ -61,7 +137,7 @@ const CompanyDetail = () => {
                   Lĩnh vực công ty
                 </span>
                 <span className="text-[#121212] text-[16px] font-[500]">
-                  Sản Phẩm Phần Mềm và Dịch Vụ Web
+                  {company.field || "Chưa cập nhật"}
                 </span>
               </div>
               <div className="flex flex-col gap-[4px]">
@@ -69,7 +145,7 @@ const CompanyDetail = () => {
                   Tỉnh thành
                 </span>
                 <span className="text-[#121212] text-[16px] font-[500]">
-                  Hà Nội
+                  {company.province || "Chưa cập nhật"}
                 </span>
               </div>
               <div className="flex flex-col gap-[4px]">
@@ -77,7 +153,7 @@ const CompanyDetail = () => {
                   Quy mô công ty
                 </span>
                 <span className="text-[#121212] text-[16px] font-[500]">
-                  151 - 300 nhân viên
+                  {company.employees || "Chưa cập nhật"}
                 </span>
               </div>
               <div className="flex flex-col gap-[4px]">
@@ -85,7 +161,7 @@ const CompanyDetail = () => {
                   Thời gian làm việc
                 </span>
                 <span className="text-[#121212] text-[16px] font-[500]">
-                  Thứ 2 - Thứ 6
+                  {company.workingTime || "Chưa cập nhật"}
                 </span>
               </div>
               <div className="flex flex-col gap-[4px]">
@@ -93,7 +169,7 @@ const CompanyDetail = () => {
                   Làm việc ngoài giờ
                 </span>
                 <span className="text-[#121212] text-[16px] font-[500]">
-                  Không có OT
+                  {company.overtime || "Không có OT"}
                 </span>
               </div>
             </div>
@@ -101,87 +177,54 @@ const CompanyDetail = () => {
           {/* End of Section 6 */}
 
           {/* Section 7 */}
-          <div className="border border-[1px] border-[#D9DCDB] rounded-[8px] p-[20px] )] bg-white">
-            <h2 className="text-[#121212] text-[22px] font-[700] pb-[16px] border-b border-dashed border-[#D9DCDB]">
-              Giới thiệu công ty
-            </h2>
-            <div className="mt-[20px]">
-              <p className="text-[#121212] text-[15px] font-[400] leading-[1.6]">
-                Naver Corporation là một công ty kỹ thuật số và công nghệ đa
-                quốc gia có trụ sở tại Hàn Quốc. Công ty vận hành công cụ tìm
-                kiếm Naver (cổng thông tin web số 1 Hàn Quốc) và hàng loạt các
-                sản phẩm công nghệ toàn cầu tiêu biểu như ứng dụng nhắn tin
-                LINE, ứng dụng Webtoon, camera tự sướng Snow và nền tảng
-                livestream V LIVE.
-              </p>
-              <br />
-              <p className="text-[#121212] text-[15px] font-[400] leading-[1.6]">
-                Naver Việt Nam (Naver Vietnam) được thành lập với tầm nhìn phát
-                triển Trung tâm Dữ liệu và Công nghệ tiên tiến (Dev Center) tại
-                khu vực Châu Á. Chúng tôi tập trung mạnh mẽ vào nghiên cứu phát
-                triển các AI, Machine Learning, Web/Mobile backend tối ưu cao.
-                Cùng hệ sinh thái khổng lồ, Naver mở ra cơ hội để bạn phát triển
-                bản thân trên các sàn công nghệ có hàng triệu người dùng hằng
-                ngày.
-              </p>
+          {company.description && (
+            <div className="border border-[1px] border-[#D9DCDB] rounded-[8px] p-[20px] bg-white">
+              <h2 className="text-[#121212] text-[22px] font-[700] pb-[16px] border-b border-dashed border-[#D9DCDB]">
+                Giới thiệu công ty
+              </h2>
+              <div 
+                className="mt-[20px] text-[#121212] text-[15px] font-[400] leading-[1.6] job-description"
+                dangerouslySetInnerHTML={{ __html: company.description }} 
+              />
             </div>
-
-            <h3 className="text-[#121212] text-[18px] font-[700] mt-[24px]">
-              Văn hóa và Đãi ngộ
-            </h3>
-            <ul className="mt-[12px] list-disc list-inside text-[#121212] text-[15px] font-[400] leading-[1.8] flex flex-col gap-[8px]">
-              <li>
-                Môi trường quốc tế phẳng, lộ trình thăng tiến rõ ràng dành cho
-                kỹ sư chuyên môn.
-              </li>
-              <li>
-                Laptop cao cấp được cấp phát (MacBook Pro / Windows tuỳ chọn)
-                cùng phụ kiện màn hình rời.
-              </li>
-              <li>Chế độ bảo hiểm sức khỏe cá nhân cao cấp.</li>
-              <li>
-                Tham gia các khóa đào tạo Công Nghệ, lớp học tiếng Hàn, tiếng
-                Anh miễn phí trong giờ làm việc.
-              </li>
-              <li>Team building, du lịch hàng năm và Happy Hour mỗi tuần.</li>
-            </ul>
-          </div>
+          )}
           {/* End of Section 7 */}
 
           {/* Section 7.5: Location */}
-          <div className="border border-[1px] border-[#D9DCDB] rounded-[8px] p-[20px] )] bg-white">
-            <h2 className="text-[#121212] text-[22px] font-[700] pb-[16px] border-b border-dashed border-[#D9DCDB]">
-              Địa điểm
-            </h2>
-            <div className="mt-[20px] flex flex-col md:flex-row gap-[20px]">
-              {/* Left Column */}
-              <div className="w-full md:w-[35%]">
-                <h3 className="text-[#121212] text-[18px] font-[700]">
-                  TP Hồ Chí Minh
-                </h3>
-                <div className="mt-[16px] border border-[1px] border-red-500 rounded-[4px] p-[16px] flex gap-[8px] items-start">
-                  <IoLocationOutline className="text-red-500 text-[20px] shrink-0 mt-[2px]" />
-                  <span className="text-[#121212] text-[14px] font-[500] leading-[1.5]">
-                    1295 1295B, Nguyễn Thị Định, Phường Cát Lái, District 2, Ho
-                    Chi Minh
-                  </span>
+          {company.address && (
+            <div className="border border-[1px] border-[#D9DCDB] rounded-[8px] p-[20px] bg-white">
+              <h2 className="text-[#121212] text-[22px] font-[700] pb-[16px] border-b border-dashed border-[#D9DCDB]">
+                Địa điểm
+              </h2>
+              <div className="mt-[20px] flex flex-col md:flex-row gap-[20px]">
+                {/* Left Column */}
+                <div className="w-full md:w-[35%]">
+                  <h3 className="text-[#121212] text-[18px] font-[700]">
+                    Trụ sở chính
+                  </h3>
+                  <div className="mt-[16px] border border-[1px] border-red-500 rounded-[4px] p-[16px] flex gap-[8px] items-start">
+                    <IoLocationOutline className="text-red-500 text-[20px] shrink-0 mt-[2px]" />
+                    <span className="text-[#121212] text-[14px] font-[500] leading-[1.5]">
+                      {company.address}
+                    </span>
+                  </div>
+                </div>
+                {/* Right Column (Map) */}
+                <div className="w-full md:w-[65%] h-[250px] md:h-auto min-h-[250px] rounded-[8px] overflow-hidden border border-[1px] border-[#D9DCDB]">
+                  <iframe
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(company.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  ></iframe>
                 </div>
               </div>
-              {/* Right Column (Map) */}
-              <div className="w-full md:w-[65%] h-[250px] md:h-auto min-h-[250px] rounded-[8px] overflow-hidden border border-[1px] border-[#D9DCDB]">
-                <iframe
-                  src="https://maps.google.com/maps?q=1295%20Nguyễn%20Thị%20Định,%20District%202,%20Ho%20Chi%20Minh&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-full"
-                ></iframe>
-              </div>
             </div>
-          </div>
+          )}
           {/* End of Section 7.5 */}
         </div>
 
@@ -189,209 +232,16 @@ const CompanyDetail = () => {
         <div className="w-full lg:w-[32%]">
           {/* Section 8 */}
           <h2 className="text-[#121212] text-[20px] lg:text-[24px] font-[700]">
-            Công ty có 6 việc làm
+            Công ty có {totalJobs} việc làm
           </h2>
           <div className="grid grid-cols-1 gap-[20px] mt-[20px]">
-            <Link href={"/job/detail/123"} className="">
-              <div className="bg-[#F0F4F8] px-[12px] py-[8px] rounded-[8px] duration-300 )] h-full flex flex-col justify-between">
-                <div>
-                  <div className="text-[14px] text-[#A6AEC5] font-[400]">
-                    Đăng 17 giờ trước
-                  </div>
-                  <div className="mt-[12px] text-[18px] font-[700]">
-                    Lead Front-end Developer (HTML, CSS, JavaScript)
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px]">
-                    <div className="w-[48px] h-[48px] border border-[1px] border-[#DEDEDE] rounded-[4px] )]">
-                      <img
-                        src={"/assets/images/hsc.png"}
-                        alt="hsc"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <span>HSC</span>
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px] text-[#0ab305] pb-[12px] border-b border-dashed border-[#DEDEDE]">
-                    <AiOutlineDollarCircle className="text-[20px] font-[500]" />
-                    <span className="font-[500] text-[16px]">
-                      3,000 - 3,500 USD
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-[12px] flex flex-col gap-[4px]">
-                  <div className="flex items-center gap-[8px]">
-                    <PiSuitcase />
-                    <Link href={"/"}>Lập trình viên Frontend</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <GrPerformance />
-                    <Link href={"/"}>Làm việc tại văn phòng</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <IoLocationOutline />
-                    <Link href={"/"}>Hà Nội</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px] mt-[12px]">
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      UI-UX
-                    </div>
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      ReactJS
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-            <Link href={"/"} className="">
-              <div className="bg-[#F0F4F8] px-[12px] py-[8px] rounded-[8px] duration-300 )] h-full flex flex-col justify-between">
-                <div>
-                  <div className="text-[14px] text-[#A6AEC5] font-[400]">
-                    Đăng 2 ngày trước
-                  </div>
-                  <div className="mt-[12px] text-[18px] font-[700]">
-                    Senior Backend Engineer (Node.js, PostgreSQL)
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px]">
-                    <div className="w-[48px] h-[48px] border border-[1px] border-[#DEDEDE] rounded-[4px] )]">
-                      <img
-                        src={"/assets/images/rakuten.png"}
-                        alt="rakuten"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <span>Rakuten</span>
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px] text-[#0ab305] pb-[12px] border-b border-dashed border-[#DEDEDE]">
-                    <AiOutlineDollarCircle className="text-[20px] font-[500]" />
-                    <span className="font-[500] text-[16px]">
-                      2,500 - 4,000 USD
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-[12px] flex flex-col gap-[4px]">
-                  <div className="flex items-center gap-[8px]">
-                    <PiSuitcase />
-                    <Link href={"/"}>Lập trình viên Backend</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <GrPerformance />
-                    <Link href={"/"}>Làm việc từ xa</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <IoLocationOutline />
-                    <Link href={"/"}>Hồ Chí Minh</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px] mt-[12px]">
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      Node.js
-                    </div>
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      PostgreSQL
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-            <Link href={"/"} className="">
-              <div className="bg-[#F0F4F8] px-[12px] py-[8px] rounded-[8px] duration-300 )] h-full flex flex-col justify-between">
-                <div>
-                  <div className="text-[14px] text-[#A6AEC5] font-[400]">
-                    Đăng 5 ngày trước
-                  </div>
-                  <div className="mt-[12px] text-[18px] font-[700]">
-                    Full-stack Developer (React, TypeScript, AWS)
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px]">
-                    <div className="w-[48px] h-[48px] border border-[1px] border-[#DEDEDE] rounded-[4px] )]">
-                      <img
-                        src={"/assets/images/naver.png"}
-                        alt="naver"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <span>Naver Vietnam</span>
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px] text-[#0ab305] pb-[12px] border-b border-dashed border-[#DEDEDE]">
-                    <AiOutlineDollarCircle className="text-[20px] font-[500]" />
-                    <span className="font-[500] text-[16px]">
-                      1,800 - 2,500 USD
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-[12px] flex flex-col gap-[4px]">
-                  <div className="flex items-center gap-[8px]">
-                    <PiSuitcase />
-                    <Link href={"/"}>Lập trình viên Full-stack</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <GrPerformance />
-                    <Link href={"/"}>Hybrid</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <IoLocationOutline />
-                    <Link href={"/"}>Đà Nẵng</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px] mt-[12px]">
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      TypeScript
-                    </div>
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      AWS
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-            <Link href={""} className="">
-              <div className="bg-[#F0F4F8] px-[12px] py-[8px] rounded-[8px] duration-300 )] h-full flex flex-col justify-between">
-                <div>
-                  <div className="text-[14px] text-[#A6AEC5] font-[400]">
-                    Đăng 1 tuần trước
-                  </div>
-                  <div className="mt-[12px] text-[18px] font-[700]">
-                    Mobile Developer (React Native, iOS, Android)
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px]">
-                    <div className="w-[48px] h-[48px] border border-[1px] border-[#DEDEDE] rounded-[4px] )]">
-                      <img
-                        src={"/assets/images/nab.png"}
-                        alt="nab"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <span>NAB Innovation Centre</span>
-                  </div>
-                  <div className="flex items-center gap-[12px] mt-[12px] text-[#0ab305] pb-[12px] border-b border-dashed border-[#DEDEDE]">
-                    <AiOutlineDollarCircle className="text-[20px] font-[500]" />
-                    <span className="font-[500] text-[16px]">
-                      2,000 - 3,000 USD
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-[12px] flex flex-col gap-[4px]">
-                  <div className="flex items-center gap-[8px]">
-                    <PiSuitcase />
-                    <Link href={"/"}>Lập trình viên Mobile</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <GrPerformance />
-                    <Link href={"/"}>Làm việc tại văn phòng</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    <IoLocationOutline />
-                    <Link href={"/"}>Hồ Chí Minh</Link>
-                  </div>
-                  <div className="flex items-center gap-[8px] mt-[12px]">
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      React Native
-                    </div>
-                    <div className="flex items-center justify-center border border-[#DEDEDE] rounded-[20px] px-[10px] py-[4px] hover:border-black">
-                      Mobile
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+            {jobs.length > 0 ? (
+              jobs.map((job) => (
+                <CardJobItem key={job._id} item={job} />
+              ))
+            ) : (
+              <div className="text-gray-500 italic py-4">Chưa có công việc nào.</div>
+            )}
           </div>
           {/* End of Section 8 */}
         </div>

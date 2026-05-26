@@ -22,7 +22,16 @@ export const useAuth = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/check`, {
       credentials: "include",
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        // Nếu response rỗng hoặc không phải JSON (ví dụ 204 No Content) thì xử lý an toàn
+        const text = await res.text();
+        if (!text) return { code: "error" };
+        try {
+          return JSON.parse(text);
+        } catch {
+          return { code: "error" };
+        }
+      })
       .then((data) => {
         if (data.code === "error") {
           setIsLogin(false);

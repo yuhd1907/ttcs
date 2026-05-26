@@ -83,6 +83,7 @@ export interface InfoUser {
   position?: string;
   gender?: string;
   birth_date?: string;
+  city?: string;
   address?: string;
   wantToWorkIn?: string;
   personal_link?: string;

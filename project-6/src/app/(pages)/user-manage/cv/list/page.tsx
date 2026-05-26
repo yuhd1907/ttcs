@@ -49,9 +49,10 @@ const UserManageCVList = () => {
       return;
     }
 
-    // Gọi public API tra cứu theo email (không cần token)
+    // Gọi API tra cứu theo email (cần gửi cookie JWT)
     fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/public/applications/by-email?email=${encodeURIComponent(userEmail)}`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/public/applications/by-email?email=${encodeURIComponent(userEmail)}`,
+      { credentials: 'include' }
     )
       .then((res) => res.json())
       .then((data) => {
@@ -74,7 +75,7 @@ const UserManageCVList = () => {
       if (!result.isConfirmed) return;
       fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/public/applications/${appId}?email=${encodeURIComponent(email)}`,
-        { method: "DELETE" }
+        { method: "DELETE", credentials: 'include' }
       )
         .then((res) => res.json())
         .then((data) => {

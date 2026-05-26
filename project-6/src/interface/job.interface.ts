@@ -10,7 +10,7 @@ export interface Job {
   images: string[];
   minSalary: number;
   maxSalary: number;
-  companyID: string;
+  companyId: string;
   companyName: string;
   companyAddress: string;
   companyLogo: string;
