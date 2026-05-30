@@ -64,6 +64,14 @@ export const MenuUser = ({ infoUser }: { infoUser: InfoUser }) => {
         <li
           className={
             "px-[16px] py-[10px] flex items-center" +
+            " justify-between hover:bg-[#000096] relative group/sub-2"
+          }
+        >
+          <Link href={"/user-manage/skill-register"}>Đăng ký nhận email</Link>
+        </li>
+        <li
+          className={
+            "px-[16px] py-[10px] flex items-center" +
             " justify-between hover:bg-[#000096] relative cursor-pointer" +
             " group/sub-2"
           }

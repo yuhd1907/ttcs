@@ -72,7 +72,7 @@ case $choice in
         FRONTEND_PID=$!
 
         print_success "Both services are running!"
-        print_step "Backend: http://localhost:8080"
+        print_step "Backend: http://localhost:4000"
         print_step "Frontend: http://localhost:3000"
 
         wait

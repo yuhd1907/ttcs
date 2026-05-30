@@ -40,6 +40,7 @@ const ApplicationForm = () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/apply`, {
         method: "POST",
+        credentials: "include",
         body: formData,
       });
       const result = await res.json();

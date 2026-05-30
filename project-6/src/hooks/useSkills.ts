@@ -7,7 +7,9 @@ export const useSkills = () => {
   useEffect(() => {
     const fetchSkills = async () => {
       const backendUrl = process.env.NEXT_PUBLIC_API_URL;
-      const response = await fetch(`${backendUrl}/api/public/master-data/skills`);
+      const response = await fetch(`${backendUrl}/api/public/master-data/skills`, {
+        credentials: "include",
+      });
       const data = await response.json();
       setSkillList(data);
     };

@@ -23,7 +23,9 @@ export const SearchBar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/list`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/list`, {
+      credentials: "include",
+    })
       .then((res) => {
         if (!res.ok) throw new Error("API not found or error");
         return res.json();

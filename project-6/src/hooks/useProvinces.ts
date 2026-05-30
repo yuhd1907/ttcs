@@ -11,8 +11,10 @@ export const useProvinces = () => {
     const fetchProvinces = async () => {
       try {
         // Thử backend API đầu tiên
-        const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
-        const response = await fetch(`${backendUrl}/api/public/master-data/cities`);
+        const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+        const response = await fetch(`${backendUrl}/api/public/master-data/cities`, {
+          credentials: "include",
+        });
 
         if (response.ok) {
           const data = await response.json();

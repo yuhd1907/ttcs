@@ -23,6 +23,7 @@ export const RegisterForm = () => {
   const onRegister = (data: CompanyRegisterFormValues) => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/register`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

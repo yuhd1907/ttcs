@@ -2,15 +2,16 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+  port: 4000
 spring:
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 100MB
   datasource:
-    url: jdbc:postgresql://localhost:5432/ttcs
+    url: jdbc:postgresql://localhost:5432/cv
     username: postgres
-    password: 1907
+    password: Namdeptraivcl129@@.
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -50,8 +51,3 @@ cloudinary:
   cloud-name: duwsd0fls
   api-key: 557828165226383
   api-secret: QUNLJcGAQ6MwMbPdpnNmX5BUgoA
-
-gemini:
-  api:
-    key: AIzaSyDABxqunGZobrt5YfbfaNWaii2yDBxYFZQ
-    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent

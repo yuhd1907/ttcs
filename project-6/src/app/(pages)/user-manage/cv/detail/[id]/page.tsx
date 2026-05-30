@@ -33,7 +33,9 @@ const UserManageCVDetail = () => {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/applications/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/applications/${id}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => { setApp(data); setLoading(false); })
       .catch(() => setLoading(false));

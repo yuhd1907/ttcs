@@ -21,7 +21,7 @@ export default function BasicInfoModal({
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
-    wantToWorkIn: "",
+    city: "",
   });
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function BasicInfoModal({
       setFormData({
         fullName: infoUser.username || "",
         phone: infoUser.phone || "",
-        wantToWorkIn: infoUser.wantToWorkIn || "",
+        city: infoUser.city || "",
       });
     }
   }, [infoUser]);
@@ -44,12 +44,12 @@ export default function BasicInfoModal({
 
   const handleSave = async () => {
     console.log("Saving Basic Info:", formData);
-    
+
     try {
       const res = await fetch("http://localhost:5000/user", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ wantToWorkIn: formData.wantToWorkIn }),
+        body: JSON.stringify(formData),
       });
       if (res.ok) {
         console.log("Đã lưu thành công vào database.json");
@@ -122,8 +122,8 @@ export default function BasicInfoModal({
                 Nơi làm việc mong muốn <span className="text-red-500">*</span>
               </label>
               <select
-                name="wantToWorkIn"
-                value={formData.wantToWorkIn}
+                name="city"
+                value={formData.city}
                 onChange={handleChange}
                 className="w-full outline-none text-[15px] text-gray-900 bg-transparent cursor-pointer appearance-none pr-6"
               >

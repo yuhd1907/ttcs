@@ -21,7 +21,9 @@ const CompanyDetail = () => {
     if (id) {
       setLoading(true);
       setErrorMsg(null);
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/company/${id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/company/${id}`, {
+        credentials: "include",
+      })
         .then(async (res) => {
           if (!res.ok) {
             let msg = "Failed to fetch";
@@ -44,7 +46,9 @@ const CompanyDetail = () => {
           setLoading(false);
         });
 
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/company/${id}/jobs?size=10`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/company/${id}/jobs?size=10`, {
+        credentials: "include",
+      })
         .then((res) => {
           if (!res.ok) throw new Error("Failed to fetch jobs");
           return res.json();
@@ -182,9 +186,9 @@ const CompanyDetail = () => {
               <h2 className="text-[#121212] text-[22px] font-[700] pb-[16px] border-b border-dashed border-[#D9DCDB]">
                 Giới thiệu công ty
               </h2>
-              <div 
-                className="mt-[20px] text-[#121212] text-[15px] font-[400] leading-[1.6] job-description"
-                dangerouslySetInnerHTML={{ __html: company.description }} 
+              <div
+                className="mt-[20px] prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: company.description }}
               />
             </div>
           )}

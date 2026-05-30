@@ -42,7 +42,7 @@ if "%choice%"=="1" (
     start cmd /k "cd project-6-backend && mvn spring-boot:run"
     timeout /t 3 /nobreak
     start cmd /k "cd project-6 && npm run dev"
-    echo Backend: http://localhost:8080
+    echo Backend: http://localhost:4000
     echo Frontend: http://localhost:3000
 ) else if "%choice%"=="4" (
     echo Setting up Backend...

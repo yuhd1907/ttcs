@@ -49,12 +49,16 @@ const jobContainer = () => {
   useEffect(() => {
     // Giữ nguyên logic gọi API của job bằng id từ params và env variable
     if (id) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}`, {
+        credentials: "include",
+      })
         .then((res) => res.json())
         .then((data) => setJob(data));
 
       // Gọi API công việc tương tự từ backend thật
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}/similar`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${id}/similar`, {
+        credentials: "include",
+      })
         .then((res) => res.json())
         .then((data) => setSameJobs(Array.isArray(data) ? data : []));
     }
@@ -197,7 +201,7 @@ const jobContainer = () => {
               <div className="mt-[20px] border border-[1px] border-[#DEDEDE] rounded-[8px] p-[20px] )] flex flex-col gap-[20px]">
                 {/* Section 1 */}
                 <div
-                  className="job-description"
+                  className="prose max-w-none"
                   dangerouslySetInnerHTML={{ __html: job?.description || "" }}
                 />
               </div>

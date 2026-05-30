@@ -9,7 +9,9 @@ export const useJobFields = () => {
     const fetchJobFields = async () => {
       try {
         const backendUrl = process.env.NEXT_PUBLIC_API_URL;
-        const response = await fetch(`${backendUrl}/api/public/master-data/fields`);
+        const response = await fetch(`${backendUrl}/api/public/master-data/fields`, {
+          credentials: "include",
+        });
         if (response.ok) {
           const data = await response.json();
           setJobFields(data);

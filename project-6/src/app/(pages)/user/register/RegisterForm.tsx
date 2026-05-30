@@ -24,6 +24,7 @@ export const RegisterForm = () => {
     console.log(data);
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/register`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

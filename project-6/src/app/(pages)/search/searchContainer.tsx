@@ -41,7 +41,9 @@ export const SearchContainer = () => {
     if (salaryMax) params.set("salaryMax", salaryMax);
     if (jobField) params.set("jobField", jobField);
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/search?${params.toString()}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/search?${params.toString()}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => setJobList(data.jobList));
   }, [skill, province, keyword, specialization, companyName, level, workType, salaryMin, salaryMax, jobField]);
