@@ -1,25 +1,43 @@
 package com.project6.controller;
 
 import com.project6.dto.ApiResponse;
-import com.project6.dto.CompanyInfoDto;
 import com.project6.dto.JobResponseDTO;
+import com.project6.entity.Company;
+import com.project6.repository.CompanyRepository;
 import com.project6.service.CompanyProfileService;
 import com.project6.service.JobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/public/company")
 @RequiredArgsConstructor
 public class PublicCompanyController {
-    
+
     private final CompanyProfileService companyProfileService;
     private final JobService jobService;
+    private final CompanyRepository companyRepository;
+
+    /** GET /api/public/company/list — danh sách tất cả công ty (id + tên) cho dropdown */
+    @GetMapping("/list")
+    public ResponseEntity<Object> listCompanies() {
+        List<Map<String, Object>> result = companyRepository.findAll().stream()
+                .sorted(Comparator.comparing(Company::getCompanyName))
+                .map(c -> {
+                    Map<String, Object> m = new LinkedHashMap<>();
+                    m.put("id", c.getId());
+                    m.put("name", c.getCompanyName());
+                    m.put("avatar", c.getAvatar());
+                    return m;
+                })
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(result);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getCompanyDetail(@PathVariable String id) {

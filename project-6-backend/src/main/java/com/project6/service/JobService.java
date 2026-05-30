@@ -14,6 +14,7 @@ import com.project6.repository.JobFieldRepository;
 import com.project6.entity.JobField;
 import com.project6.entity.Specialization;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +39,7 @@ public class JobService {
     private final SpecializationRepository specializationRepository;
     private final JobFieldRepository jobFieldRepository;
     private final FileStorageService fileStorageService;
+    private final ApplicationContext applicationContext;
 
     private Company getCurrentCompany() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -158,7 +160,16 @@ public class JobService {
             jobPost.setImages(String.join(",", imageUrls));
         }
 
-        jobPostRepository.save(jobPost);
+        JobPost savedJob = jobPostRepository.save(jobPost);
+
+        // Gửi email thông báo ngay cho user đã đăng ký skill/công ty này
+        // Dùng ApplicationContext để tránh circular dependency
+        try {
+            JobAlertService alertService = applicationContext.getBean(JobAlertService.class);
+            alertService.notifyNewJob(savedJob);
+        } catch (Exception e) {
+            // Không để lỗi email ảnh hưởng đến việc tạo job
+        }
     }
 
     @Transactional
