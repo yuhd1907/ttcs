@@ -16,6 +16,7 @@ public class UserProfileService {
 
     private final UserRepository userRepository;
     private final FileStorageService fileStorageService;
+    private final CvScreeningService cvScreeningService;
 
     public UserInfoDto updateProfile(UserProfileRequest request) {
         String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -56,6 +57,13 @@ public class UserProfileService {
         if (request.getCv() != null && !request.getCv().isEmpty()) {
             String cvUrl = fileStorageService.storeFile(request.getCv());
             user.setCvUrl(cvUrl);
+            // Đặt trạng thái PENDING và trigger xét duyệt bất đồng bộ
+            user.setCvStatus("PENDING");
+            user.setCvInvalidReason(null);
+            user.setCvLevel(null);
+            userRepository.save(user);
+            cvScreeningService.screenCvAsync(user.getId(), cvUrl);
+            return UserInfoDto.from(user);
         }
 
         User updatedUser = userRepository.save(user);
@@ -208,13 +216,20 @@ public class UserProfileService {
     }
 
     /**
-     * Lưu URL PDF CV (từ Cloudinary) vào profile người dùng hiện tại
+     * Lưu URL PDF CV (từ Cloudinary) vào profile người dùng hiện tại.
+     * Đồng thời trigger xét duyệt CV bất đồng bộ bằng Claude API.
      */
     public void saveCvUrl(String pdfUrl) {
         String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(currentEmail)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng đang đăng nhập."));
         user.setCvUrl(pdfUrl);
+        // Đặt trạng thái PENDING để frontend hiển thị "Đang xét duyệt"
+        user.setCvStatus("PENDING");
+        user.setCvInvalidReason(null);
+        user.setCvLevel(null);
         userRepository.save(user);
+        // Kích hoạt xét duyệt bất đồng bộ
+        cvScreeningService.screenCvAsync(user.getId(), pdfUrl);
     }
 }

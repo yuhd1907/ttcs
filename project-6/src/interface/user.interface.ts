@@ -88,6 +88,9 @@ export interface InfoUser {
   wantToWorkIn?: string;
   personal_link?: string;
   cvUrl?: string;
+  cvStatus?: "NONE" | "PENDING" | "VALID" | "INVALID";
+  cvInvalidReason?: string;
+  cvLevel?: "FRESHER" | "ABOVE_FRESHER";
   intro?: string;
   experience?: string;
   level?: string;
