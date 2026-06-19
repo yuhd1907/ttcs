@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.Base64;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserAuthService userAuthService;
@@ -39,6 +41,7 @@ public class UserController {
             var userInfo = userAuthService.login(req.getEmail(), req.getPassword(), response);
             return ResponseEntity.ok(ApiResponse.success("Đăng nhập thành công!", userInfo));
         } catch (RuntimeException e) {
+            log.error("Lỗi đăng nhập user: ", e);
             return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
         }
     }
@@ -81,6 +84,7 @@ public class UserController {
             UserInfoDto updatedUser = userProfileService.updateProfile(request);
             return ResponseEntity.ok(ApiResponse.success("Cập nhật thông tin thành công!", updatedUser));
         } catch (RuntimeException e) {
+            log.error("Lỗi cập nhật profile user: ", e);
             return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
         }
     }
@@ -91,6 +95,7 @@ public class UserController {
             userProfileService.updateCvProfile(request);
             return ResponseEntity.ok(ApiResponse.success("Cập nhật CV thành công!"));
         } catch (RuntimeException e) {
+            log.error("Lỗi cập nhật CV profile: ", e);
             return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
         }
     }
@@ -119,6 +124,7 @@ public class UserController {
 
             return ResponseEntity.ok(ApiResponse.success("Lưu CV thành công!", pdfUrl));
         } catch (Exception e) {
+            log.error("Lỗi lưu file CV PDF: ", e);
             return ResponseEntity.badRequest().body(ApiResponse.error("Lỗi khi lưu CV: " + e.getMessage()));
         }
     }

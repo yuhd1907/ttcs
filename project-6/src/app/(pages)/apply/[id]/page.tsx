@@ -4,23 +4,58 @@ import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ApplyFormData, ApplySchema } from "@/schemas/apply.schema";
+import { useAuth } from "@/hooks/useAuth";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const ApplicationForm = () => {
   const params = useParams();
   const router = useRouter();
   const jobID = params.id;
+  const { infoUser } = useAuth();
+  const [jobTitle, setJobTitle] = useState<string>("");
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     watch,
+    setValue,
   } = useForm<ApplyFormData>({
     resolver: zodResolver(ApplySchema),
   });
 
+  useEffect(() => {
+    if (jobID) {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/public/job/${jobID}`, {
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.name) {
+            setJobTitle(data.name);
+          }
+        })
+        .catch((err) => console.error("Error fetching job details:", err));
+    }
+  }, [jobID]);
+
+  useEffect(() => {
+    if (infoUser) {
+      if (infoUser.username) {
+        setValue("fullName", infoUser.username);
+      }
+      if (infoUser.email) {
+        setValue("email", infoUser.email);
+      }
+      if (infoUser.phone) {
+        setValue("phone", infoUser.phone);
+      }
+    }
+  }, [infoUser, setValue]);
+
   const selectedFile = watch("cv");
+  const useProfileCv = watch("useProfileCv");
 
   const onSubmit = async (data: ApplyFormData) => {
     const formData = new FormData();
@@ -33,7 +68,7 @@ const ApplicationForm = () => {
       formData.append("coverLetter", data.coverLetter);
     }
 
-    if (data.cv && data.cv[0]) {
+    if (!data.useProfileCv && data.cv && data.cv[0]) {
       formData.append("cv", data.cv[0]);
     }
 
@@ -103,7 +138,7 @@ const ApplicationForm = () => {
       <div className="max-w-3xl mx-auto bg-white rounded-xl overflow-hidden shadow-sm">
         <div className="p-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-4">
-            Ứng tuyển vị trí Kỹ sư Phần mềm
+            Ứng tuyển vị trí {jobTitle}
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -172,61 +207,78 @@ const ApplicationForm = () => {
               </div>
             </div>
 
-            {/* Upload CV */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Tải lên CV (PDF) <span className="text-red-500">*</span>
-              </label>
-              <div
-                className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 ${errors.cv ? "border-red-500 bg-red-50" : "border-gray-300 bg-gray-50"
-                  } border-dashed rounded-lg hover:border-blue-500 transition-colors cursor-pointer`}
-              >
-                <div className="space-y-1 text-center">
-                  <svg
-                    className={`mx-auto h-12 w-12 ${errors.cv ? "text-red-400" : "text-gray-400"
-                      }`}
-                    stroke="currentColor"
-                    fill="none"
-                    viewBox="0 0 48 48"
-                  >
-                    <path
-                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <div className="flex text-sm text-gray-600 justify-center">
-                    <label
-                      htmlFor="cv-upload"
-                      className="relative cursor-pointer bg-transparent rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none px-1"
-                    >
-                      <span>
-                        {selectedFile && selectedFile[0]
-                          ? selectedFile[0].name
-                          : "Tải file lên"}
-                      </span>
-                      <input
-                        id="cv-upload"
-                        type="file"
-                        accept=".pdf"
-                        {...register("cv")}
-                        className="sr-only"
-                      />
-                    </label>
-                    {!selectedFile?.[0] && (
-                      <p className="pl-1">hoặc kéo thả vào đây</p>
-                    )}
-                  </div>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Chỉ chấp nhận file PDF lên đến 5MB
-                  </p>
-                </div>
+            {/* Sử dụng CV trong hồ sơ nếu hợp lệ */}
+            {infoUser?.cvStatus === "VALID" && infoUser?.cvUrl && (
+              <div className="flex items-center space-x-3 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <input
+                  type="checkbox"
+                  id="useProfileCv"
+                  {...register("useProfileCv")}
+                  className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
+                />
+                <label htmlFor="useProfileCv" className="text-sm font-medium text-blue-800 cursor-pointer select-none">
+                  Sử dụng CV chính trong hồ sơ cá nhân của bạn (Trạng thái: Hợp lệ)
+                </label>
               </div>
-              {errors.cv && (
-                <p className="mt-1 text-sm text-red-500">{errors.cv.message as string}</p>
-              )}
-            </div>
+            )}
+
+            {/* Upload CV */}
+            {!useProfileCv && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Tải lên CV (PDF) <span className="text-red-500">*</span>
+                </label>
+                <div
+                  className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 ${errors.cv ? "border-red-500 bg-red-50" : "border-gray-300 bg-gray-50"
+                    } border-dashed rounded-lg hover:border-blue-500 transition-colors cursor-pointer`}
+                >
+                  <div className="space-y-1 text-center">
+                    <svg
+                      className={`mx-auto h-12 w-12 ${errors.cv ? "text-red-400" : "text-gray-400"
+                        }`}
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 48 48"
+                    >
+                      <path
+                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <div className="flex text-sm text-gray-600 justify-center">
+                      <label
+                        htmlFor="cv-upload"
+                        className="relative cursor-pointer bg-transparent rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none px-1"
+                      >
+                        <span>
+                          {selectedFile && selectedFile[0]
+                            ? selectedFile[0].name
+                            : "Tải file lên"}
+                        </span>
+                        <input
+                          id="cv-upload"
+                          type="file"
+                          accept=".pdf"
+                          {...register("cv")}
+                          className="sr-only"
+                        />
+                      </label>
+                      {!selectedFile?.[0] && (
+                        <p className="pl-1">hoặc kéo thả vào đây</p>
+                      )}
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Chỉ chấp nhận file PDF lên đến 5MB
+                    </p>
+                  </div>
+                </div>
+                {errors.cv && (
+                  <p className="mt-1 text-sm text-red-500">{errors.cv.message as string}</p>
+                )}
+              </div>
+            )}
 
             {/* Cover Letter */}
             <div>

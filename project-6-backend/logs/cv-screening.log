@@ -1,0 +1,794 @@
+2026-06-19 09:16:18.737 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.18 with PID 11332 (C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend\target\classes started by Dell in C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend)
+2026-06-19 09:16:18.739 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 09:16:19.746 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 09:16:19.853 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 87 ms. Found 11 JPA repository interfaces.
+2026-06-19 09:16:20.637 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 09:16:20.670 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 09:16:20.672 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 09:16:20.790 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 09:16:20.791 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1992 ms
+2026-06-19 09:16:21.055 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 09:16:21.216 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 09:16:21.278 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 09:16:21.605 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 09:16:21.645 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 09:16:22.781 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5ba184fc
+2026-06-19 09:16:22.787 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 09:16:22.943 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 09:16:24.895 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 09:16:25.482 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2026-06-19 09:16:25.482 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "ukt1evavtger3j3733ebb77byyv" of relation "job_alert_company_follows" does not exist, skipping
+2026-06-19 09:16:25.489 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2026-06-19 09:16:25.490 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk9pu0y8fdeom1kc5sahu6ep1mp" of relation "job_alert_subscriptions" does not exist, skipping
+2026-06-19 09:16:25.943 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 09:16:26.567 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 09:16:27.416 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 09:16:27.416 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 09:16:27.417 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 09:16:27.418 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3154 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 09:16:27.419 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 09:16:27.419 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 09:16:27.506 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 09:16:27.539 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: c356f943-6588-4652-9f88-ec1c13d0fa8d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 09:16:28.022 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 09:16:28.242 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 4000 (http) with context path ''
+2026-06-19 09:16:28.255 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 10.365 seconds (process running for 12.54)
+2026-06-19 09:16:28.373 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 09:17:18.823 [http-nio-4000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 09:17:18.823 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-19 09:17:18.823 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-06-19 09:18:28.383 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:18:28.383 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | time=09:18:28.383
+2026-06-19 09:18:28.398 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781835505/353fdfb3-414d-4e76…
+2026-06-19 09:18:28.399 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 09:18:28.399 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 09:18:29.665 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 1266ms
+2026-06-19 09:18:29.665 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] ✅ Tải PDF thành công | kích thước=733KB | thời gian=1266ms
+2026-06-19 09:18:29.665 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 09:18:47.847 [task-1] WARN  o.a.p.p.font.FileSystemFontProvider - 345 new fonts found, font cache will be re-built
+2026-06-19 09:18:47.848 [task-1] WARN  o.a.p.p.font.FileSystemFontProvider - Building on-disk font cache, this may take a while
+2026-06-19 09:19:04.781 [task-1] WARN  o.a.p.p.font.FileSystemFontProvider - Finished building on-disk font cache, found 382 fonts
+2026-06-19 09:19:04.881 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 1 trang | 43 ký tự trích xuất được
+2026-06-19 09:19:04.881 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][4e691faa] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=43 | 35216ms
+2026-06-19 09:19:04.881 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] → Fallback: đọc profile từ database...
+2026-06-19 09:19:04.881 [task-1] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=4e691faa-3443-4fb9-823a-df90bb39c426
+2026-06-19 09:19:04.914 [task-1] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 60 ký tự | userId=4e691faa-3443-4fb9-823a-df90bb39c426
+2026-06-19 09:19:04.914 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] ✅ Profile DB: 60 ký tự
+2026-06-19 09:19:04.914 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 09:19:04.914 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] Knowledge base size: 3154 ký tự | CV text size: 60 ký tự
+2026-06-19 09:19:04.914 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 09:19:04.914 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 09:19:04.914 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 09:19:05.314 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 09:19:05.314 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:19:05.314 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:19:05.330 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:19:05.331 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 09:19:05.331 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 09:19:05.331 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 09:19:05.515 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 09:19:05.515 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:19:05.515 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:19:05.515 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:19:05.515 [task-1] ERROR c.p.service.CvScreeningService - [FALLBACK][4e691faa] ❌ Tất cả 2 model đều thất bại
+2026-06-19 09:19:05.515 [task-1] WARN  c.p.service.CvScreeningService - [STEP-3][4e691faa] ⚠️  Gemini API thất bại hoàn toàn sau 601ms → kích hoạt Rule-Based fallback
+2026-06-19 09:19:05.515 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 09:19:05.515 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Rule check → hasContact=true | techSkills=0 | hasDegree=false | hasExpOrProj=false
+2026-06-19 09:19:05.515 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] → INVALID | CV chưa đạt yêu cầu: thiếu kỹ năng IT cụ thể (tìm thấy 0), thiếu bằng cấp hoặc kinh nghiệm/dự án IT
+2026-06-19 09:19:05.515 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Kết quả phân tích: valid=false | level=null | source=rule-based-fallback
+2026-06-19 09:19:05.515 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Lý do: CV chưa đạt yêu cầu: thiếu kỹ năng IT cụ thể (tìm thấy 0), thiếu bằng cấp hoặc kinh nghiệm/dự án IT
+2026-06-19 09:19:05.515 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=INVALID | cvLevel=null
+2026-06-19 09:19:05.581 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=INVALID
+2026-06-19 09:19:05.581 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:19:05.581 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=4e691faa | outcome=INVALID ❌ | tổng thời gian=37198ms
+2026-06-19 09:19:05.581 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 09:19:42.034 [task-2] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:19:42.044 [task-2] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | time=09:19:42.044
+2026-06-19 09:19:42.044 [task-2] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781835579/236268da-c62f-43a5…
+2026-06-19 09:19:42.044 [task-2] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 09:19:42.044 [task-2] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 09:19:42.566 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 522ms
+2026-06-19 09:19:42.566 [task-2] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] ✅ Tải PDF thành công | kích thước=33KB | thời gian=522ms
+2026-06-19 09:19:42.566 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 09:19:42.685 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 1356 ký tự trích xuất được
+2026-06-19 09:19:42.685 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] ✅ Trích xuất text thành công | 1356 ký tự | 119ms
+2026-06-19 09:19:42.685 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-2][4e691faa] Preview (500 ký tự đầu): Nguyen Hai Nam ↵ S I N H  V I Ê N ↵ 0705016997 ↵ hainamcoi123456789@gmail.com ↵ 07/12/2005 ↵ Hà Nội ↵ Giới thiệu Em là Nguyễn Hải Nam, sinh viên năm 3 chuyên ngành CNTT fsajdfklasjdflkjaslkdfjlkasdj ↵ ádfasdfasdfasdfsadf ↵ Học vấn Học Viện Báo Chí Và Tuyên Truyền ↵ 02/2025 - 03/2028 Cử nhân - gdfgdsfg ↵ fsdfsadfsadfsafd ↵ Học Viện Công Nghệ Bưu Chính Viễn Thông ↵ 09/2023 - HIỆN TẠI Cử nhân - Công nghệ thông tin ↵ fdsadfsadfsadfasdfasdfasdfasd ↵ Kỹ năng Kỹ năng chính ↵ Afnix (10 năm)  HTML5 (1 năm)  NodeJS (1 n
+2026-06-19 09:19:42.699 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 09:19:42.700 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] Knowledge base size: 3154 ký tự | CV text size: 1356 ký tự
+2026-06-19 09:19:42.700 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 09:19:42.700 [task-2] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 09:19:42.700 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 09:19:42.925 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 09:19:42.925 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:19:42.927 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:19:42.927 [task-2] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:19:42.927 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 09:19:42.927 [task-2] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 09:19:42.927 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 09:19:43.066 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 09:19:43.066 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:19:43.066 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:19:43.066 [task-2] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:19:43.066 [task-2] ERROR c.p.service.CvScreeningService - [FALLBACK][4e691faa] ❌ Tất cả 2 model đều thất bại
+2026-06-19 09:19:43.066 [task-2] WARN  c.p.service.CvScreeningService - [STEP-3][4e691faa] ⚠️  Gemini API thất bại hoàn toàn sau 366ms → kích hoạt Rule-Based fallback
+2026-06-19 09:19:43.066 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 09:19:43.066 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Rule check → hasContact=true | techSkills=2 | hasDegree=true | hasExpOrProj=true
+2026-06-19 09:19:43.066 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] → VALID | level=FRESHER
+2026-06-19 09:19:43.066 [task-2] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Kết quả phân tích: valid=true | level=FRESHER | source=rule-based-fallback
+2026-06-19 09:19:43.066 [task-2] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Lý do: CV đáp ứng các tiêu chí cơ bản
+2026-06-19 09:19:43.066 [task-2] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=VALID | cvLevel=FRESHER
+2026-06-19 09:19:43.083 [task-2] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=VALID
+2026-06-19 09:19:43.083 [task-2] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:19:43.083 [task-2] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=4e691faa | outcome=VALID ✅ | tổng thời gian=1049ms
+2026-06-19 09:19:43.083 [task-2] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 09:21:11.439 [task-3] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:21:11.439 [task-3] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | time=09:21:11.439
+2026-06-19 09:21:11.439 [task-3] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781835668/8100b8fd-19ac-48b1…
+2026-06-19 09:21:11.439 [task-3] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 09:21:11.439 [task-3] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 09:21:13.938 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 2499ms
+2026-06-19 09:21:13.938 [task-3] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] ✅ Tải PDF thành công | kích thước=2558KB | thời gian=2499ms
+2026-06-19 09:21:13.938 [task-3] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 09:21:14.358 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 27 trang | 23586 ký tự trích xuất được
+2026-06-19 09:21:14.373 [task-3] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] ✅ Trích xuất text thành công | 23586 ký tự | 435ms
+2026-06-19 09:21:14.374 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-2][4e691faa] Preview (500 ký tự đầu): HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG ↵  ↵ KHOA AN TOÀN THÔNG TIN ↵  ↵ BÁO CÁO ↵  ↵ NHẬP MÔN CÔNG NGHỆ PHẦN MỀM ↵  ↵ LỚP HỌC PHẦN: CT03 - INT1340 ↵  ↵ Đề tài 14: ↵  ↵ Hệ thống quản lí phân công và chấm công nhân viên part time ↵  ↵ Lớp: D23CTAT01-B ↵  ↵ Nhóm: 07 ↵  ↵ Họ và tên thành viên nhóm: ↵  ↵ Vũ Trường Hải – B23DCAT093 ↵  ↵ Nguyễn Văn Ngọc – B23DCAT216 ↵  ↵ Trần Thị Vân Ngọc – B23DCAT217 ↵  ↵ Trần Duy Phương – B23DCAT243 ↵  ↵ Module: Tính công tuần này ↵  ↵ Yêu cầu tuần: Báo cáo tổng hợp ↵  ↵ HỌC KỲ 2 NĂM HỌC 2025-2026 ↵  ↵ 2 ↵  ↵ MỤC LỤC ↵  ↵ MỤC LỤC ..........
+2026-06-19 09:21:14.375 [task-3] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 09:21:14.375 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] Knowledge base size: 3154 ký tự | CV text size: 23586 ký tự
+2026-06-19 09:21:14.375 [task-3] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 09:21:14.375 [task-3] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 09:21:14.375 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 09:21:14.559 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 09:21:14.559 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:21:14.559 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:21:14.559 [task-3] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:21:14.559 [task-3] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 09:21:14.559 [task-3] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 09:21:14.559 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 09:21:14.759 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 09:21:14.759 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:21:14.759 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:21:14.759 [task-3] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:21:14.759 [task-3] ERROR c.p.service.CvScreeningService - [FALLBACK][4e691faa] ❌ Tất cả 2 model đều thất bại
+2026-06-19 09:21:14.759 [task-3] WARN  c.p.service.CvScreeningService - [STEP-3][4e691faa] ⚠️  Gemini API thất bại hoàn toàn sau 384ms → kích hoạt Rule-Based fallback
+2026-06-19 09:21:14.759 [task-3] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 09:21:14.759 [task-3] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Rule check → hasContact=true | techSkills=0 | hasDegree=false | hasExpOrProj=false
+2026-06-19 09:21:14.774 [task-3] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] → INVALID | CV chưa đạt yêu cầu: thiếu kỹ năng IT cụ thể (tìm thấy 0), thiếu bằng cấp hoặc kinh nghiệm/dự án IT
+2026-06-19 09:21:14.775 [task-3] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Kết quả phân tích: valid=false | level=null | source=rule-based-fallback
+2026-06-19 09:21:14.775 [task-3] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Lý do: CV chưa đạt yêu cầu: thiếu kỹ năng IT cụ thể (tìm thấy 0), thiếu bằng cấp hoặc kinh nghiệm/dự án IT
+2026-06-19 09:21:14.775 [task-3] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=INVALID | cvLevel=null
+2026-06-19 09:21:14.790 [task-3] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=INVALID
+2026-06-19 09:21:14.791 [task-3] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:21:14.791 [task-3] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=4e691faa | outcome=INVALID ❌ | tổng thời gian=3352ms
+2026-06-19 09:21:14.791 [task-3] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 09:22:16.560 [task-4] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:22:16.561 [task-4] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | time=09:22:16.561
+2026-06-19 09:22:16.562 [task-4] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781835733/ba34f350-713c-435a…
+2026-06-19 09:22:16.565 [task-4] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 09:22:16.565 [task-4] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 09:22:17.140 [task-4] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 575ms
+2026-06-19 09:22:17.140 [task-4] INFO  c.p.service.CvScreeningService - [STEP-1][4e691faa] ✅ Tải PDF thành công | kích thước=33KB | thời gian=575ms
+2026-06-19 09:22:17.140 [task-4] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 09:22:17.172 [task-4] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 1356 ký tự trích xuất được
+2026-06-19 09:22:17.173 [task-4] INFO  c.p.service.CvScreeningService - [STEP-2][4e691faa] ✅ Trích xuất text thành công | 1356 ký tự | 33ms
+2026-06-19 09:22:17.174 [task-4] DEBUG c.p.service.CvScreeningService - [STEP-2][4e691faa] Preview (500 ký tự đầu): Nguyen Hai Nam ↵ S I N H  V I Ê N ↵ 0705016997 ↵ hainamcoi123456789@gmail.com ↵ 07/12/2005 ↵ Hà Nội ↵ Giới thiệu Em là Nguyễn Hải Nam, sinh viên năm 3 chuyên ngành CNTT fsajdfklasjdflkjaslkdfjlkasdj ↵ ádfasdfasdfasdfsadf ↵ Học vấn Học Viện Báo Chí Và Tuyên Truyền ↵ 02/2025 - 03/2028 Cử nhân - gdfgdsfg ↵ fsdfsadfsadfsafd ↵ Học Viện Công Nghệ Bưu Chính Viễn Thông ↵ 09/2023 - HIỆN TẠI Cử nhân - Công nghệ thông tin ↵ fdsadfsadfsadfasdfasdfasdfasd ↵ Kỹ năng Kỹ năng chính ↵ Afnix (10 năm)  HTML5 (1 năm)  NodeJS (1 n
+2026-06-19 09:22:17.174 [task-4] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 09:22:17.174 [task-4] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] Knowledge base size: 3154 ký tự | CV text size: 1356 ký tự
+2026-06-19 09:22:17.174 [task-4] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 09:22:17.174 [task-4] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 09:22:17.174 [task-4] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 09:22:17.357 [task-4] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 09:22:17.357 [task-4] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:22:17.357 [task-4] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:22:17.357 [task-4] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:22:17.357 [task-4] INFO  c.p.service.CvScreeningService - [STEP-3][4e691faa] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 09:22:17.357 [task-4] INFO  c.p.service.CvScreeningService - [RETRY][4e691faa] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 09:22:17.357 [task-4] DEBUG c.p.service.CvScreeningService - [STEP-3][4e691faa] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 09:22:17.542 [task-4] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 09:22:17.542 [task-4] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 09:22:17.542 [task-4] ERROR c.p.service.CvScreeningService - [ERROR][4e691faa] Gemini error detail: 
+2026-06-19 09:22:17.542 [task-4] WARN  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 09:22:17.542 [task-4] ERROR c.p.service.CvScreeningService - [FALLBACK][4e691faa] ❌ Tất cả 2 model đều thất bại
+2026-06-19 09:22:17.542 [task-4] WARN  c.p.service.CvScreeningService - [STEP-3][4e691faa] ⚠️  Gemini API thất bại hoàn toàn sau 368ms → kích hoạt Rule-Based fallback
+2026-06-19 09:22:17.542 [task-4] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 09:22:17.557 [task-4] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] Rule check → hasContact=true | techSkills=2 | hasDegree=true | hasExpOrProj=true
+2026-06-19 09:22:17.557 [task-4] INFO  c.p.service.CvScreeningService - [FALLBACK][4e691faa] → VALID | level=FRESHER
+2026-06-19 09:22:17.557 [task-4] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Kết quả phân tích: valid=true | level=FRESHER | source=rule-based-fallback
+2026-06-19 09:22:17.557 [task-4] INFO  c.p.service.CvScreeningService - [STEP-4][4e691faa] Lý do: CV đáp ứng các tiêu chí cơ bản
+2026-06-19 09:22:17.557 [task-4] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=VALID | cvLevel=FRESHER
+2026-06-19 09:22:17.574 [task-4] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=4e691faa-3443-4fb9-823a-df90bb39c426 | cvStatus=VALID
+2026-06-19 09:22:17.574 [task-4] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 09:22:17.574 [task-4] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=4e691faa | outcome=VALID ✅ | tổng thời gian=1014ms
+2026-06-19 09:22:17.574 [task-4] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 10:13:07.685 [task-5] INFO  c.project6.service.JobAlertService - Xử lý thông báo job mới: [b1a4fdfa-4fbc-40e4-9dd2-61a5ce51c6ad] - Data Analyst - Data Division
+2026-06-19 10:13:07.790 [task-5] INFO  c.project6.service.JobAlertService - Không có user nào match với job [b1a4fdfa-4fbc-40e4-9dd2-61a5ce51c6ad]. Không gửi email.
+2026-06-19 10:23:50.675 [http-nio-4000-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 10:24:29.043 [http-nio-4000-exec-5] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 10:50:05.801 [http-nio-4000-exec-6] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class java.time.LocalDateTime]] with root cause
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Java 8 date/time type `java.time.LocalDateTime` not supported by default: add Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" to enable handling (through reference chain: java.util.HashMap["data"]->com.project6.dto.ApplicationResponseDTO["createdAt"])
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:77)
+	at com.fasterxml.jackson.databind.SerializerProvider.reportBadDefinition(SerializerProvider.java:1308)
+	at com.fasterxml.jackson.databind.ser.impl.UnsupportedTypeSerializer.serialize(UnsupportedTypeSerializer.java:35)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:772)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeFields(MapSerializer.java:808)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeWithoutTypeInfo(MapSerializer.java:764)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:720)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:35)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:479)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:318)
+	at com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1572)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1061)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:483)
+	at org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:297)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:245)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:925)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.project6.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:51)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-06-19 13:12:55.319 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h11m28s492ms380µs700ns).
+2026-06-19 13:25:19.426 [http-nio-4000-exec-2] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class java.time.LocalDateTime]] with root cause
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Java 8 date/time type `java.time.LocalDateTime` not supported by default: add Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" to enable handling (through reference chain: java.util.HashMap["data"]->com.project6.dto.ApplicationResponseDTO["createdAt"])
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:77)
+	at com.fasterxml.jackson.databind.SerializerProvider.reportBadDefinition(SerializerProvider.java:1308)
+	at com.fasterxml.jackson.databind.ser.impl.UnsupportedTypeSerializer.serialize(UnsupportedTypeSerializer.java:35)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:772)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeFields(MapSerializer.java:808)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeWithoutTypeInfo(MapSerializer.java:764)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:720)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:35)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:479)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:318)
+	at com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1572)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1061)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:483)
+	at org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:297)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:245)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:925)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.project6.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:51)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-06-19 13:26:53.105 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 13:26:53.132 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-19 13:26:53.154 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 13:27:43.288 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.18 with PID 11668 (C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend\target\classes started by Dell in C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend)
+2026-06-19 13:27:43.290 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 13:27:44.093 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 13:27:44.181 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78 ms. Found 11 JPA repository interfaces.
+2026-06-19 13:27:44.835 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 13:27:44.847 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 13:27:44.847 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 13:27:44.913 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 13:27:44.913 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1575 ms
+2026-06-19 13:27:45.091 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 13:27:45.184 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 13:27:45.227 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 13:27:45.496 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 13:27:45.528 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 13:27:45.737 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2aac8ad7
+2026-06-19 13:27:45.738 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 13:27:45.787 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 13:27:47.231 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 13:27:47.557 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 13:27:47.996 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 13:27:48.634 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 13:27:48.634 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 13:27:48.634 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 13:27:48.635 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3154 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 13:27:48.635 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 13:27:48.636 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 13:27:48.687 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 13:27:48.706 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 40d918a7-21d9-4a5c-bf3e-25d7b8efb739
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 13:27:49.109 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 13:27:49.255 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 4000 (http) with context path ''
+2026-06-19 13:27:49.267 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 6.459 seconds (process running for 8.341)
+2026-06-19 13:27:49.367 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 13:27:56.247 [http-nio-4000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 13:27:56.248 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-19 13:27:56.252 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-06-19 13:38:43.459 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:38:43.459 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | time=13:38:43.459
+2026-06-19 13:38:43.459 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781851120/d575e784-7e70-448f…
+2026-06-19 13:38:43.459 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 13:38:43.459 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 13:38:46.031 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 2572ms
+2026-06-19 13:38:46.031 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] ✅ Tải PDF thành công | kích thước=2289KB | thời gian=2572ms
+2026-06-19 13:38:46.031 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 13:38:47.597 [task-1] WARN  org.apache.fontbox.ttf.CmapSubtable - Format 14 cmap table is not supported and will be ignored
+2026-06-19 13:38:50.157 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 107 trang | 167569 ký tự trích xuất được
+2026-06-19 13:38:50.173 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] ✅ Trích xuất text thành công | 167569 ký tự | 4142ms
+2026-06-19 13:38:50.173 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2][5ca012c9] Preview (500 ký tự đầu): 1 ↵  ↵ NGÂN HÀNG CÂU HỎI TRẮC NGHIỆM ↵  ↵ MÔN CHỦ NGHĨA XÃ HỘI KHOA HỌC ↵  ↵ (560 CÂU HỎI VÀ ĐÁP ÁN CỦA 7 CHƯƠNG) ↵  ↵ NĂM 2024 ↵  ↵ 2 ↵  ↵ CHƯƠNG 1: NHẬP MÔN CHỦ NGHĨA XÃ HỘI KHOA HỌC ↵  ↵ Câu 1: Chủ nghĩa xã hội khoa học là một trong ba bộ phận cấu thành của… ↵  ↵ A. chủ nghĩa Mác - Lênin ↵  ↵ B. triết học Mác – Lênin ↵  ↵ C. kinh tế chính trị Mác – Lênin ↵  ↵ D.  chủ nghĩa xã hội không tưởng ↵  ↵ Câu 2: Học thuyết giá trị thặng dư là phát kiến vĩ đại của C.Mác và của Ph.Ăngghen trong? ↵  ↵ A. triết học Mác — Lênin ↵  ↵ B. kinh tế chính trị Mác - L
+2026-06-19 13:38:50.173 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 13:38:50.173 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] Knowledge base size: 3154 ký tự | CV text size: 167569 ký tự
+2026-06-19 13:38:50.173 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 13:38:50.173 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 13:38:50.173 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 13:38:50.447 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 13:38:50.453 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:38:50.453 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:38:50.453 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:38:50.453 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 13:38:50.453 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 13:38:50.453 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 13:38:50.690 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 13:38:50.698 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:38:50.701 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:38:50.701 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:38:50.701 [task-1] ERROR c.p.service.CvScreeningService - [FALLBACK][5ca012c9] ❌ Tất cả 2 model đều thất bại
+2026-06-19 13:38:50.701 [task-1] WARN  c.p.service.CvScreeningService - [STEP-3][5ca012c9] ⚠️  Gemini API thất bại hoàn toàn sau 528ms → kích hoạt Rule-Based fallback
+2026-06-19 13:38:50.701 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 13:38:50.781 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Rule check → hasContact=false | techSkills=0 | hasDegree=false | hasExpOrProj=true
+2026-06-19 13:38:50.781 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] → INVALID | CV chưa đạt yêu cầu: thiếu thông tin liên hệ, thiếu kỹ năng IT cụ thể (tìm thấy 0)
+2026-06-19 13:38:50.781 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Kết quả phân tích: valid=false | level=null | source=rule-based-fallback
+2026-06-19 13:38:50.781 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Lý do: CV chưa đạt yêu cầu: thiếu thông tin liên hệ, thiếu kỹ năng IT cụ thể (tìm thấy 0)
+2026-06-19 13:38:50.781 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=INVALID | cvLevel=null
+2026-06-19 13:38:50.847 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=INVALID
+2026-06-19 13:38:50.847 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:38:50.855 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=5ca012c9 | outcome=INVALID ❌ | tổng thời gian=7388ms
+2026-06-19 13:38:50.855 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 13:39:38.708 [http-nio-4000-exec-5] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 13:40:10.429 [http-nio-4000-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 13:41:44.437 [http-nio-4000-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 13:43:20.907 [http-nio-4000-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 13:44:05.674 [http-nio-4000-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 13:45:46.704 [http-nio-4000-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field "id" (class com.project6.dto.CvProfileRequest), not marked as ignorable]
+2026-06-19 13:46:34.688 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 13:46:34.694 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-19 13:46:34.699 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 13:46:46.180 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.18 with PID 20532 (C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend\target\classes started by Dell in C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend)
+2026-06-19 13:46:46.182 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 13:46:46.932 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 13:46:47.069 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 127 ms. Found 11 JPA repository interfaces.
+2026-06-19 13:46:47.820 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 13:46:47.833 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 13:46:47.834 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 13:46:47.899 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 13:46:47.900 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1669 ms
+2026-06-19 13:46:48.073 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 13:46:48.192 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 13:46:48.232 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 13:46:48.512 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 13:46:48.555 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 13:46:48.851 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c6ac73c
+2026-06-19 13:46:48.855 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 13:46:48.944 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 13:46:50.414 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 13:46:50.654 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 13:46:51.115 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 13:46:51.711 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 13:46:51.712 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 13:46:51.712 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 13:46:51.713 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3154 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 13:46:51.713 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 13:46:51.713 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 13:46:51.759 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 13:46:51.776 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 84bf85d7-eb76-46d1-8f88-3630c98c237f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 13:46:52.164 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 13:46:52.308 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 4000 (http) with context path ''
+2026-06-19 13:46:52.318 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 6.677 seconds (process running for 7.425)
+2026-06-19 13:46:52.406 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 13:46:58.871 [http-nio-4000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 13:46:58.873 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-19 13:46:58.877 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-06-19 13:51:27.511 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:51:27.514 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | time=13:51:27.514
+2026-06-19 13:51:27.516 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/raw/upload/v1781851884/cv-files/58f53f2f-0f…
+2026-06-19 13:51:27.516 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 13:51:27.516 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 13:51:28.328 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 808ms
+2026-06-19 13:51:28.330 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] ✅ Tải PDF thành công | kích thước=57KB | thời gian=809ms
+2026-06-19 13:51:28.330 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 13:51:28.557 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
+2026-06-19 13:51:28.557 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][5ca012c9] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 227ms
+2026-06-19 13:51:28.557 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] → Fallback: đọc profile từ database...
+2026-06-19 13:51:28.560 [task-1] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2
+2026-06-19 13:51:28.583 [task-1] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 614 ký tự | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2
+2026-06-19 13:51:28.584 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] ✅ Profile DB: 614 ký tự
+2026-06-19 13:51:28.584 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 13:51:28.585 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] Knowledge base size: 3154 ký tự | CV text size: 614 ký tự
+2026-06-19 13:51:28.585 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 13:51:28.586 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 13:51:28.587 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 13:51:28.813 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 13:51:28.814 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:51:28.821 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:51:28.822 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:51:28.822 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 13:51:28.823 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 13:51:28.823 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 13:51:29.023 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 13:51:29.025 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:51:29.025 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:51:29.025 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:51:29.025 [task-1] ERROR c.p.service.CvScreeningService - [FALLBACK][5ca012c9] ❌ Tất cả 2 model đều thất bại
+2026-06-19 13:51:29.025 [task-1] WARN  c.p.service.CvScreeningService - [STEP-3][5ca012c9] ⚠️  Gemini API thất bại hoàn toàn sau 440ms → kích hoạt Rule-Based fallback
+2026-06-19 13:51:29.025 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 13:51:29.028 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Rule check → hasContact=true | techSkills=2 | hasDegree=false | hasExpOrProj=true
+2026-06-19 13:51:29.028 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] → VALID | level=FRESHER
+2026-06-19 13:51:29.029 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Kết quả phân tích: valid=true | level=FRESHER | source=rule-based-fallback
+2026-06-19 13:51:29.029 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Lý do: CV đáp ứng các tiêu chí cơ bản
+2026-06-19 13:51:29.030 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=VALID | cvLevel=FRESHER
+2026-06-19 13:51:29.067 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=VALID
+2026-06-19 13:51:29.067 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:51:29.067 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=5ca012c9 | outcome=VALID ✅ | tổng thời gian=1556ms
+2026-06-19 13:51:29.068 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 13:52:24.964 [task-2] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:52:24.964 [task-2] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | time=13:52:24.964
+2026-06-19 13:52:24.964 [task-2] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/raw/upload/v1781851942/cv-files/0b96b9ef-cd…
+2026-06-19 13:52:24.964 [task-2] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 13:52:24.972 [task-2] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 13:52:25.522 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 550ms
+2026-06-19 13:52:25.522 [task-2] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] ✅ Tải PDF thành công | kích thước=65KB | thời gian=550ms
+2026-06-19 13:52:25.522 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 13:52:25.537 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
+2026-06-19 13:52:25.537 [task-2] WARN  c.p.service.CvScreeningService - [STEP-2][5ca012c9] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 15ms
+2026-06-19 13:52:25.538 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] → Fallback: đọc profile từ database...
+2026-06-19 13:52:25.539 [task-2] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2
+2026-06-19 13:52:25.556 [task-2] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 614 ký tự | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2
+2026-06-19 13:52:25.559 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] ✅ Profile DB: 614 ký tự
+2026-06-19 13:52:25.559 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 13:52:25.559 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] Knowledge base size: 3154 ký tự | CV text size: 614 ký tự
+2026-06-19 13:52:25.559 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 13:52:25.559 [task-2] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 13:52:25.559 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 13:52:25.717 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 13:52:25.718 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:52:25.719 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:52:25.719 [task-2] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:52:25.719 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 13:52:25.719 [task-2] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 13:52:25.719 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 13:52:25.891 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 13:52:25.891 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:52:25.891 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:52:25.891 [task-2] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:52:25.891 [task-2] ERROR c.p.service.CvScreeningService - [FALLBACK][5ca012c9] ❌ Tất cả 2 model đều thất bại
+2026-06-19 13:52:25.891 [task-2] WARN  c.p.service.CvScreeningService - [STEP-3][5ca012c9] ⚠️  Gemini API thất bại hoàn toàn sau 332ms → kích hoạt Rule-Based fallback
+2026-06-19 13:52:25.891 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 13:52:25.893 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Rule check → hasContact=true | techSkills=2 | hasDegree=false | hasExpOrProj=true
+2026-06-19 13:52:25.893 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] → VALID | level=FRESHER
+2026-06-19 13:52:25.893 [task-2] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Kết quả phân tích: valid=true | level=FRESHER | source=rule-based-fallback
+2026-06-19 13:52:25.893 [task-2] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Lý do: CV đáp ứng các tiêu chí cơ bản
+2026-06-19 13:52:25.893 [task-2] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=VALID | cvLevel=FRESHER
+2026-06-19 13:52:25.914 [task-2] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=VALID
+2026-06-19 13:52:25.914 [task-2] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:52:25.914 [task-2] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=5ca012c9 | outcome=VALID ✅ | tổng thời gian=950ms
+2026-06-19 13:52:25.914 [task-2] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 13:54:43.194 [task-3] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:54:43.194 [task-3] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | time=13:54:43.194
+2026-06-19 13:54:43.194 [task-3] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/raw/upload/v1781852080/cv-files/741d7ec9-c0…
+2026-06-19 13:54:43.194 [task-3] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 13:54:43.194 [task-3] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 13:54:43.830 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 636ms
+2026-06-19 13:54:43.830 [task-3] INFO  c.p.service.CvScreeningService - [STEP-1][5ca012c9] ✅ Tải PDF thành công | kích thước=57KB | thời gian=636ms
+2026-06-19 13:54:43.830 [task-3] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 13:54:43.830 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 1 trang | 0 ký tự trích xuất được
+2026-06-19 13:54:43.839 [task-3] WARN  c.p.service.CvScreeningService - [STEP-2][5ca012c9] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 9ms
+2026-06-19 13:54:43.840 [task-3] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] → Fallback: đọc profile từ database...
+2026-06-19 13:54:43.840 [task-3] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2
+2026-06-19 13:54:43.846 [task-3] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 614 ký tự | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2
+2026-06-19 13:54:43.846 [task-3] INFO  c.p.service.CvScreeningService - [STEP-2][5ca012c9] ✅ Profile DB: 614 ký tự
+2026-06-19 13:54:43.846 [task-3] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 13:54:43.846 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] Knowledge base size: 3154 ký tự | CV text size: 614 ký tự
+2026-06-19 13:54:43.846 [task-3] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 13:54:43.846 [task-3] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 13:54:43.846 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 13:54:44.015 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 13:54:44.015 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:54:44.015 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:54:44.015 [task-3] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:54:44.015 [task-3] INFO  c.p.service.CvScreeningService - [STEP-3][5ca012c9] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 13:54:44.015 [task-3] INFO  c.p.service.CvScreeningService - [RETRY][5ca012c9] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 13:54:44.015 [task-3] DEBUG c.p.service.CvScreeningService - [STEP-3][5ca012c9] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 13:54:44.173 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 13:54:44.173 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 13:54:44.173 [task-3] ERROR c.p.service.CvScreeningService - [ERROR][5ca012c9] Gemini error detail: 
+2026-06-19 13:54:44.173 [task-3] WARN  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 13:54:44.173 [task-3] ERROR c.p.service.CvScreeningService - [FALLBACK][5ca012c9] ❌ Tất cả 2 model đều thất bại
+2026-06-19 13:54:44.173 [task-3] WARN  c.p.service.CvScreeningService - [STEP-3][5ca012c9] ⚠️  Gemini API thất bại hoàn toàn sau 327ms → kích hoạt Rule-Based fallback
+2026-06-19 13:54:44.173 [task-3] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 13:54:44.173 [task-3] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] Rule check → hasContact=true | techSkills=2 | hasDegree=false | hasExpOrProj=true
+2026-06-19 13:54:44.173 [task-3] INFO  c.p.service.CvScreeningService - [FALLBACK][5ca012c9] → VALID | level=FRESHER
+2026-06-19 13:54:44.173 [task-3] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Kết quả phân tích: valid=true | level=FRESHER | source=rule-based-fallback
+2026-06-19 13:54:44.173 [task-3] INFO  c.p.service.CvScreeningService - [STEP-4][5ca012c9] Lý do: CV đáp ứng các tiêu chí cơ bản
+2026-06-19 13:54:44.173 [task-3] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=VALID | cvLevel=FRESHER
+2026-06-19 13:54:44.191 [task-3] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=5ca012c9-93f9-43fd-9332-067e0f90b2c2 | cvStatus=VALID
+2026-06-19 13:54:44.191 [task-3] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 13:54:44.191 [task-3] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=5ca012c9 | outcome=VALID ✅ | tổng thời gian=997ms
+2026-06-19 13:54:44.191 [task-3] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 14:22:08.085 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m48s803ms124µs800ns).
+2026-06-19 14:37:01.048 [task-4] INFO  c.project6.service.JobAlertService - Xử lý thông báo job mới: [184a9909-8bf6-4cfc-82a5-71487c41c9c1] - Backend Developer
+2026-06-19 14:37:01.073 [task-4] INFO  c.project6.service.JobAlertService - Không có user nào match với job [184a9909-8bf6-4cfc-82a5-71487c41c9c1]. Không gửi email.
+2026-06-19 14:38:48.423 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 14:38:48.429 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-19 14:38:48.439 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 14:38:56.022 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.18 with PID 2512 (C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend\target\classes started by Dell in C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend)
+2026-06-19 14:38:56.024 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 14:38:56.838 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 14:38:56.972 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 122 ms. Found 11 JPA repository interfaces.
+2026-06-19 14:38:57.774 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 14:38:57.796 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 14:38:57.797 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 14:38:57.904 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 14:38:57.905 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1839 ms
+2026-06-19 14:38:58.152 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 14:38:58.256 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 14:38:58.321 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 14:38:58.636 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 14:38:58.663 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 14:38:58.927 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c6ac73c
+2026-06-19 14:38:58.930 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 14:38:59.020 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 14:39:00.585 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 14:39:00.975 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 14:39:01.472 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 14:39:02.172 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 14:39:02.172 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 14:39:02.172 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 14:39:02.173 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3154 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 14:39:02.173 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 14:39:02.173 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 14:39:02.229 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 14:39:02.247 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 606c634a-7689-44a4-b3bc-0d45081a0ac8
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 14:39:02.726 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 14:39:02.950 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 4000 (http) with context path ''
+2026-06-19 14:39:02.963 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 7.44 seconds (process running for 8.041)
+2026-06-19 14:39:03.078 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 14:40:04.267 [http-nio-4000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 14:40:04.269 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-19 14:40:04.272 [http-nio-4000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-06-19 14:46:08.447 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 14:46:08.449 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-19 14:46:08.452 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 14:46:12.603 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.18 with PID 12624 (C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend\target\classes started by Dell in C:\Users\Dell\OneDrive\Documents\Web 2024 2025\Project\backend-cv\project-6-backend)
+2026-06-19 14:46:12.605 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 14:46:13.411 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 14:46:13.549 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 127 ms. Found 11 JPA repository interfaces.
+2026-06-19 14:46:14.318 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 14:46:14.332 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 14:46:14.332 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 14:46:14.418 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 14:46:14.419 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1774 ms
+2026-06-19 14:46:14.648 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 14:46:14.696 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 14:46:14.725 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 14:46:14.981 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 14:46:15.001 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 14:46:15.214 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4a4b288a
+2026-06-19 14:46:15.217 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 14:46:15.269 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 14:46:16.744 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 14:46:17.048 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 14:46:17.584 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 14:46:18.374 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 14:46:18.375 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 14:46:18.375 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 14:46:18.376 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3154 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 14:46:18.377 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 14:46:18.377 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 14:46:18.451 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 14:46:18.480 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 565b7a65-bb0c-46f9-a79d-25d609664480
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 14:46:19.019 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 14:46:19.270 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 4000 (http) with context path ''
+2026-06-19 14:46:19.288 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 7.094 seconds (process running for 7.748)
+2026-06-19 14:46:19.414 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 14:48:01.408 [http-nio-4000-exec-6] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 14:48:01.408 [http-nio-4000-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-19 14:48:01.408 [http-nio-4000-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms

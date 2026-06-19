@@ -56,6 +56,22 @@ export const JobFormFields = ({
         )}
       </div>
 
+      <div className="flex items-center justify-between border border-[#DEDEDE] rounded-[4px] px-[20px] h-[46px] mt-[10px]">
+        <label
+          htmlFor="isInternship"
+          className="text-black text-[14px] font-[500] cursor-pointer select-none"
+        >
+          Chấp nhận internship
+        </label>
+        <input
+          type="checkbox"
+          id="isInternship"
+          {...register("isInternship")}
+          className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
+        />
+      </div>
+      <div className="hidden sm:block"></div>
+
       <div className="">
         <label
           htmlFor="minSalary"
@@ -185,6 +201,8 @@ export const JobFormFields = ({
           ))}
         </select>
       </div>
+
+
 
       <Controller
         control={control}

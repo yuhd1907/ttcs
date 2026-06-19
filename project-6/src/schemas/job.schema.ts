@@ -13,6 +13,7 @@ export const JobSchema = z
     images: z.array(z.any()).default([]),
     description: z.string().optional(),
     cityName: z.string().optional(),
+    isInternship: z.boolean().default(false),
   })
   .refine((data) => data.maxSalary >= data.minSalary, {
     message: "Lương tối đa phải lớn hơn hoặc bằng lương tối thiểu",

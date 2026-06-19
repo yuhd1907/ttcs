@@ -28,6 +28,7 @@ export const JobCreatingForm = () => {
       images: [],
       description: "",
       cityName: "",
+      isInternship: false,
     },
   });
 

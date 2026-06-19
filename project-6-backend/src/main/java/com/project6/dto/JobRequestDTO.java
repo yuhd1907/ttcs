@@ -16,6 +16,7 @@ public class JobRequestDTO {
     private String fields;
     private String description;
     private String cityName;
+    private Boolean isInternship;
     
     // Uploaded images for Job Details
     private List<MultipartFile> images;

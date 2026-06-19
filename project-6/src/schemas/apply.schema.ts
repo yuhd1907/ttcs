@@ -11,15 +11,39 @@ export const ApplySchema = z.object({
     .min(10, "Số điện thoại phải có ít nhất 10 số")
     .max(11, "Số điện thoại không quá 11 số")
     .regex(/^(0|84)(3|5|7|8|9)([0-9]{8})$/, "Số điện thoại không đúng định dạng Việt Nam"),
-  cv: z
-    .any()
-    .refine((files) => files?.length === 1, "Vui lòng tải lên CV của bạn")
-    .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, `Kích thước file tối đa là 5MB`)
-    .refine(
-      (files) => ACCEPTED_FILE_TYPES.includes(files?.[0]?.type),
-      "Chỉ chấp nhận định dạng PDF"
-    ),
+  cv: z.any().optional(),
+  useProfileCv: z.boolean().optional(),
   coverLetter: z.string().optional(),
+}).superRefine((data, ctx) => {
+  if (data.useProfileCv) {
+    return;
+  }
+
+  if (!data.cv || data.cv.length !== 1) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Vui lòng tải lên CV của bạn",
+      path: ["cv"],
+    });
+    return;
+  }
+
+  const file = data.cv[0];
+  if (file.size > MAX_FILE_SIZE) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Kích thước file tối đa là 5MB",
+      path: ["cv"],
+    });
+  }
+
+  if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Chỉ chấp nhận định dạng PDF",
+      path: ["cv"],
+    });
+  }
 });
 
 export type ApplyFormData = z.infer<typeof ApplySchema>;

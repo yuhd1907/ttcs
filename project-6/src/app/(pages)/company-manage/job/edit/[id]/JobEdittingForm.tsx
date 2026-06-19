@@ -56,6 +56,7 @@ export const JobEdittingForm = () => {
           : (job.fields || ""),
         images: job.images || [],
         description: job.description || "",
+        isInternship: (job as any).isInternship ?? false,
       });
     }
   }, [job, reset]);

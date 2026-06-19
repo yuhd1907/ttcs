@@ -71,6 +71,9 @@ public class JobPost {
     // Additional fields from original Job implementation that Hibernate will append
     private String level;
     
+    @Column(name = "is_internship")
+    private Boolean isInternship;
+    
     // We keep these legacy string fields around or replace them: 
     // We will use the new Relational fields instead:
     

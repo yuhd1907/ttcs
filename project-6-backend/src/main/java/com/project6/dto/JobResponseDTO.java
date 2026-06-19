@@ -34,6 +34,7 @@ public class JobResponseDTO {
     private String description;
     private List<String> images;
     private String address;
+    private Boolean isInternship;
 
     // Company detail fields for job detail page
     private String companyModel;
@@ -57,8 +58,9 @@ public class JobResponseDTO {
                 .level(job.getLevel())
                 .workingForm(job.getJobType())
                 .address(job.getCompany().getAddress())
+                .isInternship(job.getIsInternship() != null ? job.getIsInternship() : false)
                 .specialization(job.getSpecializationEntity() != null 
-                    ? Collections.singletonList(job.getSpecializationEntity().getSlug()) 
+                    ? Collections.singletonList(job.getSpecializationEntity().getName()) 
                     : Collections.emptyList())
                 .technologies(job.getSkills() != null 
                     ? job.getSkills().stream().map(Skill::getName).collect(Collectors.toList())

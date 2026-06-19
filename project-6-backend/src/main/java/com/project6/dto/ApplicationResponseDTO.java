@@ -3,7 +3,6 @@ package com.project6.dto;
 import com.project6.entity.Application;
 import lombok.Builder;
 import lombok.Data;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -16,7 +15,7 @@ public class ApplicationResponseDTO {
     private String cvUrl;
     private String coverLetter;
     private String status;
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     // Job info
     private UUID jobId;
@@ -31,7 +30,7 @@ public class ApplicationResponseDTO {
                 .cvUrl(app.getCvUrl())
                 .coverLetter(app.getCoverLetter())
                 .status(app.getStatus())
-                .createdAt(app.getCreatedAt())
+                .createdAt(app.getCreatedAt() != null ? app.getCreatedAt().toString() : null)
                 .jobId(app.getJobPost() != null ? app.getJobPost().getId() : null)
                 .jobTitle(app.getJobPost() != null ? app.getJobPost().getTitle() : null)
                 .build();

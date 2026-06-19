@@ -5,6 +5,7 @@ import { GrPerformance } from "react-icons/gr";
 import { IoLocationOutline } from "react-icons/io5";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { workingFormMap } from "@/config/workingForm";
+import { FiCheckSquare } from "react-icons/fi";
 
 export const CardJobItem = (props: {
   item: any
@@ -54,6 +55,12 @@ export const CardJobItem = (props: {
             </div>
           </div>
           <div className="mt-[12px] flex flex-col gap-[4px]">
+            {item.isInternship && (
+              <div className="flex items-center gap-[8px]">
+                <FiCheckSquare />
+                <span>Chấp nhận intern</span>
+              </div>
+            )}
             <div className="flex items-center gap-[8px]">
               <PiSuitcase />
               {/* Dùng span + onClick thay vì Link lồng bên trong Link để tránh lỗi <a> nested <a> */}
@@ -68,16 +75,33 @@ export const CardJobItem = (props: {
                 {specializationText}
               </span>
             </div>
-            <div className="flex items-center gap-[8px]">
-              <GrPerformance />
-              <span>
-                {workingFormMap.get(item.workingForm) || item.workingForm}
-              </span>
-            </div>
-            <div className="flex items-center gap-[8px]">
-              <IoLocationOutline />
-              <span>{item.address || item.location}</span>
-            </div>
+            {item.isInternship ? (
+              <div className="flex flex-wrap items-center gap-x-[16px] gap-y-[4px] text-[14px]">
+                <div className="flex items-center gap-[8px]">
+                  <GrPerformance />
+                  <span>
+                    {workingFormMap.get(item.workingForm) || item.workingForm}
+                  </span>
+                </div>
+                <div className="flex items-center gap-[8px]">
+                  <IoLocationOutline />
+                  <span>{item.address || item.location}</span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center gap-[8px]">
+                  <GrPerformance />
+                  <span>
+                    {workingFormMap.get(item.workingForm) || item.workingForm}
+                  </span>
+                </div>
+                <div className="flex items-center gap-[8px]">
+                  <IoLocationOutline />
+                  <span>{item.address || item.location}</span>
+                </div>
+              </>
+            )}
             <div className="flex flex-1 flex-wrap items-center gap-[8px] mt-[12px]">
               {(item.technologies || []).map((tech: string, index: number) => (
                 <div

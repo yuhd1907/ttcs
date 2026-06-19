@@ -100,13 +100,19 @@ export default function CVBuilderPage() {
 
       const totalHeightMm = (img.height / img.width) * pageW;
 
-      let offsetY = 0;
-      let pageIdx = 0;
-      while (offsetY < totalHeightMm) {
-        if (pageIdx > 0) pdf.addPage();
-        pdf.addImage(dataUrl, imgFormat, 0, -offsetY, pageW, totalHeightMm);
-        offsetY += pageH;
-        pageIdx++;
+      if (totalHeightMm <= pageH * 2) {
+        // Nếu nội dung không dài quá 2 trang, nén lại hiển thị trong đúng 1 trang duy nhất
+        pdf.addImage(dataUrl, imgFormat, 0, 0, pageW, pageH);
+      } else {
+        // Nếu dài hơn 2 trang, tự động chia thành nhiều trang
+        let offsetY = 0;
+        let pageIdx = 0;
+        while (offsetY < totalHeightMm) {
+          if (pageIdx > 0) pdf.addPage();
+          pdf.addImage(dataUrl, imgFormat, 0, -offsetY, pageW, totalHeightMm);
+          offsetY += pageH;
+          pageIdx++;
+        }
       }
 
       return pdf.output('blob');
