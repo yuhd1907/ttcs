@@ -19,6 +19,9 @@ public class UserInfoDto {
     private String address;
     private String personal_link;
     private String cvUrl;
+    private String cvStatus;
+    private String cvInvalidReason;
+    private String cvLevel;
 
     private String intro;
     private java.util.List<CvProfileRequest.EducationDto> educations;
@@ -43,6 +46,9 @@ public class UserInfoDto {
         dto.address = user.getAddress();
         dto.personal_link = user.getPersonalLink();
         dto.cvUrl = user.getCvUrl();
+        dto.cvStatus = user.getCvStatus();
+        dto.cvInvalidReason = user.getCvInvalidReason();
+        dto.cvLevel = user.getCvLevel();
 
         dto.intro = user.getIntro();
         

@@ -51,6 +51,18 @@ public class User {
     @Column(name = "cv_url")
     private String cvUrl;
 
+    // CV screening status: NONE | PENDING | VALID | INVALID
+    @Column(name = "cv_status")
+    @Builder.Default
+    private String cvStatus = "NONE";
+
+    @Column(name = "cv_invalid_reason", columnDefinition = "TEXT")
+    private String cvInvalidReason;
+
+    // CV level determined by AI: FRESHER | ABOVE_FRESHER
+    @Column(name = "cv_level")
+    private String cvLevel;
+
     @Column(nullable = false)
     @Builder.Default
     private String role = "USER";
