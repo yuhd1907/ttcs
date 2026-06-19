@@ -44,20 +44,24 @@ public class ApplicationService {
             throw new RuntimeException("Email này đã nộp đơn cho công việc này rồi!");
         }
 
-        // Kiểm tra điều kiện tốt nghiệp
-        boolean jobAllowsUngraduated = Boolean.TRUE.equals(job.getAllowUngraduated());
-        if (!jobAllowsUngraduated) {
-            // Job YÊU CẦU đã tốt nghiệp → kiểm tra CV của ứng viên
-            org.springframework.security.core.Authentication authCheck =
-                SecurityContextHolder.getContext().getAuthentication();
-            if (authCheck != null && authCheck.isAuthenticated()
-                    && !"anonymousUser".equals(authCheck.getName())
-                    && authCheck.getName().equalsIgnoreCase(email)) {
-                com.project6.entity.User candidate = userRepository.findByEmail(email).orElse(null);
-                if (candidate != null && Boolean.FALSE.equals(candidate.getCvGraduated())) {
-                    throw new RuntimeException(
-                        "Công việc này yêu cầu ứng viên đã tốt nghiệp. CV của bạn cho thấy bạn chưa tốt nghiệp nên không thể nộp đơn cho vị trí này.");
-                }
+        // Kiểm tra CV không hợp lệ — chặn toàn bộ, không apply được bất kỳ job nào
+        org.springframework.security.core.Authentication authForCvCheck =
+            SecurityContextHolder.getContext().getAuthentication();
+        if (authForCvCheck != null && authForCvCheck.isAuthenticated()
+                && !"anonymousUser".equals(authForCvCheck.getName())
+                && authForCvCheck.getName().equalsIgnoreCase(email)) {
+            com.project6.entity.User candidate = userRepository.findByEmail(email).orElse(null);
+            if (candidate != null && "INVALID".equals(candidate.getCvStatus())) {
+                throw new RuntimeException(
+                    "CV của bạn đã bị đánh giá KHÔNG HỢP LỆ. Vui lòng cập nhật và tải lại CV hợp lệ trước khi ứng tuyển.");
+            }
+
+            // Kiểm tra điều kiện tốt nghiệp (chỉ với ứng viên có CV hợp lệ)
+            boolean jobAllowsUngraduated = Boolean.TRUE.equals(job.getAllowUngraduated());
+            if (!jobAllowsUngraduated && candidate != null
+                    && Boolean.FALSE.equals(candidate.getCvGraduated())) {
+                throw new RuntimeException(
+                    "Công việc này yêu cầu ứng viên đã tốt nghiệp. CV của bạn cho thấy bạn chưa tốt nghiệp nên không thể nộp đơn cho vị trí này.");
             }
         }
 

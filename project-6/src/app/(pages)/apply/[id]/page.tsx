@@ -115,9 +115,15 @@ const ApplicationForm = () => {
     }
   };
 
-  // Kiểm tra điều kiện tốt nghiệp (frontend guard)
+  // CV bị đánh giá không hợp lệ — chặn toàn bộ
+  const isBlockedByInvalidCv = infoUser?.cvStatus === "INVALID";
+
+  // Chưa tốt nghiệp + job yêu cầu đã tốt nghiệp
   const isBlockedByGraduation =
     !allowUngraduated && infoUser?.cvGraduated === false;
+
+  // Tổng hợp: có bất kỳ lý do nào chặn?
+  const isBlocked = isBlockedByInvalidCv || isBlockedByGraduation;
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 font-sans">
@@ -135,8 +141,27 @@ const ApplicationForm = () => {
         </button>
       </div>
 
+      {/* Thông báo CV không hợp lệ — chặn tất cả job */}
+      {isBlockedByInvalidCv && (
+        <div className="max-w-3xl mx-auto mb-4 bg-red-50 border border-red-300 rounded-xl p-6 flex gap-4 items-start">
+          <span className="text-3xl">&#x274C;</span>
+          <div>
+            <h3 className="text-red-800 font-bold text-base mb-1">
+              CV của bạn không hợp lệ — Không thể ứng tuyển
+            </h3>
+            <p className="text-red-700 text-sm leading-relaxed">
+              Hệ thống AI đã đánh giá CV của bạn là <strong>KHÔNG HỢP LỆ</strong>.
+              Bạn không thể nộp đơn vào bất kỳ vị trí nào cho đến khi cập nhật CV hợp lệ.
+            </p>
+            <p className="text-red-600 text-xs mt-2">
+              Vui lòng vào <strong>Hồ sơ cá nhân → CV của bạn</strong> để tải lên CV mới và chờ hệ thống xét duyệt lại.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Thông báo chặn khi chưa tốt nghiệp */}
-      {isBlockedByGraduation && (
+      {!isBlockedByInvalidCv && isBlockedByGraduation && (
         <div className="max-w-3xl mx-auto mb-4 bg-orange-50 border border-orange-300 rounded-xl p-6 flex gap-4 items-start">
           <span className="text-3xl">&#x26A0;&#xFE0F;</span>
           <div>
@@ -321,16 +346,18 @@ const ApplicationForm = () => {
             <div className="pt-4">
               <button
                 type="submit"
-                disabled={isSubmitting || isBlockedByGraduation}
+                disabled={isSubmitting || isBlocked}
                 className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-sm font-medium text-white ${
-                  isBlockedByGraduation
+                  isBlocked
                     ? "bg-gray-400 cursor-not-allowed"
                     : isSubmitting
                     ? "bg-blue-400 cursor-not-allowed"
                     : "bg-blue-600 hover:bg-blue-700"
                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer`}
               >
-                {isBlockedByGraduation
+                {isBlockedByInvalidCv
+                  ? "CV không hợp lệ — Không thể ứng tuyển"
+                  : isBlockedByGraduation
                   ? "Không đủ điều kiện nộp đơn"
                   : isSubmitting
                   ? "Đang gửi..."
