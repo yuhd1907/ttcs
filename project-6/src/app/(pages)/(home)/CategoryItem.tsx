@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { IoMdAddCircleOutline, IoMdRemoveCircleOutline } from "react-icons/io";
 import { CategoryItemProps, Role } from "@/interface/it-category.interface";
 
 export const CategoryItem = ({ category, roles }: CategoryItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div
@@ -39,6 +41,7 @@ export const CategoryItem = ({ category, roles }: CategoryItemProps) => {
             <div
               key={role.slug}
               className="hover:text-[#2563EB] cursor-pointer"
+              onClick={() => router.push(`/search?keyword=${encodeURIComponent(role.name)}`)}
             >
               {role.name}
             </div>
