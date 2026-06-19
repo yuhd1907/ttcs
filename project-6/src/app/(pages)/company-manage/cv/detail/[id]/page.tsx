@@ -16,6 +16,8 @@ interface Application {
   createdAt: string;
   jobId: string;
   jobTitle: string;
+  cvGraduated?: boolean | null;  // true=đã TN, false=chưa TN, null=chưa xác định
+  cvStatus?: string;             // NONE | PENDING | VALID | INVALID
 }
 
 const statusLabel: Record<string, { label: string; color: string }> = {
@@ -118,6 +120,28 @@ const CompanyManageCVDetail = () => {
               </span>
             </div>
           </div>
+
+          {/* Trạng thái tốt nghiệp (từ AI xét duyệt CV) */}
+          {app.cvStatus === "VALID" && (
+            <div className="mt-4 flex items-center gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200">
+              <span className="text-[13px] text-gray-500 font-medium">Tình trạng tốt nghiệp (AI):</span>
+              {app.cvGraduated === true && (
+                <span className="inline-flex items-center gap-1.5 bg-green-100 text-green-700 text-[12px] font-semibold px-3 py-1 rounded-full">
+                  <span>&#x2705;</span> Đã tốt nghiệp
+                </span>
+              )}
+              {app.cvGraduated === false && (
+                <span className="inline-flex items-center gap-1.5 bg-orange-100 text-orange-700 text-[12px] font-semibold px-3 py-1 rounded-full">
+                  <span>&#x23F3;</span> Chưa tốt nghiệp
+                </span>
+              )}
+              {app.cvGraduated == null && (
+                <span className="inline-flex items-center gap-1.5 bg-gray-100 text-gray-500 text-[12px] font-semibold px-3 py-1 rounded-full">
+                  Chưa xác định
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Cover Letter */}
           {app.coverLetter && (

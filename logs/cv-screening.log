@@ -1,531 +1,790 @@
-2026-06-18 18:46:21.362 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 38640 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
-2026-06-18 18:46:21.363 [main] DEBUG c.p.Project6BackendApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
-2026-06-18 18:46:21.364 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
-2026-06-18 18:46:21.902 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-18 18:46:21.972 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 11 JPA repository interfaces.
-2026-06-18 18:46:22.389 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-06-18 18:46:22.397 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-06-18 18:46:22.397 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-06-18 18:46:22.441 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-06-18 18:46:22.442 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1049 ms
-2026-06-18 18:46:22.477 [main] DEBUG com.project6.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
-2026-06-18 18:46:22.547 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-18 18:46:22.601 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-06-18 18:46:22.634 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-06-18 18:46:22.814 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-18 18:46:22.839 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-06-18 18:46:23.047 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@10745a02
-2026-06-18 18:46:23.048 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-06-18 18:46:23.100 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-18 18:46:24.392 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-18 18:46:24.684 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 18:46:25.044 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-18 18:46:25.684 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
-2026-06-18 18:46:25.685 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
-2026-06-18 18:46:25.685 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
-2026-06-18 18:46:25.685 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3094 ký tự từ 'itviec_cv_criteria.md'
-2026-06-18 18:46:25.686 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
-2026-06-18 18:46:25.686 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
-2026-06-18 18:46:25.724 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-18 18:46:25.740 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 3b48c9f9-dc62-4a2d-a03e-1c6c24aa9e40
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-06-18 18:46:25.946 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@14021c10, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7dd4f726, org.springframework.security.web.context.SecurityContextHolderFilter@1f6865ca, org.springframework.security.web.header.HeaderWriterFilter@78fb4f7f, org.springframework.web.filter.CorsFilter@bf6de66, org.springframework.security.web.authentication.logout.LogoutFilter@5ae68d0e, com.project6.security.JwtAuthFilter@4792f119, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7416b560, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@53d782b0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@ff7042c, org.springframework.security.web.session.SessionManagementFilter@4936dca9, org.springframework.security.web.access.ExceptionTranslationFilter@685efb22, org.springframework.security.web.access.intercept.AuthorizationFilter@b0c4670]
-2026-06-18 18:46:26.079 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2026-06-18 18:46:26.209 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
-2026-06-18 18:46:26.212 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 18:46:26.213 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-06-18 18:46:26.217 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-06-18 18:46:26.227 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+2026-06-19 20:18:17.188 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 39164 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
+2026-06-19 20:18:17.192 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 20:18:17.894 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 20:18:17.996 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 94 ms. Found 11 JPA repository interfaces.
+2026-06-19 20:18:18.521 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 20:18:18.531 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 20:18:18.532 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 20:18:18.590 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 20:18:18.591 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1362 ms
+2026-06-19 20:18:18.792 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 20:18:18.852 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 20:18:18.880 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 20:18:19.079 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 20:18:19.104 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 20:18:20.271 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:693)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:203)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:443)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+2026-06-19 20:18:20.275 [main] WARN  o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+2026-06-19 20:18:20.306 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 20:18:21.437 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 20:18:21.453 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 20:18:22.492 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:693)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:203)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:443)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39)
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63)
+	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43)
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60)
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:98)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+2026-06-19 20:18:22.494 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: 28P01
+2026-06-19 20:18:22.494 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - FATAL: password authentication failed for user "postgres"
+2026-06-19 20:18:22.507 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: password authentication failed for user "postgres"] [n/a]
+2026-06-19 20:18:22.510 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: password authentication failed for user "postgres"] [n/a]
+2026-06-19 20:18:22.514 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2026-06-19 20:18:22.544 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2026-06-18 18:46:26.243 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+2026-06-19 20:18:22.567 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: password authentication failed for user "postgres"] [n/a]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: password authentication failed for user "postgres"] [n/a]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 16 common frames omitted
+Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: password authentication failed for user "postgres"] [n/a]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:63)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39)
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63)
+	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43)
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60)
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:98)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	... 20 common frames omitted
+Caused by: org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:693)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:203)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:443)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	... 40 common frames omitted
+2026-06-19 20:18:41.828 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 33832 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
+2026-06-19 20:18:41.829 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 20:18:42.303 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 20:18:42.356 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 11 JPA repository interfaces.
+2026-06-19 20:18:42.678 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 20:18:42.683 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 20:18:42.683 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 20:18:42.716 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 20:18:42.717 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 858 ms
+2026-06-19 20:18:42.818 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 20:18:42.846 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 20:18:42.866 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 20:18:43.013 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 20:18:43.028 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 20:18:44.132 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+org.postgresql.util.PSQLException: FATAL: database "cv" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2825)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:443)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+2026-06-19 20:18:44.138 [main] WARN  o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+2026-06-19 20:18:44.153 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 20:18:44.911 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 20:18:44.922 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 20:18:45.959 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+org.postgresql.util.PSQLException: FATAL: database "cv" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2825)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:443)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39)
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63)
+	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43)
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60)
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:98)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+2026-06-19 20:18:45.960 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: 3D000
+2026-06-19 20:18:45.960 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - FATAL: database "cv" does not exist
+2026-06-19 20:18:45.966 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: database "cv" does not exist] [n/a]
+2026-06-19 20:18:45.967 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: database "cv" does not exist] [n/a]
+2026-06-19 20:18:45.968 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2026-06-19 20:18:45.976 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
 
-***************************
-APPLICATION FAILED TO START
-***************************
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-19 20:18:45.985 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: database "cv" does not exist] [n/a]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.project6.Project6BackendApplication.main(Project6BackendApplication.java:13)
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: database "cv" does not exist] [n/a]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 16 common frames omitted
+Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: database "cv" does not exist] [n/a]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:63)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39)
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63)
+	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43)
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60)
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:98)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	... 20 common frames omitted
+Caused by: org.postgresql.util.PSQLException: FATAL: database "cv" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2825)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:443)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	... 40 common frames omitted
+2026-06-19 20:18:58.757 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 39832 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
+2026-06-19 20:18:58.759 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 20:18:59.204 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 20:18:59.255 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 11 JPA repository interfaces.
+2026-06-19 20:18:59.580 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 20:18:59.586 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 20:18:59.586 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 20:18:59.619 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 20:18:59.620 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 835 ms
+2026-06-19 20:18:59.723 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 20:18:59.755 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 20:18:59.774 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 20:18:59.915 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 20:18:59.930 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 20:19:00.070 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1ccdc7aa
+2026-06-19 20:19:00.072 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 20:19:00.118 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 20:19:00.923 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 20:19:01.175 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 20:19:01.467 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 20:19:01.924 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 20:19:01.924 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 20:19:01.925 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 20:19:01.925 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 5331 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 20:19:01.925 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 20:19:01.925 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 20:19:01.956 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 20:19:01.968 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Description:
-
-Web server failed to start. Port 8080 was already in use.
-
-Action:
-
-Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
-
-2026-06-18 18:47:10.586 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 8820 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
-2026-06-18 18:47:10.587 [main] DEBUG c.p.Project6BackendApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
-2026-06-18 18:47:10.588 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
-2026-06-18 18:47:11.037 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-18 18:47:11.089 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 11 JPA repository interfaces.
-2026-06-18 18:47:11.404 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-06-18 18:47:11.411 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-06-18 18:47:11.412 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-06-18 18:47:11.447 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-06-18 18:47:11.447 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 831 ms
-2026-06-18 18:47:11.477 [main] DEBUG com.project6.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
-2026-06-18 18:47:11.540 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-18 18:47:11.574 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-06-18 18:47:11.594 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-06-18 18:47:11.746 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-18 18:47:11.761 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-06-18 18:47:11.861 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3303e89e
-2026-06-18 18:47:11.862 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-06-18 18:47:11.883 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-18 18:47:12.643 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-18 18:47:12.802 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 18:47:13.056 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-18 18:47:13.430 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
-2026-06-18 18:47:13.430 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
-2026-06-18 18:47:13.430 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
-2026-06-18 18:47:13.430 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3094 ký tự từ 'itviec_cv_criteria.md'
-2026-06-18 18:47:13.430 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
-2026-06-18 18:47:13.430 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
-2026-06-18 18:47:13.459 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-18 18:47:13.469 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 89ee437a-6a06-4ebd-b9c0-66d8919097c6
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-06-18 18:47:13.604 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6311640d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a42610, org.springframework.security.web.context.SecurityContextHolderFilter@19e552a3, org.springframework.security.web.header.HeaderWriterFilter@58581ab6, org.springframework.web.filter.CorsFilter@1107cbd8, org.springframework.security.web.authentication.logout.LogoutFilter@320bfc61, com.project6.security.JwtAuthFilter@67bf0480, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@45c57dbd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@22a5f12, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@610640e3, org.springframework.security.web.session.SessionManagementFilter@56f3f9da, org.springframework.security.web.access.ExceptionTranslationFilter@10587ce5, org.springframework.security.web.access.intercept.AuthorizationFilter@150eab74]
-2026-06-18 18:47:13.707 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2026-06-18 18:47:13.812 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
-2026-06-18 18:47:13.819 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 3.525 seconds (process running for 3.871)
-2026-06-18 18:47:13.971 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
-2026-06-18 18:48:18.018 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-18 18:48:18.018 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-06-18 18:48:18.020 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-06-18 18:48:18.041 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/cities
-2026-06-18 18:48:18.041 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/specializations
-2026-06-18 18:48:18.041 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /company/list
-2026-06-18 18:48:18.041 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:18.041 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/skills
-2026-06-18 18:48:18.175 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:18.175 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/specializations
-2026-06-18 18:48:18.175 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /company/list
-2026-06-18 18:48:18.175 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/cities
-2026-06-18 18:48:18.176 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/skills
-2026-06-18 18:48:18.195 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
-2026-06-18 18:48:18.195 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
-2026-06-18 18:48:18.196 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
-2026-06-18 18:48:18.299 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/specializations
-2026-06-18 18:48:18.305 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/specializations
-2026-06-18 18:48:21.458 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:21.458 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/cities
-2026-06-18 18:48:21.459 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/fields
-2026-06-18 18:48:21.465 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/fields
-2026-06-18 18:48:21.466 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/cities
-2026-06-18 18:48:21.467 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:21.477 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/fields
-2026-06-18 18:48:21.481 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/fields
-2026-06-18 18:48:21.491 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:21.496 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:21.524 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:21.529 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:24.965 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:24.972 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:25.000 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:25.005 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:26.260 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:26.266 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:26.289 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:26.294 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:33.150 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:33.156 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:33.175 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:33.181 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:36.076 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:36.078 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/fields
-2026-06-18 18:48:36.078 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/cities
-2026-06-18 18:48:36.088 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:36.088 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/fields
-2026-06-18 18:48:36.089 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/cities
-2026-06-18 18:48:36.099 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/public/master-data/fields
-2026-06-18 18:48:36.107 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/public/master-data/fields
-2026-06-18 18:48:36.114 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:36.118 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:36.133 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:36.138 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:39.136 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /user/profile
-2026-06-18 18:48:39.142 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing PATCH /user/profile
-2026-06-18 18:48:39.146 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured PATCH /user/profile
-2026-06-18 18:48:47.407 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 18:48:47.407 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=cd763e20-4499-4085-a654-57585978b3ad | time=18:48:47.407
-2026-06-18 18:48:47.408 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781783324/88c2dc34-83b3-4464…
-2026-06-18 18:48:47.408 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 18:48:47.408 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] Bắt đầu tải PDF từ Cloudinary...
-2026-06-18 18:48:47.422 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:47.427 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:47.442 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:47.447 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:47.464 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:47.467 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:48.755 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 1347ms
-2026-06-18 18:48:48.757 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] ✅ Tải PDF thành công | kích thước=408KB | thời gian=1349ms
-2026-06-18 18:48:48.757 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] Bắt đầu trích xuất text từ PDF (PDFBox)...
-2026-06-18 18:48:48.881 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
-2026-06-18 18:48:48.881 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][cd763e20] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 124ms
-2026-06-18 18:48:48.881 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] → Fallback: đọc profile từ database...
-2026-06-18 18:48:48.889 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Lỗi không mong đợi tại screenCvAsync: failed to lazily initialize a collection of role: com.project6.entity.User.educations: could not initialize proxy - no Session | class=LazyInitializationException
-org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.project6.entity.User.educations: could not initialize proxy - no Session
-	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:634)
-	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:217)
-	at org.hibernate.collection.spi.AbstractPersistentCollection.readSize(AbstractPersistentCollection.java:148)
-	at org.hibernate.collection.spi.PersistentBag.isEmpty(PersistentBag.java:360)
-	at com.project6.service.CvScreeningService.buildCvTextFromProfile(CvScreeningService.java:567)
-	at com.project6.service.CvScreeningService.screenCvAsync(CvScreeningService.java:129)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
-	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2026-06-18 18:48:48.893 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=INVALID | cvLevel=null
-2026-06-18 18:48:48.908 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=INVALID
-2026-06-18 18:48:48.908 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 18:48:48.908 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=cd763e20 | outcome=ERROR ❌ | tổng thời gian=1501ms
-2026-06-18 18:48:48.908 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 18:48:52.474 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:52.479 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:52.498 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:52.501 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:48:52.514 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/check
-2026-06-18 18:48:52.520 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/check
-2026-06-18 18:51:48.699 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 18:51:48.701 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-06-18 18:51:48.703 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-06-18 18:51:50.523 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 38296 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
-2026-06-18 18:51:50.525 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
-2026-06-18 18:51:50.988 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-18 18:51:51.039 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 11 JPA repository interfaces.
-2026-06-18 18:51:51.396 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-06-18 18:51:51.405 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-06-18 18:51:51.405 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-06-18 18:51:51.444 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-06-18 18:51:51.444 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 892 ms
-2026-06-18 18:51:51.546 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-18 18:51:51.590 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-06-18 18:51:51.626 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-06-18 18:51:51.803 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-18 18:51:51.825 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-06-18 18:51:51.944 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3ed7dd70
-2026-06-18 18:51:51.946 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-06-18 18:51:51.976 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-18 18:51:52.850 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-18 18:51:53.008 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 18:51:53.294 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-18 18:51:53.694 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
-2026-06-18 18:51:53.694 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
-2026-06-18 18:51:53.694 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
-2026-06-18 18:51:53.695 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3094 ký tự từ 'itviec_cv_criteria.md'
-2026-06-18 18:51:53.695 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
-2026-06-18 18:51:53.695 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
-2026-06-18 18:51:53.723 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-18 18:51:53.733 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 1216097c-1870-41c2-9b36-c416b1b3c74f
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-06-18 18:51:53.956 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2026-06-18 18:51:54.049 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
-2026-06-18 18:51:54.055 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 3.841 seconds (process running for 4.253)
-2026-06-18 18:51:54.106 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
-2026-06-18 18:52:17.020 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-18 18:52:17.021 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-06-18 18:52:17.023 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-06-18 18:52:25.065 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 18:52:25.066 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=cd763e20-4499-4085-a654-57585978b3ad | time=18:52:25.066
-2026-06-18 18:52:25.066 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781783541/56011cff-cf71-4a65…
-2026-06-18 18:52:25.066 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 18:52:25.066 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] Bắt đầu tải PDF từ Cloudinary...
-2026-06-18 18:52:27.212 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 2146ms
-2026-06-18 18:52:27.212 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] ✅ Tải PDF thành công | kích thước=408KB | thời gian=2146ms
-2026-06-18 18:52:27.213 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] Bắt đầu trích xuất text từ PDF (PDFBox)...
-2026-06-18 18:52:27.361 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
-2026-06-18 18:52:27.361 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][cd763e20] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 148ms
-2026-06-18 18:52:27.361 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] → Fallback: đọc profile từ database...
-2026-06-18 18:52:27.372 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Lỗi không mong đợi tại screenCvAsync: failed to lazily initialize a collection of role: com.project6.entity.User.educations: could not initialize proxy - no Session | class=LazyInitializationException
-org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.project6.entity.User.educations: could not initialize proxy - no Session
-	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:634)
-	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:217)
-	at org.hibernate.collection.spi.AbstractPersistentCollection.readSize(AbstractPersistentCollection.java:148)
-	at org.hibernate.collection.spi.PersistentBag.isEmpty(PersistentBag.java:360)
-	at com.project6.service.CvScreeningService.buildCvTextFromProfile(CvScreeningService.java:567)
-	at com.project6.service.CvScreeningService.screenCvAsync(CvScreeningService.java:129)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
-	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2026-06-18 18:52:27.376 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=INVALID | cvLevel=null
-2026-06-18 18:52:27.403 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=INVALID
-2026-06-18 18:52:27.404 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 18:52:27.404 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=cd763e20 | outcome=ERROR ❌ | tổng thời gian=2339ms
-2026-06-18 18:52:27.404 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 18:56:44.531 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 18:56:44.533 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-06-18 18:56:44.535 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-06-18 18:56:48.696 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 38576 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
-2026-06-18 18:56:48.698 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
-2026-06-18 18:56:49.112 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-18 18:56:49.160 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 11 JPA repository interfaces.
-2026-06-18 18:56:49.502 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-06-18 18:56:49.507 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-06-18 18:56:49.507 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-06-18 18:56:49.541 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-06-18 18:56:49.542 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 819 ms
-2026-06-18 18:56:49.641 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-18 18:56:49.678 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-06-18 18:56:49.698 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-06-18 18:56:49.855 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-18 18:56:49.873 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-06-18 18:56:49.973 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6e9a10cd
-2026-06-18 18:56:49.976 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-06-18 18:56:50.000 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-18 18:56:50.760 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-18 18:56:50.917 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 18:56:51.179 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-18 18:56:51.557 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
-2026-06-18 18:56:51.558 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
-2026-06-18 18:56:51.558 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
-2026-06-18 18:56:51.558 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3094 ký tự từ 'itviec_cv_criteria.md'
-2026-06-18 18:56:51.558 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
-2026-06-18 18:56:51.558 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
-2026-06-18 18:56:51.589 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-18 18:56:51.599 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 2c5f9ccd-9d1c-4b91-8bc2-9f3b783fe2e1
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-06-18 18:56:51.839 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2026-06-18 18:56:51.928 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
-2026-06-18 18:56:51.935 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 3.525 seconds (process running for 3.918)
-2026-06-18 18:56:51.989 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
-2026-06-18 18:56:57.884 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-18 18:56:57.884 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-06-18 18:56:57.886 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-06-18 18:57:01.612 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 18:57:01.612 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=cd763e20-4499-4085-a654-57585978b3ad | time=18:57:01.612
-2026-06-18 18:57:01.612 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781783818/44756f81-223e-4987…
-2026-06-18 18:57:01.612 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 18:57:01.612 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] Bắt đầu tải PDF từ Cloudinary...
-2026-06-18 18:57:02.745 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 1132ms
-2026-06-18 18:57:02.745 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] ✅ Tải PDF thành công | kích thước=408KB | thời gian=1133ms
-2026-06-18 18:57:02.745 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] Bắt đầu trích xuất text từ PDF (PDFBox)...
-2026-06-18 18:57:02.862 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
-2026-06-18 18:57:02.863 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][cd763e20] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 118ms
-2026-06-18 18:57:02.864 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] → Fallback: đọc profile từ database...
-2026-06-18 18:57:02.881 [task-1] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 2819 ký tự | userId=cd763e20-4499-4085-a654-57585978b3ad
-2026-06-18 18:57:02.882 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] ✅ Profile DB: 2819 ký tự
-2026-06-18 18:57:02.882 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
-2026-06-18 18:57:02.882 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] Knowledge base size: 3094 ký tự | CV text size: 2819 ký tự
-2026-06-18 18:57:02.882 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.5-flash' | max_retry=3
-2026-06-18 18:57:02.882 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 1/3
-2026-06-18 18:57:02.883 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
-2026-06-18 18:58:03.134 [task-1] WARN  c.p.service.CvScreeningService - [RETRY][cd763e20] ⚠️  Exception: ResourceAccessException | I/O error on POST request for "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent": Read timed out | model='gemini-2.5-flash' | lần 1/3 | đợi 2000ms
-2026-06-18 18:58:05.148 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 2/3
-2026-06-18 18:58:05.148 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
-2026-06-18 18:58:10.537 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] HTTP 200 từ Gemini model='gemini-2.5-flash' | 5389ms
-2026-06-18 18:58:10.538 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] Raw response (617B): {
-  "candidates": [
-    {
-      "content": {
-        "parts": [
-          {
-            "text": "{\n  \"valid\": true,\n  \"level"
-          }
-        ],
-        "role": "model"
-      },
-      "finishReason": "MAX_TOKENS",
-      "index": 0
-    }
-  ],
-  "usageMetadata": {
-    "promptTokenCount": 2327,
-    "candidatesTokenCount": 12,
-    "totalTokenCount": 2912,
-    "promptTokensDetails": [
-      {
-        "modality": "TEXT",
-        "tokenCount": 2327
-      }
-    ],
-    "thoughtsTokenCount": 573,…
-2026-06-18 18:58:10.548 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Token usage → input=2327 | output=12 | total=2912
-2026-06-18 18:58:10.548 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] finishReason: MAX_TOKENS
-2026-06-18 18:58:10.548 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Gemini raw JSON: {
-  "valid": true,
-  "level
-2026-06-18 18:58:10.548 [task-1] ERROR c.p.service.CvScreeningService - [STEP-4][cd763e20] ❌ Không tìm thấy JSON object trong: '{
-  "valid": true,
-  "level'
-2026-06-18 18:58:10.548 [task-1] WARN  c.p.service.CvScreeningService - [RETRY][cd763e20] ⚠️  model='gemini-2.5-flash' trả về JSON không hợp lệ | 5400ms → không retry
-2026-06-18 18:58:10.550 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
-2026-06-18 18:58:10.550 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
-2026-06-18 18:58:10.550 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.0-flash-lite | lần thử 1/3
-2026-06-18 18:58:10.550 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
-2026-06-18 18:58:10.804 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 429 (429 TOO_MANY_REQUESTS): {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota ex… | model='gemini-2.0-flash-lite' | không retry (lỗi client)
-2026-06-18 18:58:10.805 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 429 Error → Quá giới hạn request (rate limit) – đợi và thử lại hoặc nâng cấp quota
-2026-06-18 18:58:10.805 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-lite
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-lite
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-lite
-Please retry in 52.009978221s.
-2026-06-18 18:58:10.806 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
-2026-06-18 18:58:10.806 [task-1] ERROR c.p.service.CvScreeningService - [FALLBACK][cd763e20] ❌ Tất cả 2 model đều thất bại
-2026-06-18 18:58:10.806 [task-1] WARN  c.p.service.CvScreeningService - [STEP-3][cd763e20] ⚠️  Gemini API thất bại hoàn toàn sau 67924ms → kích hoạt Rule-Based fallback
-2026-06-18 18:58:10.806 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Kích hoạt Rule-Based fallback (không cần Gemini)...
-2026-06-18 18:58:10.810 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Rule check → hasContact=true | techSkills=3 | hasDegree=true | hasExpOrProj=true
-2026-06-18 18:58:10.811 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] → VALID | level=FRESHER
-2026-06-18 18:58:10.811 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Kết quả phân tích: valid=true | level=FRESHER | source=rule-based-fallback
-2026-06-18 18:58:10.811 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Lý do: CV đáp ứng các tiêu chí cơ bản
-2026-06-18 18:58:10.811 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | cvLevel=FRESHER
-2026-06-18 18:58:10.833 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID
-2026-06-18 18:58:10.833 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 18:58:10.833 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=cd763e20 | outcome=VALID ✅ | tổng thời gian=69221ms
-2026-06-18 18:58:10.835 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 19:03:16.365 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 19:03:16.367 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-06-18 19:03:16.369 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-06-18 19:03:18.872 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 39028 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
-2026-06-18 19:03:18.873 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
-2026-06-18 19:03:19.331 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-18 19:03:19.385 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 11 JPA repository interfaces.
-2026-06-18 19:03:19.736 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-06-18 19:03:19.746 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-06-18 19:03:19.746 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-06-18 19:03:19.792 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-06-18 19:03:19.792 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 892 ms
-2026-06-18 19:03:19.902 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-18 19:03:19.950 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-06-18 19:03:19.977 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-06-18 19:03:20.142 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-18 19:03:20.166 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-06-18 19:03:20.278 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6ea66c33
-2026-06-18 19:03:20.280 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-06-18 19:03:20.309 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-18 19:03:21.142 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-18 19:03:21.354 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 19:03:21.959 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-18 19:03:22.908 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
-2026-06-18 19:03:22.909 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
-2026-06-18 19:03:22.910 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
-2026-06-18 19:03:22.912 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 3094 ký tự từ 'itviec_cv_criteria.md'
-2026-06-18 19:03:22.912 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
-2026-06-18 19:03:22.912 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
-2026-06-18 19:03:22.969 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-18 19:03:22.996 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 9f387fed-1703-4175-9405-80fe9bbcab06
+Using generated security password: 105d241e-b3a6-4750-ad51-ab921f46c845
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2026-06-18 19:03:23.468 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2026-06-18 19:03:23.703 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
-2026-06-18 19:03:23.716 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 5.137 seconds (process running for 5.543)
-2026-06-18 19:03:23.827 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
-2026-06-18 19:03:48.904 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-18 19:03:48.904 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-06-18 19:03:48.906 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-2026-06-18 19:03:56.601 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 19:03:56.601 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=cd763e20-4499-4085-a654-57585978b3ad | time=19:03:56.601
-2026-06-18 19:03:56.601 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781784233/55623538-ccf3-438a…
-2026-06-18 19:03:56.602 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 19:03:56.602 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] Bắt đầu tải PDF từ Cloudinary...
-2026-06-18 19:03:57.177 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 574ms
-2026-06-18 19:03:57.177 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] ✅ Tải PDF thành công | kích thước=408KB | thời gian=574ms
-2026-06-18 19:03:57.179 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] Bắt đầu trích xuất text từ PDF (PDFBox)...
-2026-06-18 19:03:57.302 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
-2026-06-18 19:03:57.302 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][cd763e20] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 123ms
-2026-06-18 19:03:57.302 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] → Fallback: đọc profile từ database...
-2026-06-18 19:03:57.303 [task-1] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=cd763e20-4499-4085-a654-57585978b3ad
-2026-06-18 19:03:57.323 [task-1] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 2819 ký tự | userId=cd763e20-4499-4085-a654-57585978b3ad
-2026-06-18 19:03:57.324 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] ✅ Profile DB: 2819 ký tự
-2026-06-18 19:03:57.324 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
-2026-06-18 19:03:57.325 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] Knowledge base size: 3094 ký tự | CV text size: 2819 ký tự
-2026-06-18 19:03:57.325 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.5-flash' | max_retry=3
-2026-06-18 19:03:57.325 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 1/3
-2026-06-18 19:03:57.325 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
-2026-06-18 19:04:01.196 [task-1] WARN  c.p.service.CvScreeningService - [RETRY][cd763e20] ⚠️  HTTP 503 (503 SERVICE_UNAVAILABLE): {
-  "error": {
-    "code": 503,
-    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
-    "status": "UNAVAILABLE"
-  }
-}
- | model='gemini-2.5-flash' | lần 1/3 | đợi 2000ms trước retry
-2026-06-18 19:04:03.209 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 2/3
-2026-06-18 19:04:03.209 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
-2026-06-18 19:04:04.525 [task-1] WARN  c.p.service.CvScreeningService - [RETRY][cd763e20] ⚠️  HTTP 503 (503 SERVICE_UNAVAILABLE): {
-  "error": {
-    "code": 503,
-    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
-    "status": "UNAVAILABLE"
-  }
-}
- | model='gemini-2.5-flash' | lần 2/3 | đợi 4000ms trước retry
-2026-06-18 19:04:08.535 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 3/3
-2026-06-18 19:04:08.535 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
-2026-06-18 19:04:10.347 [task-1] WARN  c.p.service.CvScreeningService - [RETRY][cd763e20] ⚠️  HTTP 503 (503 SERVICE_UNAVAILABLE): {
-  "error": {
-    "code": 503,
-    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
-    "status": "UNAVAILABLE"
-  }
-}
- | model='gemini-2.5-flash' | lần 3/3 | đợi 8000ms trước retry
-2026-06-18 19:04:18.358 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
-2026-06-18 19:04:18.358 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
-2026-06-18 19:04:18.359 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.0-flash-lite | lần thử 1/3
-2026-06-18 19:04:18.360 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
-2026-06-18 19:04:18.701 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 429 (429 TOO_MANY_REQUESTS): {
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota ex… | model='gemini-2.0-flash-lite' | không retry (lỗi client)
-2026-06-18 19:04:18.702 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 429 Error → Quá giới hạn request (rate limit) – đợi và thử lại hoặc nâng cấp quota
-2026-06-18 19:04:18.711 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-lite
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-lite
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-lite
-Please retry in 44.051102318s.
-2026-06-18 19:04:18.711 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
-2026-06-18 19:04:18.711 [task-1] ERROR c.p.service.CvScreeningService - [FALLBACK][cd763e20] ❌ Tất cả 2 model đều thất bại
-2026-06-18 19:04:18.711 [task-1] WARN  c.p.service.CvScreeningService - [STEP-3][cd763e20] ⚠️  Gemini API thất bại hoàn toàn sau 21386ms → kích hoạt Rule-Based fallback
-2026-06-18 19:04:18.711 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Kích hoạt Rule-Based fallback (không cần Gemini)...
-2026-06-18 19:04:18.714 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Rule check → hasContact=true | techSkills=3 | hasDegree=true | hasExpOrProj=true
-2026-06-18 19:04:18.714 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] → VALID | level=FRESHER
-2026-06-18 19:04:18.714 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Kết quả phân tích: valid=true | level=FRESHER | source=rule-based-fallback
-2026-06-18 19:04:18.714 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Lý do: CV đáp ứng các tiêu chí cơ bản
-2026-06-18 19:04:18.714 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | cvLevel=FRESHER
-2026-06-18 19:04:18.741 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID
-2026-06-18 19:04:18.741 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
-2026-06-18 19:04:18.742 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=cd763e20 | outcome=VALID ✅ | tổng thời gian=22140ms
-2026-06-18 19:04:18.742 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
-2026-06-18 19:05:03.960 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18 19:05:03.962 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-06-18 19:05:03.963 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 20:19:02.237 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 20:19:02.331 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 4000 (http) with context path ''
+2026-06-19 20:19:02.338 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 3.845 seconds (process running for 4.18)
+2026-06-19 20:19:02.393 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 20:20:16.506 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 20:20:16.508 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-19 20:20:16.511 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 20:20:18.121 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 26608 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
+2026-06-19 20:20:18.123 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 20:20:18.600 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 20:20:18.665 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 11 JPA repository interfaces.
+2026-06-19 20:20:19.031 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 4000 (http)
+2026-06-19 20:20:19.039 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 20:20:19.039 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 20:20:19.083 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 20:20:19.083 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 932 ms
+2026-06-19 20:20:19.189 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 20:20:19.245 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 20:20:19.273 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 20:20:19.441 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 20:20:19.461 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 20:20:19.686 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@63187d63
+2026-06-19 20:20:19.687 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 20:20:19.716 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 20:20:20.545 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 20:20:20.710 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 20:20:20.964 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 20:20:21.348 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 20:20:21.348 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 20:20:21.348 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 20:20:21.350 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 5331 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 20:20:21.350 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 20:20:21.350 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 20:20:21.374 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 20:20:21.384 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 38768c60-96d5-4c44-a70c-410f305ac3c5
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 20:20:21.635 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 20:20:21.726 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 4000 (http) with context path ''
+2026-06-19 20:20:21.733 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 3.959 seconds (process running for 4.361)
+2026-06-19 20:20:21.784 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 20:20:57.008 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 20:20:57.009 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-19 20:20:57.011 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 20:20:58.784 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 9808 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
+2026-06-19 20:20:58.785 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 20:20:59.277 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 20:20:59.327 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 11 JPA repository interfaces.
+2026-06-19 20:20:59.644 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-19 20:20:59.649 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 20:20:59.651 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 20:20:59.687 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 20:20:59.687 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 873 ms
+2026-06-19 20:20:59.790 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 20:20:59.828 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 20:20:59.853 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 20:21:00.006 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 20:21:00.027 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 20:21:00.131 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3df77dfa
+2026-06-19 20:21:00.132 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 20:21:00.154 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 20:21:01.010 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 20:21:01.173 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 20:21:01.431 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 20:21:01.825 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 20:21:01.825 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 20:21:01.825 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 20:21:01.826 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 5331 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 20:21:01.826 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 20:21:01.826 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 20:21:01.853 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 20:21:01.864 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 47c3779b-99ae-42ba-b2a9-6b830b0ac789
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 20:21:02.094 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 20:21:02.185 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-06-19 20:21:02.192 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 3.725 seconds (process running for 4.199)
+2026-06-19 20:21:02.240 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 20:21:06.417 [http-nio-8080-exec-6] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 20:21:06.418 [http-nio-8080-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-19 20:21:06.419 [http-nio-8080-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-06-19 20:21:37.429 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 20:21:37.430 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=cd763e20-4499-4085-a654-57585978b3ad | time=20:21:37.430
+2026-06-19 20:21:37.432 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781875295/6e758140-8514-4b4f…
+2026-06-19 20:21:37.433 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 20:21:37.433 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 20:21:38.460 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 1027ms
+2026-06-19 20:21:38.460 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] ✅ Tải PDF thành công | kích thước=408KB | thời gian=1027ms
+2026-06-19 20:21:38.460 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 20:21:38.607 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
+2026-06-19 20:21:38.608 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][cd763e20] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 148ms
+2026-06-19 20:21:38.609 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] → Fallback: đọc profile từ database...
+2026-06-19 20:21:38.613 [task-1] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=cd763e20-4499-4085-a654-57585978b3ad
+2026-06-19 20:21:38.635 [task-1] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 2819 ký tự | userId=cd763e20-4499-4085-a654-57585978b3ad
+2026-06-19 20:21:38.636 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] ✅ Profile DB: 2819 ký tự
+2026-06-19 20:21:38.636 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 20:21:38.636 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] Knowledge base size: 5331 ký tự | CV text size: 2819 ký tự
+2026-06-19 20:21:38.636 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 20:21:38.636 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 20:21:38.637 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 20:21:38.962 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 20:21:38.963 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 20:21:38.966 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: 
+2026-06-19 20:21:38.966 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 20:21:38.966 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 20:21:38.966 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 20:21:38.966 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 20:21:39.205 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 20:21:39.205 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 20:21:39.205 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: 
+2026-06-19 20:21:39.205 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 20:21:39.205 [task-1] ERROR c.p.service.CvScreeningService - [FALLBACK][cd763e20] ❌ Tất cả 2 model đều thất bại
+2026-06-19 20:21:39.205 [task-1] WARN  c.p.service.CvScreeningService - [STEP-3][cd763e20] ⚠️  Gemini API thất bại hoàn toàn sau 569ms → kích hoạt Rule-Based fallback
+2026-06-19 20:21:39.205 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 20:21:39.207 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Rule check → hasContact=true | techSkills=3 | hasDegree=true | hasExpOrProj=true
+2026-06-19 20:21:39.207 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] → VALID
+2026-06-19 20:21:39.207 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Kết quả phân tích: valid=true | graduated=null | source=rule-based-fallback
+2026-06-19 20:21:39.208 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Lý do: CV hợp lệ
+2026-06-19 20:21:39.208 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | graduated=null
+2026-06-19 20:21:39.250 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | graduated=null
+2026-06-19 20:21:39.250 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 20:21:39.250 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=cd763e20 | outcome=VALID ✅ | tổng thời gian=1821ms
+2026-06-19 20:21:39.250 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 21:10:15.457 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 21:10:15.459 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-19 21:10:15.462 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-19 21:10:19.242 [main] INFO  c.p.Project6BackendApplication - Starting Project6BackendApplication using Java 17.0.19 with PID 30712 (C:\My folder\test\project-6-backend\target\classes started by ADMIN in C:\My folder\test)
+2026-06-19 21:10:19.244 [main] INFO  c.p.Project6BackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 21:10:19.666 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19 21:10:19.723 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 50 ms. Found 11 JPA repository interfaces.
+2026-06-19 21:10:20.087 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-19 21:10:20.096 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 21:10:20.096 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-06-19 21:10:20.144 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 21:10:20.145 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 876 ms
+2026-06-19 21:10:20.270 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19 21:10:20.328 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19 21:10:20.356 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-19 21:10:20.538 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19 21:10:20.567 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 21:10:20.693 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3df77dfa
+2026-06-19 21:10:20.695 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 21:10:20.734 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19 21:10:21.634 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19 21:10:21.805 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19 21:10:22.063 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19 21:10:22.454 [main] INFO  c.p.service.CvScreeningService - ╔══════════════════════════════════════════════════════╗
+2026-06-19 21:10:22.455 [main] INFO  c.p.service.CvScreeningService - ║  [INIT] CvScreeningService khởi động                 ║
+2026-06-19 21:10:22.455 [main] INFO  c.p.service.CvScreeningService - ╚══════════════════════════════════════════════════════╝
+2026-06-19 21:10:22.456 [main] INFO  c.p.service.CvScreeningService - [INIT] ✅ Knowledge base (RAG) nạp thành công: 5331 ký tự từ 'itviec_cv_criteria.md'
+2026-06-19 21:10:22.456 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini primary model  : gemini-2.5-flash
+2026-06-19 21:10:22.456 [main] INFO  c.p.service.CvScreeningService - [INIT] Gemini fallback model : gemini-2.0-flash-lite
+2026-06-19 21:10:22.482 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19 21:10:22.492 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 957a5dc1-a09c-44cd-9829-105362f89522
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-19 21:10:22.719 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-06-19 21:10:22.814 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-06-19 21:10:22.822 [main] INFO  c.p.Project6BackendApplication - Started Project6BackendApplication in 3.863 seconds (process running for 4.67)
+2026-06-19 21:10:22.879 [main] INFO  com.project6.component.DataLoader - Master data loaded successfully!
+2026-06-19 21:10:28.767 [http-nio-8080-exec-4] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 21:10:28.767 [http-nio-8080-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-19 21:10:28.768 [http-nio-8080-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-06-19 21:39:47.815 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 21:39:47.819 [task-1] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=cd763e20-4499-4085-a654-57585978b3ad | time=21:39:47.819
+2026-06-19 21:39:47.820 [task-1] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781879985/1e8aaa40-3b91-431f…
+2026-06-19 21:39:47.820 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 21:39:47.820 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 21:39:48.739 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 917ms
+2026-06-19 21:39:48.740 [task-1] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] ✅ Tải PDF thành công | kích thước=408KB | thời gian=918ms
+2026-06-19 21:39:48.741 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 21:39:48.977 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
+2026-06-19 21:39:48.977 [task-1] WARN  c.p.service.CvScreeningService - [STEP-2][cd763e20] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 235ms
+2026-06-19 21:39:48.977 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] → Fallback: đọc profile từ database...
+2026-06-19 21:39:48.978 [task-1] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=cd763e20-4499-4085-a654-57585978b3ad
+2026-06-19 21:39:48.991 [task-1] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 2819 ký tự | userId=cd763e20-4499-4085-a654-57585978b3ad
+2026-06-19 21:39:48.994 [task-1] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] ✅ Profile DB: 2819 ký tự
+2026-06-19 21:39:48.994 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 21:39:48.994 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] Knowledge base size: 5331 ký tự | CV text size: 2819 ký tự
+2026-06-19 21:39:48.994 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 21:39:48.994 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 21:39:48.995 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 21:39:49.376 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 21:39:49.376 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 21:39:49.383 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: 
+2026-06-19 21:39:49.383 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 21:39:49.383 [task-1] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 21:39:49.384 [task-1] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 21:39:49.384 [task-1] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 21:39:49.676 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 21:39:49.676 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 21:39:49.677 [task-1] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: 
+2026-06-19 21:39:49.677 [task-1] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 21:39:49.678 [task-1] ERROR c.p.service.CvScreeningService - [FALLBACK][cd763e20] ❌ Tất cả 2 model đều thất bại
+2026-06-19 21:39:49.678 [task-1] WARN  c.p.service.CvScreeningService - [STEP-3][cd763e20] ⚠️  Gemini API thất bại hoàn toàn sau 684ms → kích hoạt Rule-Based fallback
+2026-06-19 21:39:49.678 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 21:39:49.687 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Rule check → hasContact=true | techSkills=3 | hasDegree=true | hasExpOrProj=true
+2026-06-19 21:39:49.687 [task-1] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] → VALID
+2026-06-19 21:39:49.688 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Kết quả phân tích: valid=true | graduated=null | source=rule-based-fallback
+2026-06-19 21:39:49.688 [task-1] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Lý do: CV hợp lệ
+2026-06-19 21:39:49.688 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | graduated=null
+2026-06-19 21:39:49.739 [task-1] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | graduated=null
+2026-06-19 21:39:49.739 [task-1] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 21:39:49.739 [task-1] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=cd763e20 | outcome=VALID ✅ | tổng thời gian=1924ms
+2026-06-19 21:39:49.740 [task-1] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 21:40:28.097 [task-2] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 21:40:28.097 [task-2] INFO  c.p.service.CvScreeningService - │ [START] Xét duyệt CV | userId=cd763e20-4499-4085-a654-57585978b3ad | time=21:40:28.097
+2026-06-19 21:40:28.097 [task-2] INFO  c.p.service.CvScreeningService - │ [START] CV URL : https://res.cloudinary.com/duwsd0fls/image/upload/v1781880026/ab8b4117-444c-4182…
+2026-06-19 21:40:28.098 [task-2] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────
+2026-06-19 21:40:28.098 [task-2] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] Bắt đầu tải PDF từ Cloudinary...
+2026-06-19 21:40:29.015 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-1] HTTP 200 từ Cloudinary | 917ms
+2026-06-19 21:40:29.016 [task-2] INFO  c.p.service.CvScreeningService - [STEP-1][cd763e20] ✅ Tải PDF thành công | kích thước=408KB | thời gian=918ms
+2026-06-19 21:40:29.016 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] Bắt đầu trích xuất text từ PDF (PDFBox)...
+2026-06-19 21:40:29.026 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-2] PDF có 2 trang | 0 ký tự trích xuất được
+2026-06-19 21:40:29.026 [task-2] WARN  c.p.service.CvScreeningService - [STEP-2][cd763e20] ⚠️  PDF không trích xuất được text (có thể là PDF ảnh scan) | ký tự=0 | 10ms
+2026-06-19 21:40:29.026 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] → Fallback: đọc profile từ database...
+2026-06-19 21:40:29.028 [task-2] DEBUG c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] Đọc profile từ DB | userId=cd763e20-4499-4085-a654-57585978b3ad
+2026-06-19 21:40:29.036 [task-2] INFO  c.p.s.UserProfileBuilderService - [PROFILE-BUILDER] ✅ Build profile thành công: 2819 ký tự | userId=cd763e20-4499-4085-a654-57585978b3ad
+2026-06-19 21:40:29.037 [task-2] INFO  c.p.service.CvScreeningService - [STEP-2][cd763e20] ✅ Profile DB: 2819 ký tự
+2026-06-19 21:40:29.038 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Bắt đầu xây dựng RAG prompt và gọi Gemini API...
+2026-06-19 21:40:29.038 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] Knowledge base size: 5331 ký tự | CV text size: 2819 ký tự
+2026-06-19 21:40:29.038 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.5-flash' | max_retry=3
+2026-06-19 21:40:29.038 [task-2] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.5-flash | lần thử 1/3
+2026-06-19 21:40:29.038 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=***MASKED***
+2026-06-19 21:40:29.297 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.5-flash' | không retry (lỗi client)
+2026-06-19 21:40:29.298 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 21:40:29.298 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: 
+2026-06-19 21:40:29.298 [task-2] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.5-flash' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 21:40:29.299 [task-2] INFO  c.p.service.CvScreeningService - [STEP-3][cd763e20] Gọi model: 'gemini-2.0-flash-lite' | max_retry=3
+2026-06-19 21:40:29.299 [task-2] INFO  c.p.service.CvScreeningService - [RETRY][cd763e20] model=gemini-2.0-flash-lite | lần thử 1/3
+2026-06-19 21:40:29.299 [task-2] DEBUG c.p.service.CvScreeningService - [STEP-3][cd763e20] POST → https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=***MASKED***
+2026-06-19 21:40:29.561 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] ❌ HTTP 401 (401 UNAUTHORIZED):  | model='gemini-2.0-flash-lite' | không retry (lỗi client)
+2026-06-19 21:40:29.561 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini 401 Error → API key không hợp lệ hoặc đã hết hạn – kiểm tra gemini.api-key trong application.yml
+2026-06-19 21:40:29.561 [task-2] ERROR c.p.service.CvScreeningService - [ERROR][cd763e20] Gemini error detail: 
+2026-06-19 21:40:29.561 [task-2] WARN  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Model 'gemini-2.0-flash-lite' thất bại hoàn toàn → thử model tiếp theo
+2026-06-19 21:40:29.561 [task-2] ERROR c.p.service.CvScreeningService - [FALLBACK][cd763e20] ❌ Tất cả 2 model đều thất bại
+2026-06-19 21:40:29.561 [task-2] WARN  c.p.service.CvScreeningService - [STEP-3][cd763e20] ⚠️  Gemini API thất bại hoàn toàn sau 523ms → kích hoạt Rule-Based fallback
+2026-06-19 21:40:29.561 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Kích hoạt Rule-Based fallback (không cần Gemini)...
+2026-06-19 21:40:29.564 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] Rule check → hasContact=true | techSkills=3 | hasDegree=true | hasExpOrProj=true
+2026-06-19 21:40:29.564 [task-2] INFO  c.p.service.CvScreeningService - [FALLBACK][cd763e20] → VALID
+2026-06-19 21:40:29.564 [task-2] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Kết quả phân tích: valid=true | graduated=null | source=rule-based-fallback
+2026-06-19 21:40:29.564 [task-2] INFO  c.p.service.CvScreeningService - [STEP-4][cd763e20] Lý do: CV hợp lệ
+2026-06-19 21:40:29.564 [task-2] INFO  c.p.service.CvScreeningService - [STEP-5] Lưu DB → userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | graduated=null
+2026-06-19 21:40:29.576 [task-2] INFO  c.p.service.CvScreeningService - [STEP-5] ✅ Lưu DB thành công | userId=cd763e20-4499-4085-a654-57585978b3ad | cvStatus=VALID | graduated=null
+2026-06-19 21:40:29.576 [task-2] INFO  c.p.service.CvScreeningService - ┌─────────────────────────────────────────────────────────────
+2026-06-19 21:40:29.578 [task-2] INFO  c.p.service.CvScreeningService - │ [RESULT] sessionId=cd763e20 | outcome=VALID ✅ | tổng thời gian=1479ms
+2026-06-19 21:40:29.578 [task-2] INFO  c.p.service.CvScreeningService - └─────────────────────────────────────────────────────────────

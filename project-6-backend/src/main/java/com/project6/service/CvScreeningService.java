@@ -161,18 +161,18 @@ public class CvScreeningService {
             }
 
             // ── STEP-4 + 5: Lưu DB ───────────────────────────────────────
-            boolean valid  = (Boolean) result.getOrDefault("valid", false);
-            String  reason = (String)  result.getOrDefault("reason", "Không xác định được lý do.");
-            String  level  = (String)  result.getOrDefault("level", null);
-            String  src    = (String)  result.getOrDefault("source", "gemini");
+            boolean valid     = (Boolean) result.getOrDefault("valid", false);
+            String  reason    = (String)  result.getOrDefault("reason", "Không xác định được lý do.");
+            Boolean graduated = (Boolean) result.getOrDefault("graduated", null);
+            String  src       = (String)  result.getOrDefault("source", "gemini");
 
-            log.info("[STEP-4][{}] Kết quả phân tích: valid={} | level={} | source={}", sessionId, valid, level, src);
+            log.info("[STEP-4][{}] Kết quả phân tích: valid={} | graduated={} | source={}", sessionId, valid, graduated, src);
             log.info("[STEP-4][{}] Lý do: {}", sessionId, reason);
 
             if (valid) {
-                updateStatus(userId, "VALID", null, level);
+                updateStatus(userId, "VALID", null, graduated);
             } else {
-                updateStatus(userId, "INVALID", reason, null);
+                updateStatus(userId, "INVALID", reason, graduated);
             }
 
             logEnd(sessionId, valid ? "VALID ✅" : "INVALID ❌", startMs);
@@ -388,12 +388,13 @@ public class CvScreeningService {
             ============================================
 
             ======== YÊU CẦU ĐẦU RA ========
-            Trả về JSON hợp lệ với đúng 3 trường:
+            Trả về JSON hợp lệ với ĐÚNG 3 trường sau, KHÔNG thêm trường nào khác:
             {
               "valid": true hoặc false,
-              "level": "FRESHER" hoặc "ABOVE_FRESHER" hoặc null (null nếu valid=false),
-              "reason": "Lý do ngắn gọn bằng tiếng Việt (tối đa 200 ký tự)"
+              "reason": "Lý do ngắn gọn bằng tiếng Việt (tối đa 200 ký tự). Nếu valid=true thì ghi 'CV hợp lệ'.",
+              "graduated": true (đã tốt nghiệp) | false (chưa tốt nghiệp) | null (không xác định được)
             }
+            Trường "graduated" chỉ phản ánh tình trạng học tập, KHÔNG ảnh hưởng đến kết quả valid.
             """.formatted(this.knowledgeBase, truncated);
     }
 
@@ -412,17 +413,17 @@ public class CvScreeningService {
             String json = content.substring(start, end + 1);
             JsonNode node = objectMapper.readTree(json);
 
-            boolean validField = node.path("valid").asBoolean(false);
-            String  levelField = node.path("level").isNull() ? null : node.path("level").asText(null);
-            String  reasonField = node.path("reason").asText("Không xác định.");
+            boolean validField    = node.path("valid").asBoolean(false);
+            String  reasonField   = node.path("reason").asText("Không xác định.");
+            Boolean graduatedField = node.path("graduated").isNull() ? null : node.path("graduated").asBoolean();
 
-            log.info("[STEP-4][{}] Parse JSON thành công → valid={} | level={} | reason={}",
-                sessionId, validField, levelField, truncate(reasonField, 150));
+            log.info("[STEP-4][{}] Parse JSON thành công → valid={} | graduated={} | reason={}",
+                sessionId, validField, graduatedField, truncate(reasonField, 150));
 
             Map<String, Object> result = new HashMap<>();
-            result.put("valid",  validField);
-            result.put("level",  levelField);
-            result.put("reason", reasonField);
+            result.put("valid",     validField);
+            result.put("reason",    reasonField);
+            result.put("graduated", graduatedField);
             return result;
 
         } catch (Exception e) {
@@ -463,18 +464,16 @@ public class CvScreeningService {
             if (!hasDegree && !hasExpOrProj)    missing.add("thiếu bằng cấp hoặc kinh nghiệm/dự án IT");
             String reason = "CV chưa đạt yêu cầu: " + String.join(", ", missing);
             log.info("[FALLBACK][{}] → INVALID | {}", sessionId, reason);
-            result.put("valid",  false);
-            result.put("level",  null);
-            result.put("reason", reason);
-            result.put("source", "rule-based-fallback");
+            result.put("valid",     false);
+            result.put("reason",    reason);
+            result.put("graduated", null);
+            result.put("source",    "rule-based-fallback");
         } else {
-            boolean hasRealExp = text.contains("năm kinh nghiệm") || text.contains("2 năm") || text.contains("3 năm");
-            String level = hasRealExp ? "ABOVE_FRESHER" : "FRESHER";
-            log.info("[FALLBACK][{}] → VALID | level={}", sessionId, level);
-            result.put("valid",  true);
-            result.put("level",  level);
-            result.put("reason", "CV đáp ứng các tiêu chí cơ bản");
-            result.put("source", "rule-based-fallback");
+            log.info("[FALLBACK][{}] → VALID", sessionId);
+            result.put("valid",     true);
+            result.put("reason",    "CV hợp lệ");
+            result.put("graduated", null);
+            result.put("source",    "rule-based-fallback");
         }
         return result;
     }
@@ -514,16 +513,16 @@ public class CvScreeningService {
         }
     }
 
-    private void updateStatus(UUID userId, String status, String reason, String level) {
+    private void updateStatus(UUID userId, String status, String reason, Boolean graduated) {
         try {
-            log.info("[STEP-5] Lưu DB → userId={} | cvStatus={} | cvLevel={}", userId, status, level);
+            log.info("[STEP-5] Lưu DB → userId={} | cvStatus={} | graduated={}", userId, status, graduated);
             User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy user: " + userId));
             user.setCvStatus(status);
             user.setCvInvalidReason(reason);
-            if (level != null) user.setCvLevel(level);
+            if (graduated != null) user.setCvGraduated(graduated);
             userRepository.save(user);
-            log.info("[STEP-5] ✅ Lưu DB thành công | userId={} | cvStatus={}", userId, status);
+            log.info("[STEP-5] ✅ Lưu DB thành công | userId={} | cvStatus={} | graduated={}", userId, status, graduated);
         } catch (Exception e) {
             log.error("[STEP-5] ❌ Lỗi lưu DB | userId={} | {}: {}", userId,
                 e.getClass().getSimpleName(), e.getMessage());
@@ -537,13 +536,13 @@ public class CvScreeningService {
 
     private String buildDefaultKnowledgeBase() {
         return """
-            TIÊU CHÍ XÉT DUYỆT CV (Chuẩn ITviec):
+            TIÊU CHÍ XÉT DUYỆT CV:
             1. Có họ tên và ít nhất 1 thông tin liên hệ (email, SĐT, LinkedIn/GitHub).
             2. Có bằng cấp IT/CNTT hoặc chứng chỉ chuyên ngành IT.
-            3. Có kinh nghiệm thực tế IT hoặc dự án cá nhân/đồ án được mô tả cụ thể.
-            4. Có ít nhất 2 kỹ năng/công nghệ IT cụ thể (Java, Python, SQL, v.v.).
-            5. Nội dung CV đủ dài, có cấu trúc, không sơ sài.
-            PHÂN LOẠI: FRESHER (< 1 năm) | ABOVE_FRESHER (>= 1 năm kinh nghiệm thực tế).
+               Nếu không có bằng cấp → phải có kinh nghiệm/dự án IT thực tế.
+            3. Nội dung không rác, không spam, có cấu trúc rõ ràng.
+            4. Mô tả công việc/dự án đủ chi tiết, không sơ sài.
+            OUTPUT: JSON 3 trường: {"valid": true/false, "reason": "...", "graduated": true/false/null}
             """;
     }
 

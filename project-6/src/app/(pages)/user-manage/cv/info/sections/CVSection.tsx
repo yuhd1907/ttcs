@@ -47,23 +47,22 @@ function getCvStatusBadge(status: CvStatus, hasCV: boolean) {
   }
 }
 
-function getCvLevelBadge(level: string | null | undefined) {
-  if (!level) return null;
-  if (level === "FRESHER") {
+function getCvGraduatedBadge(graduated: boolean | null | undefined) {
+  if (graduated === true) {
     return (
-      <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium ml-2">
-        Fresher
+      <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium ml-2">
+        ✅ Đã tốt nghiệp
       </span>
     );
   }
-  if (level === "ABOVE_FRESHER") {
+  if (graduated === false) {
     return (
-      <span className="bg-indigo-100 text-indigo-700 text-xs px-2 py-0.5 rounded-full font-medium ml-2">
-        Trên Fresher
+      <span className="bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full font-medium ml-2">
+        ⏳ Chưa tốt nghiệp
       </span>
     );
   }
-  return null;
+  return null; // null/undefined = chưa xác định, không hiển thị
 }
 
 export default function CVSection() {
@@ -211,7 +210,7 @@ export default function CVSection() {
             Trạng thái:
           </span>
           {getCvStatusBadge(cvStatus, hasCV)}
-          {cvStatus === "VALID" && getCvLevelBadge(infoUser?.cvLevel)}
+          {cvStatus === "VALID" && getCvGraduatedBadge(infoUser?.cvGraduated)}
         </div>
 
         {/* Lý do không hợp lệ */}
@@ -238,11 +237,11 @@ export default function CVSection() {
               Tiêu chí để CV hợp lệ:
             </p>
             <ul className="text-blue-600 text-[12px] list-disc list-inside space-y-0.5">
-              <li>Có bằng cấp/chứng chỉ trong lĩnh vực IT hoặc liên quan</li>
-              <li>Có kinh nghiệm thực tế hoặc dự án cụ thể</li>
-              <li>Liệt kê ít nhất 2 kỹ năng kỹ thuật cụ thể</li>
-              <li>Hồ sơ định dạng rõ ràng, có mô tả cụ thể</li>
-              <li>Có thông tin cơ bản: họ tên, thông tin liên hệ</li>
+              <li>Có họ tên và ít nhất 1 thông tin liên hệ (email, SĐT, LinkedIn, GitHub)</li>
+              <li>Có bằng cấp CNTT/kỹ thuật hoặc chứng chỉ IT quốc tế</li>
+              <li>Nếu không có bằng cấp IT: phải có dự án hoặc kinh nghiệm làm việc thực tế trong ngành IT</li>
+              <li>Mô tả dự án/công việc đủ chi tiết, không sơ sài (“Học Java” không được tính)</li>
+              <li>Nội dung rõ ràng, có cấu trúc, không có nội dung rác/spam</li>
             </ul>
           </div>
         )}

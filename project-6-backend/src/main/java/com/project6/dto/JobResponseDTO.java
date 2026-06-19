@@ -35,6 +35,7 @@ public class JobResponseDTO {
     private List<String> images;
     private String address;
     private Boolean isInternship;
+    private Boolean allowUngraduated;  // true = chấp nhận sinh viên chưa tốt nghiệp
 
     // Company detail fields for job detail page
     private String companyModel;
@@ -59,6 +60,7 @@ public class JobResponseDTO {
                 .workingForm(job.getJobType())
                 .address(job.getCompany().getAddress())
                 .isInternship(job.getIsInternship() != null ? job.getIsInternship() : false)
+                .allowUngraduated(job.getAllowUngraduated() != null ? job.getAllowUngraduated() : false)
                 .specialization(job.getSpecializationEntity() != null 
                     ? Collections.singletonList(job.getSpecializationEntity().getName()) 
                     : Collections.emptyList())

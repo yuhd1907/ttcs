@@ -140,6 +140,8 @@ public class JobService {
                 .jobType(req.getWorkingForm())
                 .level(req.getLevel())
                 .isInternship(req.getIsInternship())
+                // Internship đồng nghĩa chấp nhận sinh viên chưa tốt nghiệp
+                .allowUngraduated(Boolean.TRUE.equals(req.getIsInternship()))
                 .specializationEntity(getOrCreateSpecialization(req.getSpecialization()))
                 .jobFields(getOrCreateFields(req.getFields()))
                 .city(req.getCityName() != null && !req.getCityName().isBlank()
@@ -187,7 +189,11 @@ public class JobService {
         if (req.getMaxSalary() != null) jobPost.setSalaryMax(BigDecimal.valueOf(req.getMaxSalary()));
         if (req.getLevel() != null) jobPost.setLevel(req.getLevel());
         if (req.getWorkingForm() != null) jobPost.setJobType(req.getWorkingForm());
-        if (req.getIsInternship() != null) jobPost.setIsInternship(req.getIsInternship());
+        if (req.getIsInternship() != null) {
+            jobPost.setIsInternship(req.getIsInternship());
+            // Internship đồng nghĩa chấp nhận sinh viên chưa tốt nghiệp
+            jobPost.setAllowUngraduated(req.getIsInternship());
+        }
         if (req.getSpecialization() != null) jobPost.setSpecializationEntity(getOrCreateSpecialization(req.getSpecialization()));
         if (req.getFields() != null) jobPost.setJobFields(getOrCreateFields(req.getFields()));
         if (req.getDescription() != null) jobPost.setDescription(req.getDescription());

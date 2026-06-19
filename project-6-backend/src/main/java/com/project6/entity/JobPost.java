@@ -73,6 +73,11 @@ public class JobPost {
     
     @Column(name = "is_internship")
     private Boolean isInternship;
+
+    // Nếu true: chấp nhận sinh viên chưa tốt nghiệp. Nếu false/null: chỉ nhận đã tốt nghiệp.
+    @Column(name = "allow_ungraduated")
+    @Builder.Default
+    private Boolean allowUngraduated = false;
     
     // We keep these legacy string fields around or replace them: 
     // We will use the new Relational fields instead:

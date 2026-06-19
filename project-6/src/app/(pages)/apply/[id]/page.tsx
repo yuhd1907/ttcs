@@ -14,6 +14,7 @@ const ApplicationForm = () => {
   const jobID = params.id;
   const { infoUser } = useAuth();
   const [jobTitle, setJobTitle] = useState<string>("");
+  const [allowUngraduated, setAllowUngraduated] = useState<boolean>(true); // mặc định cho phép
 
   const {
     register,
@@ -34,6 +35,12 @@ const ApplicationForm = () => {
         .then((data) => {
           if (data && data.name) {
             setJobTitle(data.name);
+          }
+          // Lấy trạng thái cho phép sinh viên chưa tốt nghiệp
+          if (data && typeof data.allowUngraduated === "boolean") {
+            setAllowUngraduated(data.allowUngraduated);
+          } else {
+            setAllowUngraduated(false); // mặc định: không cho phép
           }
         })
         .catch((err) => console.error("Error fetching job details:", err));
@@ -108,31 +115,44 @@ const ApplicationForm = () => {
     }
   };
 
+  // Kiểm tra điều kiện tốt nghiệp (frontend guard)
+  const isBlockedByGraduation =
+    !allowUngraduated && infoUser?.cvGraduated === false;
+
   return (
     <div className="min-h-screen bg-gray-100 p-6 font-sans">
-      {/* Nút Quay lại ở góc trái trên */}
+      {/* Nút Quay lại */}
       <div className="max-w-3xl mx-auto mb-6">
         <button
           type="button"
           onClick={() => router.back()}
           className="flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors cursor-pointer"
         >
-          <svg
-            className="w-5 h-5 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            ></path>
+          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           Quay lại
         </button>
       </div>
+
+      {/* Thông báo chặn khi chưa tốt nghiệp */}
+      {isBlockedByGraduation && (
+        <div className="max-w-3xl mx-auto mb-4 bg-orange-50 border border-orange-300 rounded-xl p-6 flex gap-4 items-start">
+          <span className="text-3xl">&#x26A0;&#xFE0F;</span>
+          <div>
+            <h3 className="text-orange-800 font-bold text-base mb-1">
+              Bạn không đủ điều kiện nộp đơn
+            </h3>
+            <p className="text-orange-700 text-sm leading-relaxed">
+              Công việc này <strong>yêu cầu ứng viên đã tốt nghiệp</strong>.
+              Theo kết quả xét duyệt CV, hệ thống xác định bạn <strong>chưa tốt nghiệp</strong>.
+            </p>
+            <p className="text-orange-600 text-xs mt-2">
+              Bạn có thể tìm các việc làm <strong>chấp nhận sinh viên</strong> hoặc internship phù hợp hơn.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Form Container */}
       <div className="max-w-3xl mx-auto bg-white rounded-xl overflow-hidden shadow-sm">
@@ -301,11 +321,20 @@ const ApplicationForm = () => {
             <div className="pt-4">
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-sm font-medium text-white ${isSubmitting ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-                  } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer`}
+                disabled={isSubmitting || isBlockedByGraduation}
+                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-sm font-medium text-white ${
+                  isBlockedByGraduation
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : isSubmitting
+                    ? "bg-blue-400 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700"
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer`}
               >
-                {isSubmitting ? "Đang gửi..." : "Gửi Đơn Ứng Tuyển"}
+                {isBlockedByGraduation
+                  ? "Không đủ điều kiện nộp đơn"
+                  : isSubmitting
+                  ? "Đang gửi..."
+                  : "Gửi Đơn Ứng Tuyển"}
               </button>
             </div>
           </form>

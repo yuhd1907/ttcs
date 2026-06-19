@@ -57,6 +57,7 @@ export const JobEdittingForm = () => {
         images: job.images || [],
         description: job.description || "",
         isInternship: (job as any).isInternship ?? false,
+        allowUngraduated: (job as any).allowUngraduated ?? false,
       });
     }
   }, [job, reset]);

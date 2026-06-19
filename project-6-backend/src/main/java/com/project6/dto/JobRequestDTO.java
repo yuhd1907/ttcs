@@ -17,6 +17,7 @@ public class JobRequestDTO {
     private String description;
     private String cityName;
     private Boolean isInternship;
+    private Boolean allowUngraduated;  // true = chấp nhận sinh viên chưa tốt nghiệp
     
     // Uploaded images for Job Details
     private List<MultipartFile> images;

@@ -90,7 +90,7 @@ export interface InfoUser {
   cvUrl?: string;
   cvStatus?: "NONE" | "PENDING" | "VALID" | "INVALID";
   cvInvalidReason?: string;
-  cvLevel?: "FRESHER" | "ABOVE_FRESHER";
+  cvGraduated?: boolean | null; // true=đã TN, false=chưa TN, null/undefined=chưa xác định
   intro?: string;
   experience?: string;
   level?: string;

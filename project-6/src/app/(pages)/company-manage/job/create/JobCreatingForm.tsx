@@ -29,7 +29,9 @@ export const JobCreatingForm = () => {
       description: "",
       cityName: "",
       isInternship: false,
+      allowUngraduated: false,
     },
+
   });
 
   const [isPending, setIsPending] = useState(false);

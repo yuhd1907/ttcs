@@ -72,6 +72,7 @@ export const JobFormFields = ({
       </div>
       <div className="hidden sm:block"></div>
 
+
       <div className="">
         <label
           htmlFor="minSalary"

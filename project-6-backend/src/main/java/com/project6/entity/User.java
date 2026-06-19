@@ -59,9 +59,13 @@ public class User {
     @Column(name = "cv_invalid_reason", columnDefinition = "TEXT")
     private String cvInvalidReason;
 
-    // CV level determined by AI: FRESHER | ABOVE_FRESHER
+    // CV level determined by AI: FRESHER | ABOVE_FRESHER (legacy, kept for compatibility)
     @Column(name = "cv_level")
     private String cvLevel;
+
+    // CV graduation status determined by AI: true=graduated, false=not yet graduated, null=unknown
+    @Column(name = "cv_graduated")
+    private Boolean cvGraduated;
 
     @Column(nullable = false)
     @Builder.Default
