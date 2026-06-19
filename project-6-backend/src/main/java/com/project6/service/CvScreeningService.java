@@ -84,6 +84,14 @@ public class CvScreeningService {
         }
         log.info("[INIT] Gemini primary model  : {}", geminiModel);
         log.info("[INIT] Gemini fallback model : {}", FALLBACK_MODEL);
+        if (geminiApiKey != null) {
+            int len = geminiApiKey.trim().length();
+            String prefix = len > 5 ? geminiApiKey.trim().substring(0, 5) : geminiApiKey.trim();
+            String suffix = len > 5 ? geminiApiKey.trim().substring(len - 5) : "";
+            log.info("[INIT] Loaded API Key (length={}): {}...{}", len, prefix, suffix);
+        } else {
+            log.warn("[INIT] Loaded API Key is NULL!");
+        }
     }
 
     // =========================================================
@@ -170,9 +178,15 @@ public class CvScreeningService {
             log.info("[STEP-4][{}] Lý do: {}", sessionId, reason);
 
             if (valid) {
-                updateStatus(userId, "VALID", null, graduated);
+                String warning = "rule-based-fallback".equals(src)
+                    ? "[Dự phòng] Được duyệt bằng thuật toán dự phòng (Rule-based Fallback) do không kết nối được Gemini API."
+                    : "[Gemini] CV hợp lệ.";
+                updateStatus(userId, "VALID", warning, graduated);
             } else {
-                updateStatus(userId, "INVALID", reason, graduated);
+                String warning = "rule-based-fallback".equals(src)
+                    ? "[Dự phòng] " + reason
+                    : "[Gemini] " + reason;
+                updateStatus(userId, "INVALID", warning, graduated);
             }
 
             logEnd(sessionId, valid ? "VALID ✅" : "INVALID ❌", startMs);
@@ -536,13 +550,14 @@ public class CvScreeningService {
 
     private String buildDefaultKnowledgeBase() {
         return """
-            TIÊU CHÍ XÉT DUYỆT CV:
-            1. Có họ tên và ít nhất 1 thông tin liên hệ (email, SĐT, LinkedIn/GitHub).
-            2. Có bằng cấp IT/CNTT hoặc chứng chỉ chuyên ngành IT.
-               Nếu không có bằng cấp → phải có kinh nghiệm/dự án IT thực tế.
-            3. Nội dung không rác, không spam, có cấu trúc rõ ràng.
-            4. Mô tả công việc/dự án đủ chi tiết, không sơ sài.
-            OUTPUT: JSON 3 trường: {"valid": true/false, "reason": "...", "graduated": true/false/null}
+            HỆ THỐNG KIỂM DUYỆT VÀ ĐÁNH GIÁ CV TỰ ĐỘNG (IT FRESHER) - 6 TIÊU CHÍ BẮT BUỘC:
+            1. TIÊU CHÍ 1 — Thông Tin Cơ Bản: Phải có Họ tên và ít nhất 01 liên hệ (email, SĐT, LinkedIn, GitHub/GitLab).
+            2. TIÊU CHÍ 2 — Bằng Cấp / Chứng Chỉ Chuyên Ngành IT: Bằng Đại học/Cao đẳng ngành IT hoặc Chứng chỉ chuyên môn IT quốc tế (AWS, Azure, CCNA...) hoặc Chứng chỉ lập trình uy tín (FreeCodeCamp, Coursera...).
+            3. TIÊU CHÍ 3 — Kinh Nghiệm Thực Tế / Dự Án Trong Lĩnh Vực IT: (Áp dụng nếu không đạt Tiêu chí 2) Có kinh nghiệm làm Intern/Fresher/Part-time ghi rõ công ty hoặc Dự án thực tế (cá nhân/mã nguồn mở) kèm Tech stack & mô tả chi tiết.
+            4. TIÊU CHÍ 4 — Tính Có Nghĩa Của Văn Bản & Định Dạng (Chống Spam): Chữ không bị lỗi font nặng, không có ký tự vô nghĩa (gibberish/spam như asdf, sadasd...), các từ mô tả phải thuộc từ điển tự nhiên hợp lệ. Nếu vi phạm, reject ngay lập tức (Early Exit).
+            5. TIÊU CHÍ 5 — Độ Chi Tiết Của Mô Tả: Công việc/dự án phải được mô tả hành động cụ thể, kỹ năng phải có ngữ cảnh thực hành (không chỉ ghi "Kỹ năng: Học Java" mà không có dự án/mô tả).
+            6. TIÊU CHÍ 6 — Tình Trạng Tốt Nghiệp / Tiến Độ Học Tập: Phân loại graduated: true (nếu đã tốt nghiệp hoặc năm kết thúc <= năm hiện tại) hoặc false (nếu đang học, kết thúc tương lai, hoặc từ khóa sinh viên năm cuối/expected graduation) hoặc null (không rõ).
+            OUTPUT JSON: {"valid": true/false, "reason": "...", "graduated": true/false/null}
             """;
     }
 

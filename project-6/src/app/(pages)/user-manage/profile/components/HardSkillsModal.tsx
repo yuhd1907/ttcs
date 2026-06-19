@@ -15,9 +15,9 @@ interface HardSkillsModalProps {
   onSave?: (groupName: string, items: SkillItem[]) => void;
 }
 
-import { SKILL_MAP, EXPERIENCE_MAP, skillLabel, experienceLabel } from '@/config/cvLabels';
+import { EXPERIENCE_MAP, skillLabel, experienceLabel } from '@/config/cvLabels';
+import { useSkills } from "@/hooks/useSkills";
 
-const MOCK_SKILLS = Object.entries(SKILL_MAP).map(([value, label]) => ({ value, label }));
 const EXPERIENCE_OPTIONS = Object.entries(EXPERIENCE_MAP).map(([value, label]) => ({ value, label }));
 
 const MAX_SKILLS = 20;
@@ -28,6 +28,7 @@ export const HardSkillsModal: React.FC<HardSkillsModalProps> = ({
   initialItems = [],
   onSave,
 }) => {
+  const { skillList } = useSkills();
   const [groupName, setGroupName] = useState("Kỹ năng chính");
   const [items, setItems] = useState<SkillItem[]>(initialItems);
   const [selectedSkill, setSelectedSkill] = useState("");
@@ -71,8 +72,8 @@ export const HardSkillsModal: React.FC<HardSkillsModalProps> = ({
     onClose();
   };
 
-  const availableSkills = MOCK_SKILLS.filter(
-    (opt) => !items.some((item) => item.skill === opt.value)
+  const availableSkills = skillList.filter(
+    (opt) => !items.some((item) => item.skill === opt.name)
   );
 
   const canSave = groupName.trim() !== "" && items.length > 0;
@@ -145,8 +146,8 @@ export const HardSkillsModal: React.FC<HardSkillsModalProps> = ({
                 >
                   <option value="">Nhập kỹ năng</option>
                   {availableSkills.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
+                    <option key={opt.id || opt._id || opt.name} value={opt.name}>
+                      {opt.name}
                     </option>
                   ))}
                 </select>

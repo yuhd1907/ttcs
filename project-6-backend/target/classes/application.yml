@@ -2,15 +2,16 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+  port: 4000
 spring:
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 100MB
   datasource:
-    url: jdbc:postgresql://localhost:5432/ttcs
+    url: jdbc:postgresql://localhost:5432/cv
     username: postgres
-    password: 1907
+    password: Namdeptraivcl129@@.
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -69,5 +70,5 @@ cloudinary:
   api-secret: QUNLJcGAQ6MwMbPdpnNmX5BUgoA
 
 gemini:
-  api-key: AQ.Ab8RN6Lo9_fX-TgV96sAkny9T3EpYx73rBkjDIM-vB_AOEPhJg
+  api-key: AQ.Ab8RN6KDK4g1rGLd4cek9Dw7Xjogl19pBQQ29TUzAHlUNtv4yg
   model: gemini-2.5-flash

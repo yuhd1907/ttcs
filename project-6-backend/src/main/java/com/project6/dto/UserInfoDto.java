@@ -55,6 +55,7 @@ public class UserInfoDto {
         if (user.getEducations() != null) {
             dto.educations = user.getEducations().stream().map(e -> {
                 CvProfileRequest.EducationDto d = new CvProfileRequest.EducationDto();
+                d.setId(e.getId() != null ? String.valueOf(e.getId()) : null);
                 d.setSchool(e.getSchool());
                 d.setDegree(e.getDegree());
                 d.setMajor(e.getMajor());
@@ -71,6 +72,7 @@ public class UserInfoDto {
         if (user.getExperiences() != null) {
             dto.experiences = user.getExperiences().stream().map(e -> {
                 CvProfileRequest.ExperienceDto d = new CvProfileRequest.ExperienceDto();
+                d.setId(e.getId() != null ? String.valueOf(e.getId()) : null);
                 d.setPosition(e.getPosition());
                 d.setCompany(e.getCompany());
                 d.setIsCurrentlyWorking(e.getIsCurrentlyWorking());
@@ -94,11 +96,13 @@ public class UserInfoDto {
             for (java.util.Map.Entry<String, java.util.List<com.project6.entity.cv.UserSkill>> entry : grouped.entrySet()) {
                 CvProfileRequest.SkillGroupDto groupDto = new CvProfileRequest.SkillGroupDto();
                 com.project6.entity.cv.UserSkill first = entry.getValue().get(0);
+                groupDto.setId(first.getId() != null ? String.valueOf(first.getId()) : null);
                 groupDto.setType(first.getType());
                 groupDto.setGroupName(first.getGroupName());
                 
                 groupDto.setItems(entry.getValue().stream().map(s -> {
                     CvProfileRequest.SkillItemDto item = new CvProfileRequest.SkillItemDto();
+                    item.setId(s.getId() != null ? String.valueOf(s.getId()) : null);
                     item.setSkill(s.getSkillName());
                     item.setExperience(s.getExperience());
                     return item;
@@ -111,6 +115,7 @@ public class UserInfoDto {
         if (user.getLanguages() != null) {
             dto.languages = user.getLanguages().stream().map(l -> {
                 CvProfileRequest.LanguageDto d = new CvProfileRequest.LanguageDto();
+                d.setId(l.getId() != null ? String.valueOf(l.getId()) : null);
                 d.setLanguage(l.getLanguage());
                 d.setLevel(l.getLevel());
                 return d;
@@ -120,6 +125,7 @@ public class UserInfoDto {
         if (user.getProjects() != null) {
             dto.projects = user.getProjects().stream().map(p -> {
                 CvProfileRequest.ProjectDto d = new CvProfileRequest.ProjectDto();
+                d.setId(p.getId() != null ? String.valueOf(p.getId()) : null);
                 d.setName(p.getName());
                 d.setIsCurrentlyWorking(p.getIsCurrentlyWorking());
                 d.setFromMonth(p.getFromMonth());
@@ -135,6 +141,7 @@ public class UserInfoDto {
         if (user.getCertificates() != null) {
             dto.certificates = user.getCertificates().stream().map(c -> {
                 CvProfileRequest.CertificateDto d = new CvProfileRequest.CertificateDto();
+                d.setId(c.getId() != null ? String.valueOf(c.getId()) : null);
                 d.setName(c.getName());
                 d.setOrganization(c.getOrganization());
                 d.setMonth(c.getMonth());
@@ -148,6 +155,7 @@ public class UserInfoDto {
         if (user.getAwards() != null) {
             dto.awards = user.getAwards().stream().map(a -> {
                 CvProfileRequest.AwardDto d = new CvProfileRequest.AwardDto();
+                d.setId(a.getId() != null ? String.valueOf(a.getId()) : null);
                 d.setName(a.getName());
                 d.setOrganization(a.getOrganization());
                 d.setMonth(a.getMonth());

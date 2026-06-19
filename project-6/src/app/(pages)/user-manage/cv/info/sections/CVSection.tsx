@@ -211,14 +211,33 @@ export default function CVSection() {
           </span>
           {getCvStatusBadge(cvStatus, hasCV)}
           {cvStatus === "VALID" && getCvGraduatedBadge(infoUser?.cvGraduated)}
+          {hasCV && cvStatus !== "NONE" && cvStatus !== "PENDING" && infoUser?.cvInvalidReason && (
+            <span className={`text-[11px] px-2.5 py-0.5 rounded-full font-medium border ${
+              infoUser.cvInvalidReason.startsWith("[Dự phòng]")
+                ? "bg-amber-50 text-amber-700 border-amber-200"
+                : "bg-blue-50 text-blue-700 border-blue-200"
+            }`}>
+              Cơ chế: {infoUser.cvInvalidReason.startsWith("[Dự phòng]") ? "Dự phòng (Fallback)" : "AI Gemini"}
+            </span>
+          )}
         </div>
+
+        {/* Cảnh báo dự phòng khi hợp lệ */}
+        {cvStatus === "VALID" && infoUser?.cvInvalidReason && infoUser.cvInvalidReason.startsWith("[Dự phòng]") && (
+          <div className="mt-3 bg-yellow-50 border border-yellow-200 rounded-md p-3">
+            <p className="text-yellow-700 text-[13px] leading-relaxed">
+              <span className="font-semibold">Lưu ý: </span>
+              {infoUser.cvInvalidReason.replace(/^\[(Gemini|Dự phòng)\]\s*/, "")}
+            </p>
+          </div>
+        )}
 
         {/* Lý do không hợp lệ */}
         {cvStatus === "INVALID" && infoUser?.cvInvalidReason && (
           <div className="mt-3 bg-red-50 border border-red-200 rounded-md p-3">
             <p className="text-red-600 text-[13px] leading-relaxed">
               <span className="font-semibold">Lý do: </span>
-              {infoUser.cvInvalidReason}
+              {infoUser.cvInvalidReason.replace(/^\[(Gemini|Dự phòng)\]\s*/, "")}
             </p>
           </div>
         )}
