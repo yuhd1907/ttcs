@@ -140,27 +140,19 @@ const ApplicationForm = () => {
           Quay lại
         </button>
       </div>
-
       {/* Thông báo CV không hợp lệ — chặn tất cả job */}
       {isBlockedByInvalidCv && (
         <div className="max-w-3xl mx-auto mb-4 bg-red-50 border border-red-300 rounded-xl p-6 flex gap-4 items-start">
-          <span className="text-3xl">&#x274C;</span>
           <div>
             <h3 className="text-red-800 font-bold text-base mb-1">
               CV của bạn không hợp lệ — Không thể ứng tuyển
             </h3>
-            <p className="text-red-700 text-sm leading-relaxed">
-              Hệ thống AI đã đánh giá CV của bạn là <strong>KHÔNG HỢP LỆ</strong>.
-              Bạn không thể nộp đơn vào bất kỳ vị trí nào cho đến khi cập nhật CV hợp lệ.
-            </p>
             <p className="text-red-600 text-xs mt-2">
               Vui lòng vào <strong>Hồ sơ cá nhân → CV của bạn</strong> để tải lên CV mới và chờ hệ thống xét duyệt lại.
             </p>
           </div>
         </div>
-      )}
-
-      {/* Thông báo chặn khi chưa tốt nghiệp */}
+      )}      {/* Thông báo chặn khi chưa tốt nghiệp */}
       {!isBlockedByInvalidCv && isBlockedByGraduation && (
         <div className="max-w-3xl mx-auto mb-4 bg-orange-50 border border-orange-300 rounded-xl p-6 flex gap-4 items-start">
           <span className="text-3xl">&#x26A0;&#xFE0F;</span>

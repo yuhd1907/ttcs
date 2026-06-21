@@ -20,4 +20,5 @@ export interface Job {
   companyWorkingTime: string;
   companyWorkOvertime: string;
   timeSince?: string;
+  address?: string;
 }

@@ -2,16 +2,15 @@ server:
   error:
     include-message: always
     include-binding-errors: always
-  port: 4000
 spring:
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 100MB
   datasource:
-    url: jdbc:postgresql://localhost:5432/cv
+    url: jdbc:postgresql://localhost:5432/ttcs
     username: postgres
-    password: Namdeptraivcl129@@.
+    password: 1907
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

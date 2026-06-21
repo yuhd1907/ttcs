@@ -2,10 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
+import { InfoUser } from "@/interface/user.interface";
 import GeneralInfoModal, { EXPERIENCE_OPTIONS, LEVEL_OPTIONS, WORK_TYPE_OPTIONS } from "../modal/GeneralInfoModal";
 import { useJobFields } from "@/hooks/useJobFields";
 
-export default function GeneralInfoSection() {
+interface GeneralInfoSectionProps {
+  infoUser: InfoUser | null;
+}
+
+export default function GeneralInfoSection({ infoUser }: GeneralInfoSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const { jobFields } = useJobFields();
@@ -56,21 +61,29 @@ export default function GeneralInfoSection() {
         <div className="grid grid-cols-[250px_1fr] gap-y-5 text-[15px] items-center">
           <div className="text-gray-600">Tổng số năm kinh nghiệm</div>
           <div className="text-gray-900 font-medium">
-            {userData?.experience ? getLabel(EXPERIENCE_OPTIONS, userData.experience) : <span className="text-gray-400 font-medium">Thêm thông tin</span>}
+            {(infoUser?.experience || userData?.experience) ? (
+              getLabel(EXPERIENCE_OPTIONS, infoUser?.experience || userData.experience)
+            ) : (
+              <span className="text-gray-400 font-medium">Thêm thông tin</span>
+            )}
           </div>
 
           <div className="text-gray-600">Cấp bậc hiện tại</div>
           <div className="text-gray-900 font-medium">
-            {userData?.level ? getLabel(LEVEL_OPTIONS, userData.level) : <span className="text-gray-400 font-medium">Thêm thông tin</span>}
+            {(infoUser?.level || userData?.level) ? (
+              getLabel(LEVEL_OPTIONS, infoUser?.level || userData.level)
+            ) : (
+              <span className="text-gray-400 font-medium">Thêm thông tin</span>
+            )}
           </div>
 
           <div className="text-gray-600">
             Hình thức làm việc mong muốn
           </div>
           <div>
-            {userData?.workTypes && userData.workTypes.length > 0 ? (
+            {(infoUser?.workTypes && infoUser.workTypes.length > 0) || (userData?.workTypes && userData.workTypes.length > 0) ? (
               <div className="flex flex-wrap gap-2">
-                {userData.workTypes.map((type: string) => (
+                {(infoUser?.workTypes || userData.workTypes).map((type: string) => (
                   <span key={type} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-[13px] font-medium">
                     {getLabel(WORK_TYPE_OPTIONS, type)}
                   </span>
@@ -85,9 +98,9 @@ export default function GeneralInfoSection() {
             Lĩnh vực đã làm việc
           </div>
           <div>
-            {userData?.jobFieldSelected && userData.jobFieldSelected.length > 0 ? (
+            {(infoUser?.jobFieldSelected && infoUser.jobFieldSelected.length > 0) || (userData?.jobFieldSelected && userData.jobFieldSelected.length > 0) ? (
               <div className="flex flex-wrap gap-2">
-                {getJobFieldLabels(userData.jobFieldSelected).map((label: string, idx: number) => (
+                {getJobFieldLabels(infoUser?.jobFieldSelected || userData.jobFieldSelected).map((label: string, idx: number) => (
                   <span key={idx} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-[13px] font-medium">
                     {label}
                   </span>
@@ -100,8 +113,8 @@ export default function GeneralInfoSection() {
 
           <div className="text-gray-600">Mức lương mong muốn</div>
           <div className="text-gray-900 font-medium">
-            {userData?.desiredMin || userData?.desiredMax ? (
-              `${userData.desiredMin || "0"} - ${userData.desiredMax || "0"} ${userData.desiredCurrency || "USD"}/tháng`
+            {infoUser?.desiredMin || infoUser?.desiredMax || userData?.desiredMin || userData?.desiredMax ? (
+              `${infoUser?.desiredMin || userData?.desiredMin || "0"} - ${infoUser?.desiredMax || userData?.desiredMax || "0"} ${infoUser?.desiredCurrency || userData?.desiredCurrency || "USD"}/tháng`
             ) : (
               <span className="text-gray-400 font-medium">Thêm thông tin</span>
             )}
@@ -109,8 +122,8 @@ export default function GeneralInfoSection() {
 
           <div className="text-gray-600">Mức lương hiện tại</div>
           <div className="text-gray-900 font-medium">
-            {userData?.currentSalary ? (
-              `${userData.currentSalary} ${userData.currentCurrency || "USD"}/tháng`
+            {infoUser?.currentSalary || userData?.currentSalary ? (
+              `${infoUser?.currentSalary || userData?.currentSalary} ${infoUser?.currentCurrency || userData?.currentCurrency || "USD"}/tháng`
             ) : (
               <span className="text-gray-400 font-medium">Thêm thông tin</span>
             )}
