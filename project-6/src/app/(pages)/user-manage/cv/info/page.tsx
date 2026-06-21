@@ -29,8 +29,8 @@ export default function ManageCV() {
 
       <CVSection />
       <BasicInfoSection infoUser={infoUser} />
-      <GeneralInfoSection />
-      <CoverLetterSection />
+      <GeneralInfoSection infoUser={infoUser} />
+      <CoverLetterSection infoUser={infoUser} />
     </div>
   );
 }

@@ -3,9 +3,15 @@
 import React, { useState, useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
 
+import { InfoUser } from "@/interface/user.interface";
+
 const MAX_COVER_LETTER = 500;
 
-export default function CoverLetterSection() {
+interface CoverLetterSectionProps {
+  infoUser: InfoUser | null;
+}
+
+export default function CoverLetterSection({ infoUser }: CoverLetterSectionProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [coverLetter, setCoverLetter] = useState("");
   const [savedCoverLetter, setSavedCoverLetter] = useState("");
@@ -26,8 +32,13 @@ export default function CoverLetterSection() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (infoUser?.intro) {
+      setCoverLetter(infoUser.intro);
+      setSavedCoverLetter(infoUser.intro);
+    } else {
+      fetchData();
+    }
+  }, [infoUser?.intro]);
 
   const handleSave = async () => {
     try {

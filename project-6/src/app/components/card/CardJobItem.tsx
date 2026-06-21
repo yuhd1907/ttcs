@@ -28,6 +28,11 @@ export const CardJobItem = (props: {
             <div className="mt-[12px] text-[18px] font-[700] line-clamp-1">
               {item.name || item.title}
             </div>
+            {typeof item.applicantCount !== 'undefined' && (
+              <div className="mt-[4px] text-[13px] font-[600] text-[#0088FF]">
+                Số lượng ứng tuyển: {item.applicantCount}
+              </div>
+            )}
             <div 
               className="flex items-center gap-[12px] mt-[12px] cursor-pointer hover:text-[#0088FF] transition-colors"
               onClick={(e) => {

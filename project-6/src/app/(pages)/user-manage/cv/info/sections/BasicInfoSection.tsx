@@ -58,8 +58,10 @@ export default function BasicInfoSection({ infoUser }: BasicInfoSectionProps) {
           )}
 
           <div className="text-gray-600">Nơi làm việc mong muốn</div>
-          {userData?.wantToWorkIn ? (
-            <div className="font-semibold text-gray-900">{userData.wantToWorkIn}</div>
+          {(infoUser?.wantToWorkIn || infoUser?.city || userData?.wantToWorkIn) ? (
+            <div className="font-semibold text-gray-900">
+              {infoUser?.wantToWorkIn || infoUser?.city || userData?.wantToWorkIn}
+            </div>
           ) : (
             <div className="flex items-center gap-2 text-[#f97316]">
               <IoWarningOutline className="w-4 h-4" />
